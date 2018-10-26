@@ -1,0 +1,377 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 引入head标签 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="用于个人学习整理的博客" />
+<meta name="keywords" content="境界线,realmline" />
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_autumn.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+<!-- SNS-icon -->
+<script src="/assets/fonts/sns/iconfont.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>git基础操作学习笔记</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?https://hm.baidu.com/hm.js?35f27cd3f76195dca98823d061bc968b";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+
+<!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(255,210,32) ">
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(255,210,32);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;">不可视境界线</a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">git基础操作学习笔记</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;realmline</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(255,210,32);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+      <a href="javascript:;" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(255,210,32)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+      <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(255,210,32);"><sapn class="main">没有上一页咯</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">git基础操作学习笔记</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;realmline</span> -->
+  </div>
+  <div class="right-area">
+    
+      <a href="/myblog,cd%20mtblog,jekyll%20serve/jekyll/update/2018/10/25/welcome-to-jekyll.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(255,210,32)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+      <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(255,210,32);"><sapn class="main">Welcome to Jekyll!</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+      <a href="javascript:;" class="leftchange" style="border-right: 1px solid rgb(255,210,32);border-bottom: 2px solid rgb(255,210,32);"><span><br>没有上一篇咯</span></a>
+    
+    
+      <a href="/myblog,cd%20mtblog,jekyll%20serve/jekyll/update/2018/10/25/welcome-to-jekyll.html" class="rightchange" style="border-left: 1px solid rgb(255,210,32);border-bottom: 2px solid rgb(255,210,32);"><span>下一篇<br><br>Welcome to Jekyll!</span></a>
+    
+  </div>
+</div>
+
+
+<div class="markdown-body fadeInUp animated">
+
+  
+
+  <!-- 文章内容 -->
+  <h1 id="git基础操作学习笔记">git基础操作学习笔记</h1>
+
+<h3 id="前言">前言</h3>
+
+<p>git是当下最先进的分布式版本控制系统，原来在公司一直用的svn，不过由于想要尝试制作个人博客，就通过廖雪峰老师的git教程开始了学习，<strong>由于我是在windows系统下进行操作的，所以以下操作均已windows为基准</strong></p>
+
+<h3 id="创建一个仓库">创建一个仓库</h3>
+
+<p>打开<code class="highlighter-rouge">cmd</code>或者<code class="highlighter-rouge">power shell</code>，然后通过<code class="highlighter-rouge">cd e:\pathh</code>进入要创建仓库的文件夹，并执行<code class="highlighter-rouge">git init</code>命令</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git init
+</code></pre></div></div>
+
+<p>提示创建好了一个空仓库，当前目录下多一个<code class="highlighter-rouge">.get</code>的目录，这个目录默认是隐藏的，用于跟踪管理git版本库，为了避免仓库出现问题，最好不要修改这个目录的文件</p>
+
+<h3 id="把文件添加到版本库">把文件添加到版本库</h3>
+
+<p><strong><em>git是无法操作仓库目录外的文件的 ，只能操作当前仓库目录下的文件</em></strong></p>
+
+<p>将文件添加到仓库分两步</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git add xxx.txt
+$ git commit -m'xxxxxxxxxxxxx'
+</code></pre></div></div>
+
+<ul>
+  <li>将文件添加到暂存区<code class="highlighter-rouge">git add xxx.txt</code></li>
+  <li>将文件添加到仓库<code class="highlighter-rouge">git commit -m'xxxxxxxxx'</code>,
+    <ul>
+      <li><code class="highlighter-rouge">git add</code>是将某个文件添加到暂存区，后面的<code class="highlighter-rouge">xxx.txt</code>可以是文件也可以是当前目录下的一个目录<code class="highlighter-rouge">git add /</code>
+        <ul>
+          <li><strong>如果需要撤销add操作，<a href="#1">看这里</a></strong></li>
+        </ul>
+      </li>
+      <li><code class="highlighter-rouge">git commit</code>是将暂存区的内容提交到仓库，<code class="highlighter-rouge">-m'xxxx'</code>是本次提交的描述，<strong>必填</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="查看仓库的当前状态">查看仓库的当前状态</h3>
+
+<p>通过<code class="highlighter-rouge">git status</code>可以查看仓库当前状态，目前记录下有这几种状态</p>
+
+<ul>
+  <li><strong>Untracked files</strong>：当前目录下有未被git管理的文件</li>
+  <li><strong>Changes to be committed</strong>：有文件在暂存区中，但是还没有<code class="highlighter-rouge">commit</code></li>
+  <li><strong>Changes not staged for commit</strong>：有文件修改，但是还没有<code class="highlighter-rouge">add</code>到暂存区</li>
+</ul>
+
+<h3 id="查看文件差异">查看文件差异</h3>
+
+<p>当仓库管理下的文件在工作区被修改时，可以通过<code class="highlighter-rouge">git diff filename</code>或者<code class="highlighter-rouge">git diff HEAD --filename</code>来查看差异</p>
+
+<h5 id="git-diff-filename和git-diff-head---filename的差异"><code class="highlighter-rouge">git diff filename</code>和<code class="highlighter-rouge">git diff HEAD --filename</code>的差异</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">git diff filename</code>
+    <ul>
+      <li>当暂存区没有文件时，比较的是<em>工作区</em>和<em>上次提交版本</em>的文件</li>
+      <li>当暂存区有文件时，比较的是<code class="highlighter-rouge">当前工作区</code>和<code class="highlighter-rouge">暂存区</code>的文件</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">git diff HEAD --filename</code>
+    <ul>
+      <li>比较的是当前工作区和版本库中的文件的差别</li>
+    </ul>
+  </li>
+</ul>
+
+<p><em>需要注意的是<code class="highlighter-rouge">git diff</code></em>只会显示工作区的差异，当文件被add到暂存区时，在执行这个命令就什么也不会返回</p>
+
+<h3 id="查看版本日志">查看版本日志</h3>
+
+<p><code class="highlighter-rouge">git log</code>命令会列出所有历史记录，最近的排在上方，记录过多时，通过<code class="highlighter-rouge">↑</code>、<code class="highlighter-rouge">↓</code>来控制显示，且通过<code class="highlighter-rouge">q</code>退出，如果要看详细的版本分支结构可以通过加上参数实现，<a href="https://git-scm.com/docs/git-log" target="_blank">详细参数</a></p>
+
+<h3 id="查看每一个命令的版本日志">查看每一个命令的版本日志</h3>
+
+<p><code class="highlighter-rouge">git reflog</code>可以查找所有历史的记录，可以找到指定<code class="highlighter-rouge">commit id</code>回退版本</p>
+
+<h3 id="回退版本"><span id="1">回退版本</span></h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git reset --hrad HEAD^
+$ git reset --hard HEAD^^
+$ git reset HEAD 'filename'
+</code></pre></div></div>
+
+<ol>
+  <li>第一条命令可以回退到上个版本</li>
+  <li>第二条命令可以回退到上上个版本，通过改变<code class="highlighter-rouge">HEAD^n</code>可以回退到n个版本</li>
+  <li><strong>第三条命令可以将filename的从暂存区删除</strong></li>
+</ol>
+
+<h3 id="删除文件">删除文件</h3>
+
+<p>执行<code class="highlighter-rouge">git rm filename</code>命令，即可删除仓库文件，<strong>注意：还需要<code class="highlighter-rouge">commit</code>，不然仓库的文件会还存在</strong></p>
+
+<h3 id="总结">总结</h3>
+
+<ul>
+  <li>git中的<code class="highlighter-rouge">add</code>和<code class="highlighter-rouge">commit</code>操作并不是1对1的关系，<code class="highlighter-rouge">commit</code>只是提交暂存区的文件，所以一次<code class="highlighter-rouge">commit</code>可以对应多次<code class="highlighter-rouge">add</code></li>
+  <li>git是针对修改，而不是文件
+    <ul>
+      <li>修改文件并<code class="highlighter-rouge">add</code>后，再次修改文件且不<code class="highlighter-rouge">add</code>，然后直接<code class="highlighter-rouge">commit</code>，会发现只有第一次的修改被提交了</li>
+    </ul>
+  </li>
+  <li>git命令中出现的HEAD均为本地最新版本的意思</li>
+</ul>
+
+
+  <!-- 引入share模块 -->
+  
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDU2Ni8xNzA5Mw=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>不可视境界线 ©
+  
+  
+  2018
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+    var wow = new WOW({
+        boxClass: 'wow',
+        animateClass: 'animated',
+        // offset: 600,
+        mobile: true,
+        live: true
+    });
+    wow.init();
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+    window.onbeforeunload = function(){
+        //刷新后页面自动回到顶部
+        document.documentElement.scrollTop = 0;  //ie下
+        document.body.scrollTop = 0;  //非ie
+    }
+</script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
