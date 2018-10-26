@@ -251,6 +251,7 @@ $ git reset HEAD 'filename'
       <li>修改文件并<code class="highlighter-rouge">add</code>后，再次修改文件且不<code class="highlighter-rouge">add</code>，然后直接<code class="highlighter-rouge">commit</code>，会发现只有第一次的修改被提交了</li>
     </ul>
   </li>
+  <li>如果被托管的文件不是通过<code class="highlighter-rouge">git rm</code>而是直接在本地删除时，需要使用<code class="highlighter-rouge">commit -am'xxxxx'</code>，这样才会将删除同步到仓库，而<code class="highlighter-rouge">git rm</code>删除的话，只需要<code class="highlighter-rouge">commit -m</code>即可</li>
   <li>git命令中出现的HEAD均为本地最新版本的意思</li>
 </ul>
 
