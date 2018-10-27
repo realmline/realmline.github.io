@@ -23,7 +23,7 @@ aboutyou: 'your introduction'
 portraits: '/assets/profile.jpeg' # your portraits image file path
 
 # SNS
-SNS: true
+SNS: false
 SNS-icon: #['facebook', 'weibo', 'QQ', 'github', 'Dribbble', 'twitter', 'instagram', 'weixin']
   mail: ''
   weixin: '' # your wechat image file path
