@@ -1,0 +1,452 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 引入head标签 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="用于个人学习整理的博客" />
+<meta name="keywords" content="境界线,realmline" />
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_autumn.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+<!-- SNS-icon -->
+<script src="/assets/fonts/sns/iconfont.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>github远程库</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?https://hm.baidu.com/hm.js?35f27cd3f76195dca98823d061bc968b";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+
+<!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(255,127,36) ">
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(255,127,36);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;">不可视境界线</a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">github远程库</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;realmline</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(255,127,36);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+      <a href="javascript:;" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(255,127,36)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+      <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(255,127,36);"><sapn class="main">没有上一页咯</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">github远程库</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;realmline</span> -->
+  </div>
+  <div class="right-area">
+    
+      <a href="/2018/10/27/git-1.1.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(255,127,36)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+      <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(255,127,36);"><sapn class="main">git分支学习笔记</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+      <a href="javascript:;" class="leftchange" style="border-right: 1px solid rgb(255,127,36);border-bottom: 2px solid rgb(255,127,36);"><span><br>没有上一篇咯</span></a>
+    
+    
+      <a href="/2018/10/27/git-1.1.html" class="rightchange" style="border-left: 1px solid rgb(255,127,36);border-bottom: 2px solid rgb(255,127,36);"><span>下一篇<br><br>git分支学习笔记</span></a>
+    
+  </div>
+</div>
+
+
+<div class="markdown-body fadeInUp animated">
+
+  
+
+  <!-- 文章内容 -->
+  <h1 id="关联github远程库">关联github远程库</h1>
+
+<h3 id="前言">前言</h3>
+
+<p>github是一个开源协作平台，也可以作为免费的远程仓库，这一篇主要记录关联github远程库的各种操作，<strong>由于我是在windows系统下进行操作的，所以以下操作均已windows为基准</strong></p>
+
+<h3 id="创建ssh-key">创建SSH KEY</h3>
+
+<ul>
+  <li>
+    <p>右击桌面菜单，选择打开Git Bash，执行命令：</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ssh-keygen -t- rsa -C 'youemail@example.com'
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>要将<code class="highlighter-rouge">youemail@example.com</code>改成自己的github邮箱</p>
+    </blockquote>
+  </li>
+  <li>执行成功后，在<code class="highlighter-rouge">C:\User\administrator\</code>目录下找到.ssh文件夹，里面会有两个文件，<code class="highlighter-rouge">id_rsa</code>和<code class="highlighter-rouge">id_rsa.pub</code></li>
+  <li>将公匙中的内容复制出来添加到github的sshkey中</li>
+</ul>
+
+<h3 id="推送仓库">推送仓库</h3>
+
+<p>有两种方式可以操作：</p>
+
+<ul>
+  <li>
+    <p>推送现有仓库</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git remote add origin https://github.com/githubname/gitDemo.git
+$ git remote add origin git@github.com:yougithubname/project.git
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>先关联远程库，origin为关联远程库的名称</p>
+
+      <p>第一条命令是http关联，缺点是每次提交都需要输入一回账号和密码</p>
+
+      <p>第二条命令是ssh关联，需要把sshkey公钥绑定到github的ssh上面</p>
+    </blockquote>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git push -u origin master
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>推送现有仓库到远程库，由于远程库是空的，加了<code class="highlighter-rouge">-u</code>参数可以把本地的master和远程的master分支关联起来</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>克隆远程库至本地</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone git@github.com:yougithubname/project.git
+$ git clone https://github.com/yougithubname.gitDemo.git
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>同样的第一条是http的方式，第二条是ssh方式，克隆下来后，默认的远程库关联名为origin</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="查看远程分支">查看远程分支</h3>
+
+<p><code class="highlighter-rouge">git remote</code>	显示远程仓库分支，<em>如上面的推送仓库的master主分支会显示origin关联名</em></p>
+
+<p><code class="highlighter-rouge">git remote -v</code>可以显示更详细的远程库分支</p>
+
+<h3 id="删除远程关联">删除远程关联</h3>
+
+<p><code class="highlighter-rouge">git remote rm origin</code>删除名为origin的远程库关联</p>
+
+<h3 id="提交本地内容至远程库">提交本地内容至远程库</h3>
+
+<p><code class="highlighter-rouge">git push origin master</code>将本地master的分支提交到远程库上</p>
+
+<h3 id="获取远程库分支">获取远程库分支</h3>
+
+<p>远程库默认clone下来的只有master主分支，clone其他分支命令如下：</p>
+
+<ul>
+  <li>
+    <p>拉取远程分支到本地需要先指定链接</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch --set-upstream-to=origin/dev dev
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>本地的dev分支和远程库的dev分支链接</p>
+    </blockquote>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout -b dev origin/dev
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>clone远程的dev分支，并新建到本地dev分支库中</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="rebase">rebase</h3>
+
+<p>将版本分支修改成一条直线，当远程的仓库有更新时，本地无法直接提交，需要先拉取下来，之后查看<code class="highlighter-rouge">log</code>会发现基于上一个版本之后，提交历史分叉了，因为远程拉取下来的分支是基于上一个版本的，本地修改的内容也是基于上一个版本</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* 本地版本
+|\
+| -拉取版本
+|/
+*上一版本
+</code></pre></div></div>
+
+<p>通过<code class="highlighter-rouge">git rebase</code>可以将本地版本的修改改为不在基于上一版本，而且基于刚刚拉取下来的版本</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*本地版本
+*拉取版本
+*上一版本
+</code></pre></div></div>
+
+<h3 id="标签">标签</h3>
+
+<p>当需要寻找指定版本时，<code class="highlighter-rouge">commit id</code>十分难记，可以通过给版本添加标签便于寻找</p>
+
+<h4 id="查看标签">查看标签</h4>
+
+<p><code class="highlighter-rouge">git tag </code>命令可以查看所有的标签，<strong><em>返回列表不是按时间顺序，而且按字母顺序的</em></strong></p>
+
+<p><code class="highlighter-rouge">git show tagname</code>命令可以查看指定标签名的标签信息</p>
+
+<h4 id="创建标签">创建标签</h4>
+
+<p>先进入需要打标签的分支<code class="highlighter-rouge">git checkout dev</code>，此处切换到dev分支</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git tag v1.0
+git tag -a v1.0 -m 'version 0.1'
+</code></pre></div></div>
+
+<blockquote>
+  <p>第一条添加的时一个v1.0的版本</p>
+
+  <p>第二条添加一个带有描述的标签，<code class="highlighter-rouge">-a 'xxxx'</code>为标签名称，<code class="highlighter-rouge">-m 'xxxxx'</code>为描述信息</p>
+</blockquote>
+
+<p>给以前的<code class="highlighter-rouge">commit</code>添加标签</p>
+
+<ul>
+  <li>
+    <p>先通过<code class="highlighter-rouge">git reflog</code>找到<code class="highlighter-rouge">commit id</code></p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git tag v1.0 10ab2j
+git tag -a v1.0 -m 'version 0.1' 10ab2j
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>10ab2j为指定的<code class="highlighter-rouge">commit id</code>，通过此命令可以给指定版本添加标签</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h4 id="删除标签">删除标签</h4>
+
+<p><code class="highlighter-rouge">git tag -d v1.0</code>删除标签为v1.0的标签</p>
+
+<p><strong>删除远程库的标签，必须要先在删除本地的那个标签</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git tag -d v1.0
+git push origin :refs/tags/v1.0
+</code></pre></div></div>
+
+<h4 id="推送标签">推送标签</h4>
+
+<p>默认情况下，标签存在本地，不会被推送到远程库，如果要推送到远程：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin v1.0
+git push origin --tags
+</code></pre></div></div>
+
+<blockquote>
+  <p>第一条推送v1.0的标签到远程</p>
+
+  <p>第二条推送所有未被推送过的本地标签到远程</p>
+</blockquote>
+
+
+  <!-- 引入share模块 -->
+  
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDU2Ni8xNzA5Mw=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>不可视境界线 ©
+  
+  
+  2018
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+    var wow = new WOW({
+        boxClass: 'wow',
+        animateClass: 'animated',
+        // offset: 600,
+        mobile: true,
+        live: true
+    });
+    wow.init();
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+    window.onbeforeunload = function(){
+        //刷新后页面自动回到顶部
+        document.documentElement.scrollTop = 0;  //ie下
+        document.body.scrollTop = 0;  //非ie
+    }
+</script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
