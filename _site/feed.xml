@@ -1,4 +1,268 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-10-27T15:00:53+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">不可视境界线</title><subtitle>用于个人学习整理的博客</subtitle><author><name>true</name></author><entry><title type="html">github远程库</title><link href="http://localhost:4000/2018/10/27/git-1.2.html" rel="alternate" type="text/html" title="github远程库" /><published>2018-10-27T00:00:00+08:00</published><updated>2018-10-27T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/27/git-1.2</id><content type="html" xml:base="http://localhost:4000/2018/10/27/git-1.2.html">&lt;h1 id=&quot;关联github远程库&quot;&gt;关联github远程库&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-10-29T00:06:51+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">不可视境界线</title><subtitle>用于个人学习整理的博客</subtitle><author><name>true</name></author><entry><title type="html">python基础笔记</title><link href="http://localhost:4000/2018/10/28/python-1.0.html" rel="alternate" type="text/html" title="python基础笔记" /><published>2018-10-28T00:00:00+08:00</published><updated>2018-10-28T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/28/python-1.0</id><content type="html" xml:base="http://localhost:4000/2018/10/28/python-1.0.html">&lt;h1 id=&quot;python基础笔记&quot;&gt;python基础笔记&lt;/h1&gt;
+
+&lt;h3 id=&quot;前言&quot;&gt;前言&lt;/h3&gt;
+
+&lt;p&gt;这是之前记过的python笔记，又重新整理了一下，发现对之前模糊的理解又清晰了一些！&lt;/p&gt;
+
+&lt;h3 id=&quot;命令行模式与python交互模式&quot;&gt;命令行模式与python交互模式&lt;/h3&gt;
+
+&lt;h5 id=&quot;命令行模式&quot;&gt;命令行模式&lt;/h5&gt;
+
+&lt;p&gt;windows下打开cmd或者powershell进入到命令行模式&lt;/p&gt;
+
+&lt;p&gt;命令行模式下也可以直接执行python文件，但是需要先&lt;code class=&quot;highlighter-rouge&quot;&gt;cd&lt;/code&gt;进入文件所在目录&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;c:\cd&amp;gt; e:\test
+e:\test&amp;gt; test.py 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;python交互模式&quot;&gt;python交互模式&lt;/h5&gt;
+
+&lt;p&gt;在命令行模式下输入python命令进入到python交互模式，特征是出现了&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ c:\&amp;gt; python
+......
+&amp;gt;&amp;gt;&amp;gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;同时输入&lt;code class=&quot;highlighter-rouge&quot;&gt;exit()&lt;/code&gt;命令可以退出python交互模式，且回到命令行模式&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;配置python可以直接双击执行只在linux以及mac下才会有效&quot;&gt;配置python可以直接双击执行（&lt;em&gt;只在linux以及mac下才会有效&lt;/em&gt;）&lt;/h3&gt;
+
+&lt;p&gt;在第一行输入以下代码&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/user/bin python3&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;这行代码的用意是让操作系统在执行这个脚本的时候，去调用user/bin下面的python3解释器，但是用户没有按默认安装路径安装就无法找到解释器，通过加上&lt;code class=&quot;highlighter-rouge&quot;&gt;env&lt;/code&gt;会在env设置里面查找python3的安装路径，在调用对应路径下的python3解释器，&lt;strong&gt;&lt;em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/user/bin/env python3&lt;/span&gt;&lt;/code&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;下一步还要通过命令行操作，给对应文件执行权限&lt;code class=&quot;highlighter-rouge&quot;&gt;$ chmod a+x hello.py &lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;设置编码格式&quot;&gt;设置编码格式&lt;/h3&gt;
+
+&lt;p&gt;在第一行输入以下代码&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# _*_ coding: utf-8 _*_
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;用于告诉python解析器，按照utf-8编码读取源码，&lt;strong&gt;&lt;em&gt;同时也要保证代码编译器也是按照utf-8编码的&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;io&quot;&gt;I/O&lt;/h3&gt;
+
+&lt;p&gt;输出&lt;code class=&quot;highlighter-rouge&quot;&gt;print('')&lt;/code&gt;，参数为输出字符&lt;/p&gt;
+
+&lt;p&gt;输入&lt;code class=&quot;highlighter-rouge&quot;&gt;input(‘’)&lt;/code&gt;，参数为提示字符&lt;/p&gt;
+
+&lt;h3 id=&quot;数据类型&quot;&gt;数据类型&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;python是动态语言，所以设置变量只需要名称，类型由值控制&lt;/em&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;整数，如&lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;，也可以是其他进制的值：十六进制:&lt;code class=&quot;highlighter-rouge&quot;&gt;0xff00&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;浮点数，如&lt;code class=&quot;highlighter-rouge&quot;&gt;1.23&lt;/code&gt;，也可以用科学计数法表示：1.23*10&lt;sup&gt;9&lt;/sup&gt;=&lt;code class=&quot;highlighter-rouge&quot;&gt;1.23e9&lt;/code&gt;，0.0012=&lt;code class=&quot;highlighter-rouge&quot;&gt;1.2e-3&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;字符串，&lt;code class=&quot;highlighter-rouge&quot;&gt;hello python&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;布尔值，&lt;code class=&quot;highlighter-rouge&quot;&gt;True &lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;False&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;空值，&lt;code class=&quot;highlighter-rouge&quot;&gt;None&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;变量，&lt;code class=&quot;highlighter-rouge&quot;&gt;a=1&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;转义字符&quot;&gt;转义字符&lt;/h3&gt;
+
+&lt;p&gt;用于字符转义，如&lt;code class=&quot;highlighter-rouge&quot;&gt;\n&lt;/code&gt;换行，&lt;code class=&quot;highlighter-rouge&quot;&gt;\t&lt;/code&gt;制表符等&lt;/p&gt;
+
+&lt;h5 id=&quot;需要禁用字符转义时字符串前缀加r&quot;&gt;需要禁用字符转义时，字符串前缀加&lt;code class=&quot;highlighter-rouge&quot;&gt;r&lt;/code&gt;&lt;/h5&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; r‘/nabcd/t’
+/nabcd/t
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;不使用字符转义后，还有另一种换行的输出&lt;code class=&quot;highlighter-rouge&quot;&gt;'''...''' &lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;命令行模式下，直接输入&lt;code class=&quot;highlighter-rouge&quot;&gt;print('''abcdedf&lt;/code&gt;然后按回车键，不会立马输出字符，而是出现&lt;code class=&quot;highlighter-rouge&quot;&gt;...&lt;/code&gt;，填完要输出的内容后再输入&lt;code class=&quot;highlighter-rouge&quot;&gt;''')&lt;/code&gt;即可输出换行字符&lt;/p&gt;
+
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; print(''' line1
+...line2
+...line3''')
+line1
+line2
+line3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;逻辑关键字&quot;&gt;逻辑关键字&lt;/h3&gt;
+
+&lt;p&gt;与&lt;code class=&quot;highlighter-rouge&quot;&gt;and&lt;/code&gt;，或&lt;code class=&quot;highlighter-rouge&quot;&gt;or&lt;/code&gt;，非&lt;code class=&quot;highlighter-rouge&quot;&gt;not&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;占位符&quot;&gt;占位符&lt;/h3&gt;
+
+&lt;p&gt;有两种方式：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;%&lt;/code&gt;，通过加不同的参数，可以替换为不同数据类型的内容&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;占位符&lt;/th&gt;
+          &lt;th&gt;替换内容&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;%d&lt;/td&gt;
+          &lt;td&gt;整数（十进制）&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;%f&lt;/td&gt;
+          &lt;td&gt;浮点数，&lt;strong&gt;%0.nf表示显示n个有效小数位数&lt;/strong&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;%S&lt;/td&gt;
+          &lt;td&gt;字符串&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;%x&lt;/td&gt;
+          &lt;td&gt;十六进制&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ str = &quot;hello $s by $s&quot;%(&quot;python&quot;,&quot;2018-10-28&quot;)
+$ print(str)
+&amp;gt;&amp;gt;&amp;gt; &quot;hello python by 2018-10-28&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;目前这几种数据类型就够用了，如果还需要替换其他类型的内容，再搜索python 占位符即可，如果要显示’%’字符可以用&lt;code class=&quot;highlighter-rouge&quot;&gt;%%&lt;/code&gt;转义&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;字符串类型的内置方法&lt;code class=&quot;highlighter-rouge&quot;&gt;format()&lt;/code&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ str = &quot;hello {0} by {1}&quot;.format(&quot;python&quot;,&quot;2018-10-28&quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;浮点类型控制有效小数位数的占位格式：&lt;code class=&quot;highlighter-rouge&quot;&gt;{0:n}&lt;/code&gt;&lt;strong&gt;&lt;em&gt;n代表有效的小数位数&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;字符编码&quot;&gt;字符编码&lt;/h3&gt;
+
+&lt;p&gt;刚开始只有127个字符（ASCII码）被编入电脑，后来出现了所有语言都统一的编码（Unicode码），但是Unicode用来存储英文会浪费一倍的存储空间，所以就出现了可变长度的编码（UTF-8）&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ASCII码中，一个字节对应一个字符&lt;/p&gt;
+
+  &lt;p&gt;Unicode码中，两个字节对应一个字符&lt;/p&gt;
+
+  &lt;p&gt;UTF-8中，一个字母对应一个字节，一个汉字对应3个字节（&lt;strong&gt;&lt;em&gt;生僻字单个会占4-6个字符&lt;/em&gt;&lt;/strong&gt;）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;计算机系统通用的字符编码方式&quot;&gt;计算机系统通用的字符编码方式:&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;计算机内存中，统一使用Unicode编码，当保存到硬盘或者传输的时候就会转换为UTF-8&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;读写原理&lt;/strong&gt;，修改记事本内容时，会先读取内容并转换为Unicode到内存中，待保存时再把 Unicode转换为UTF-8保存到文件&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;../../../assets/posts/2018-10/5.jpg&quot; alt=&quot;记事本读写原理&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;传输原理&lt;/strong&gt;，浏览网站的时候，服务器会把动态生成的Unicode内容转换为UTF-8再&lt;strong&gt;传输&lt;/strong&gt;到浏览器&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;../../../assets/posts/2018-10/6.jpg&quot; alt=&quot;浏览器传输原理&quot; /&gt;&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;当看到一些网站的源码有类似&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;meta charset=&quot;UTF-8&quot; /&amp;gt;&lt;/code&gt;，那就表示该网页用的是UTF-8编码&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;在python3中字符串是以unicode编码的&quot;&gt;在python3中，字符串是以Unicode编码的&lt;/h5&gt;
+
+&lt;p&gt;读取内容的时候也会先转换为Unicode，所以如果知道字符串的整数编码，就可以直接用16进制这么写&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; '\u4e2d\u6587'
+'中文'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;对于单个字符&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;python提供了&lt;code class=&quot;highlighter-rouge&quot;&gt;ord()&lt;/code&gt;，获取字符的整数表示，以及&lt;code class=&quot;highlighter-rouge&quot;&gt;chr&lt;/code&gt;，把编码转换为对应字符&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; ord('A')
+65
+&amp;gt;&amp;gt;&amp;gt; ord('中')
+20013
+&amp;gt;&amp;gt;&amp;gt; chr(66)
+'B'
+&amp;gt;&amp;gt;&amp;gt; chr(25991)
+'文'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;网络传输&quot;&gt;网络传输&lt;/h5&gt;
+
+&lt;p&gt;字符串在内存中以Unicode表示，当进行网络传输时，需把字符串转换为字节为单位的&lt;code class=&quot;highlighter-rouge&quot;&gt;bytes&lt;/code&gt;（字节流），本地接受时，需要再把&lt;code class=&quot;highlighter-rouge&quot;&gt;bytes&lt;/code&gt;转换成字符串&lt;/p&gt;
+
+&lt;p&gt;Python对&lt;code class=&quot;highlighter-rouge&quot;&gt;bytes&lt;/code&gt;的数据用&lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt;前缀表示：如&lt;code class=&quot;highlighter-rouge&quot;&gt;x = b'abc'&lt;/code&gt;或者&lt;code class=&quot;highlighter-rouge&quot;&gt;x = b&quot;abc&quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;把字符串转换成bytes编码&quot;&gt;把字符串转换成&lt;code class=&quot;highlighter-rouge&quot;&gt;bytes&lt;/code&gt;编码&lt;/h5&gt;
+
+&lt;p&gt;字符串通过&lt;code class=&quot;highlighter-rouge&quot;&gt;encode（）&lt;/code&gt;方法可以编码为指定的&lt;code class=&quot;highlighter-rouge&quot;&gt;bytes&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; 'ABC'.encode('ascii')
+b'ABC'
+&amp;gt;&amp;gt;&amp;gt; '中文'.encode('utf-8')
+b'\xe4\xb8\xad\xe6\x96\x87'
+&amp;gt;&amp;gt;&amp;gt; '中文'.encode('ascii')
+Traceback (most recent call last):
+  File &quot;&amp;lt;stdin&amp;gt;&quot;, line 1, in &amp;lt;module&amp;gt;
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-1: ordinal not in range(128)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;纯英文可以用&lt;code class=&quot;highlighter-rouge&quot;&gt;ASCII&lt;/code&gt;编码为&lt;code class=&quot;highlighter-rouge&quot;&gt;bytes&lt;/code&gt;，含有中文可以用&lt;code class=&quot;highlighter-rouge&quot;&gt;UTF-8&lt;/code&gt;编码为&lt;code class=&quot;highlighter-rouge&quot;&gt;bytes&lt;/code&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;&lt;em&gt;含有中文不能用&lt;code class=&quot;highlighter-rouge&quot;&gt;ASCII&lt;/code&gt;编码为&lt;code class=&quot;highlighter-rouge&quot;&gt;bytes&lt;/code&gt;，因为&lt;code class=&quot;highlighter-rouge&quot;&gt;ASCII&lt;/code&gt;编码范围只有英文和一些特殊符号&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;把编码转换为字符串&quot;&gt;把编码转换为字符串&lt;/h5&gt;
+
+&lt;p&gt;通过&lt;code class=&quot;highlighter-rouge&quot;&gt;decode()&lt;/code&gt;方法可以将字节流转换为字符串，&lt;strong&gt;&lt;em&gt;但是如果包含不能解码的字节会报错，加入errors=’ignore’参数，可以忽略错误字节&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; b'\xe4\xb8\xad\xff'.decode('utf-8')
+Traceback (most recent call last):
+  ...
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 3: invalid start byte
+
+&amp;gt;&amp;gt;&amp;gt; b'\xe4\xb8\xad\xff'.decode('utf-8', errors='ignore')
+'中'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;加入了&lt;code class=&quot;highlighter-rouge&quot;&gt;errors=‘ignore’&lt;/code&gt;后，代码忽略了错误字节返回了&lt;code class=&quot;highlighter-rouge&quot;&gt;'中'&lt;/code&gt;字符串&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;decode()&lt;/code&gt;不指定参数时，默认转换为unicode编码的字符串&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;总结&quot;&gt;总结&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;数值除法有两种格式，&lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt;返回浮点值，&lt;code class=&quot;highlighter-rouge&quot;&gt;//&lt;/code&gt;返回整数值&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;None&lt;/code&gt;不能理解为0，0是有意义的，而&lt;code class=&quot;highlighter-rouge&quot;&gt;Node&lt;/code&gt;是特殊的空值&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;byte&lt;/code&gt;中，无法显示为&lt;code class=&quot;highlighter-rouge&quot;&gt;ASCII&lt;/code&gt;的字节用&lt;code class=&quot;highlighter-rouge&quot;&gt;\x##&lt;/code&gt;显示，如‘中’，包含3个字节,显示为&lt;code class=&quot;highlighter-rouge&quot;&gt;\xe4\xb8\xad&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>realmline</name></author><category term="python" /><summary type="html">python基础笔记</summary></entry><entry><title type="html">github远程库</title><link href="http://localhost:4000/2018/10/27/git-1.2.html" rel="alternate" type="text/html" title="github远程库" /><published>2018-10-27T00:00:00+08:00</published><updated>2018-10-27T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/27/git-1.2</id><content type="html" xml:base="http://localhost:4000/2018/10/27/git-1.2.html">&lt;h1 id=&quot;关联github远程库&quot;&gt;关联github远程库&lt;/h1&gt;
 
 &lt;h3 id=&quot;前言&quot;&gt;前言&lt;/h3&gt;
 
@@ -18,7 +282,7 @@
     &lt;/blockquote&gt;
   &lt;/li&gt;
   &lt;li&gt;执行成功后，在&lt;code class=&quot;highlighter-rouge&quot;&gt;C:\User\administrator\&lt;/code&gt;目录下找到.ssh文件夹，里面会有两个文件，&lt;code class=&quot;highlighter-rouge&quot;&gt;id_rsa&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;id_rsa.pub&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;将公匙中的内容复制出来添加到github的sshkey中&lt;/li&gt;
+  &lt;li&gt;将公匙（id_rsa.pub）中的内容复制出来添加到github的sshkey中&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;推送仓库&quot;&gt;推送仓库&lt;/h3&gt;
@@ -75,29 +339,50 @@ $ git clone https://github.com/yougithubname.gitDemo.git
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin master&lt;/code&gt;将本地master的分支提交到远程库上&lt;/p&gt;
 
-&lt;h3 id=&quot;获取远程库分支&quot;&gt;获取远程库分支&lt;/h3&gt;
+&lt;h3 id=&quot;远程库分支&quot;&gt;远程库分支&lt;/h3&gt;
+
+&lt;h5 id=&quot;克隆远程分支&quot;&gt;克隆远程分支&lt;/h5&gt;
 
 &lt;p&gt;远程库默认clone下来的只有master主分支，clone其他分支命令如下：&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;拉取远程分支到本地需要先指定链接&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git checkout -b dev origin/dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git branch --set-upstream-to=origin/dev dev
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;clone远程的dev分支，并新建到本地dev分支库中&lt;/p&gt;
+&lt;/blockquote&gt;
 
-    &lt;blockquote&gt;
-      &lt;p&gt;本地的dev分支和远程库的dev分支链接&lt;/p&gt;
-    &lt;/blockquote&gt;
+&lt;h5 id=&quot;提交分支到远程库&quot;&gt;提交分支到远程库&lt;/h5&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git checkout -b dev origin/dev
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+&lt;p&gt;如果和远程库分支版本不同，就需要先拉取，而拉取远程分支到本地需要指定链接&lt;/p&gt;
 
-    &lt;blockquote&gt;
-      &lt;p&gt;clone远程的dev分支，并新建到本地dev分支库中&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git branch --set-upstream-to=origin/dev dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;将本地分支dev与远程dev分支链接，然后&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull&lt;/code&gt;拉取更新下来&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;如果本地当前分支名在远程库不存在时，&lt;code class=&quot;highlighter-rouge&quot;&gt;push&lt;/code&gt;会在远程生成一个新的分支，避免这个情况可以指定分支：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git push origin HEAD:dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;将当前分支提交到远程库的dev分支中，HEAD指向当前分支&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;查看本地分支和远程分支链接情况&quot;&gt;查看本地分支和远程分支链接情况&lt;/h5&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git branch -vv
+master 3caa59 [origin/master] 'xxxxxx'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;返回的内容为当前本地分支的列表信息，内容分别为：&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;master&lt;/code&gt;分支名、&lt;code class=&quot;highlighter-rouge&quot;&gt;3cass59&lt;/code&gt;分支的id、&lt;code class=&quot;highlighter-rouge&quot;&gt;[origin/master]&lt;/code&gt;链接的远程库分支、&lt;code class=&quot;highlighter-rouge&quot;&gt;'xxxxxx'&lt;/code&gt;上一次&lt;code class=&quot;highlighter-rouge&quot;&gt;commit&lt;/code&gt;的描述&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h3 id=&quot;rebase&quot;&gt;rebase&lt;/h3&gt;
 
@@ -245,6 +530,10 @@ $ git checkout dev
   &lt;li&gt;
     &lt;p&gt;修复完成后，提交并合并到最新分支，然后回到储藏的那个分支，还原工作区&lt;/p&gt;
 
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;修复的版本合并到最新分支后，也需要和储藏区的分支合并一下，不然提交的时候可能会产生冲突&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
     &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git stash apply
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
@@ -329,7 +618,7 @@ $ git commit -m'xxxxxxxxxxxxx'
 
 &lt;h3 id=&quot;工作区暂存区版本库&quot;&gt;工作区&amp;amp;暂存区&amp;amp;版本库&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/posts/2018-10/2.jpg&quot; alt=&quot;工作区&amp;amp;暂存区&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../../../assets/posts/2018-10/2.jpg&quot; alt=&quot;工作区&amp;amp;暂存区&amp;amp;版本库&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;在本地仓库目录下&lt;/strong&gt;，除了隐藏目录.git之外的都是工作区&lt;/li&gt;
   &lt;li&gt;版本库目录(.git)中，有一个名为暂存区&lt;code class=&quot;highlighter-rouge&quot;&gt;stage&lt;/code&gt;的区域，用来存放&lt;code class=&quot;highlighter-rouge&quot;&gt;git add&lt;/code&gt;命令添加的文件&lt;/li&gt;
@@ -375,7 +664,7 @@ $ git commit -m'xxxxxxxxxxxxx'
 
 &lt;h3 id=&quot;查看每一个命令的版本日志&quot;&gt;查看每一个命令的版本日志&lt;/h3&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git reflog&lt;/code&gt;可以查找所有历史的记录，可以找到指定&lt;code class=&quot;highlighter-rouge&quot;&gt;commit id&lt;/code&gt;回退版本&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git reflog&lt;/code&gt;可以查找所有历史的记录，可以找到指定&lt;code class=&quot;highlighter-rouge&quot;&gt;commit id&lt;/code&gt;，对指定版本进行相应操作&lt;/p&gt;
 
 &lt;h3 id=&quot;回退版本&quot;&gt;&lt;span id=&quot;1&quot;&gt;回退版本&lt;/span&gt;&lt;/h3&gt;
 
