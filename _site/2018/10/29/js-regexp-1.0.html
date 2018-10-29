@@ -1,0 +1,590 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 引入head标签 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="用于个人学习整理的博客" />
+<meta name="keywords" content="境界线,realmline" />
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_autumn.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+<!-- SNS-icon -->
+<script src="/assets/fonts/sns/iconfont.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>JS中的正则表达式</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?https://hm.baidu.com/hm.js?35f27cd3f76195dca98823d061bc968b";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+
+<!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(238,180,34) ">
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(238,180,34);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;">不可视境界线</a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">JS中的正则表达式</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;realmline</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(238,180,34);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+      <a href="javascript:;" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(238,180,34)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+      <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(238,180,34);"><sapn class="main">没有上一页咯</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">JS中的正则表达式</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;realmline</span> -->
+  </div>
+  <div class="right-area">
+    
+      <a href="/2018/10/28/python-1.0.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(238,180,34)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+      <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(238,180,34);"><sapn class="main">python基础笔记</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+      <a href="javascript:;" class="leftchange" style="border-right: 1px solid rgb(238,180,34);border-bottom: 2px solid rgb(238,180,34);"><span><br>没有上一篇咯</span></a>
+    
+    
+      <a href="/2018/10/28/python-1.0.html" class="rightchange" style="border-left: 1px solid rgb(238,180,34);border-bottom: 2px solid rgb(238,180,34);"><span>下一篇<br><br>python基础笔记</span></a>
+    
+  </div>
+</div>
+
+
+<div class="markdown-body fadeInUp animated">
+
+  
+
+  <!-- 文章内容 -->
+  <h1 id="js中的正则表达式">JS中的正则表达式</h1>
+
+<h3 id="前言">前言</h3>
+
+<p>在涉及对一个字符串进行格式验证，比如验证它是否是有效的邮箱格式，虽然可以分离提取字符串<code class="highlighter-rouge">@</code>前后的字符来判断，但是那样显然很麻烦，所以我们可以使用正则表达式来对字符串进行匹配，在js中通过<strong>RegExp</strong>类型来支持正则表达式</p>
+
+<p>常见的应用如下：</p>
+
+<ol>
+  <li>验证字符串</li>
+  <li>查找字符串</li>
+  <li>替换字符串</li>
+  <li>提取字符串</li>
+</ol>
+
+<h3 id="格式">格式</h3>
+
+<p>正则表达式的格式很简单，如下：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">/</span><span class="nx">abc</span><span class="o">/</span><span class="nx">i</span><span class="p">;</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>这段正则表达式可以匹配包含<code class="highlighter-rouge">'abc'</code>或者<code class="highlighter-rouge">ABC</code>的字符串等，<em>被<code class="highlighter-rouge">/.../</code>包裹的内容是正则表达式，<code class="highlighter-rouge">/.../</code>后面的是标志，每一个正则表达式都可以带有1个或者多个标志，<strong>标志<code class="highlighter-rouge">i</code>模式下不区分大小写</strong></em></p>
+
+</blockquote>
+
+<h4 id="元字符">元字符</h4>
+
+<p>正则表达式中的元字符可以匹配位置或字符串中的某个字符，通过搭配可以更高效的写出正则表达式</p>
+
+<ul>
+  <li>
+    <h5 id="匹配位置的元字符">匹配位置的元字符：</h5>
+
+    <p>匹配位置的元字符只有三个<code class="highlighter-rouge">^</code>、<code class="highlighter-rouge">$</code>和<code class="highlighter-rouge">\b</code>：</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>元字符</th>
+          <th>作用</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="highlighter-rouge">^</code></td>
+          <td>用于匹配行的开始位置</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">$</code></td>
+          <td>用于匹配行的末尾位置</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">\b</code></td>
+          <td>用于匹配单词的开始或者结尾 ，<em>字符串中每一个空格分隔就算一个单词，如<code class="highlighter-rouge">abc efg</code>就算两个单词</em></td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">\B</code></td>
+          <td>用于匹配不处于单词的开头或者结尾</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//匹配abc开头的字符串</span>
+<span class="kd">var</span> <span class="nx">str1</span> <span class="o">=</span> <span class="sr">/^abc/</span>
+<span class="c1">//匹配abc结尾的字符串</span>
+<span class="kd">var</span> <span class="nx">str2</span> <span class="o">=</span> <span class="sr">/abc$/</span>
+<span class="c1">//匹配只有'abc'这3个字符组成的字符串</span>
+<span class="kd">var</span> <span class="nx">str3</span> <span class="o">=</span> <span class="sr">/^abc$/</span>
+<span class="c1">//匹配字符串中单词开头为'abc'的字符串</span>
+<span class="kd">var</span> <span class="nx">str4</span> <span class="o">=</span> <span class="sr">/</span><span class="se">\b</span><span class="sr">abc/</span>
+<span class="c1">//匹配字符串中单词结尾为'abc'的字符串</span>
+<span class="kd">var</span> <span class="nx">str5</span> <span class="o">=</span> <span class="sr">/abc</span><span class="se">\b</span><span class="sr">/</span>
+<span class="c1">//匹配字符串中单词开头不为‘abc’的字符串</span>
+<span class="kd">var</span> <span class="nx">str6</span> <span class="o">=</span> <span class="sr">/</span><span class="se">\B</span><span class="sr">abc/</span>
+<span class="c1">//匹配字符串中单词结尾不为‘abc’的字符串</span>
+<span class="kd">var</span> <span class="nx">str7</span> <span class="o">=</span> <span class="sr">/abc</span><span class="se">\B</span><span class="sr">/</span>
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p><strong><em>\b会对空格隔开字符串进行匹配，但是匹配到有效后就会停止，使用标志<code class="highlighter-rouge">g</code>可以不停止匹配对全局进行匹配直到匹配完毕</em></strong>，<code class="highlighter-rouge">\b</code>匹配到字符后可以配合<code class="highlighter-rouge">replace()</code>将单词替换</p>
+    </blockquote>
+  </li>
+  <li>
+    <h5 id="匹配字符的元字符">匹配字符的元字符</h5>
+
+    <p>匹配字符的元字符：</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>元字符</th>
+          <th>作用</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="highlighter-rouge">[]</code></td>
+          <td>包含，如：<code class="highlighter-rouge">[abc]</code>匹配其中任何一个字符（<code class="highlighter-rouge">a</code>、<code class="highlighter-rouge">b</code>、<code class="highlighter-rouge">c</code>）即满足条件</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">[^]</code></td>
+          <td>反包含，如：<code class="highlighter-rouge">[^abc]</code>，不匹配其中任何一个字符（<code class="highlighter-rouge">a</code>、<code class="highlighter-rouge">b</code>、<code class="highlighter-rouge">c</code>）即满足条件</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">\w</code></td>
+          <td>匹配单个字符（数字、字母、下划线），等价于<code class="highlighter-rouge">[0-9a-zA-Z\_]</code></td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">\W</code></td>
+          <td>匹配单个字符（数字、字母、下划线除外），等价于<code class="highlighter-rouge">[^0-9a-zA-Z\_]</code></td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">\d</code></td>
+          <td>匹配单个数字字符，等价于<code class="highlighter-rouge">[0-9]</code></td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">\D</code></td>
+          <td>匹配单个非数字字符，等价于<code class="highlighter-rouge">[^0-9]</code></td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">\s</code></td>
+          <td>匹配单个空白字符（空格、Tab字符、回车和换行）</td>
+        </tr>
+        <tr>
+          <td>`\S</td>
+          <td>匹配单个非空白字符（非空格、Tab字符、回车和换行）</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">.</code></td>
+          <td>匹配单个除回车和换行符之外的所有字符（<strong><em>可以匹配中文</em></strong>）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <tbody>
+        <tr>
+          <td><code class="highlighter-rouge">|</code></td>
+          <td>匹配左右条件中的一个即满足条件，如：<code class="highlighter-rouge">x|y</code>匹配<code class="highlighter-rouge">x</code>或<code class="highlighter-rouge">y</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <h5 id="限定符">限定符</h5>
+
+    <p>限定符可以对匹配的上一项条件重复执行指定的次数</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>贪婪限定符</th>
+          <th>惰性限定符</th>
+          <th>作用</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="highlighter-rouge">*</code></td>
+          <td><code class="highlighter-rouge">*?</code></td>
+          <td>匹配0次或多次</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">+</code></td>
+          <td><code class="highlighter-rouge">+?</code></td>
+          <td>匹配1次或多次</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">?</code></td>
+          <td><code class="highlighter-rouge">??</code></td>
+          <td>匹配0次或1次</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">{n}</code></td>
+          <td><code class="highlighter-rouge">{n}?</code></td>
+          <td>匹配n次</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">{n,}</code></td>
+          <td><code class="highlighter-rouge">{n,}?</code></td>
+          <td>最少匹配n次</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">{n,m}</code></td>
+          <td><code class="highlighter-rouge">{n,m}?</code></td>
+          <td>最少匹配n次，最多匹配m次</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h5 id="贪婪限定符会尽量匹配最多的匹配项惰性会尽量匹配最少的匹配项">贪婪限定符会尽量匹配最多的匹配项，惰性会尽量匹配最少的匹配项</h5>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="sr">/abc*/</span>
+<span class="kd">var</span> <span class="nx">str1</span> <span class="o">=</span> <span class="sr">/abc*</span><span class="se">?</span><span class="sr">/</span>
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>如果匹配的字符串是<code class="highlighter-rouge">'abcccccabccccancccabccabc'</code></p>
+
+      <p>贪婪匹配的结果会是<code class="highlighter-rouge">abccccc</code>，<strong>而惰性匹配的结果会是<code class="highlighter-rouge">ab</code>，因为*最少匹配0次</strong></p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="regexp">RegExp</h3>
+
+<h5 id="创建正则表达式">创建正则表达式</h5>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//通过字面量创建正则表达式</span>
+<span class="kd">var</span> <span class="nx">re1</span> <span class="o">=</span> <span class="sr">/ABC</span><span class="se">\-</span><span class="sr">001/</span><span class="p">;</span>
+<span class="c1">//通过RegExp对象实例化一个正则表达式</span>
+<span class="kd">var</span> <span class="nx">re2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s1">'ABC</span><span class="err">\\</span><span class="s1">-001'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>RegExp实例化的表达式参数是字符串，需要转义一下</p>
+
+  <p>这两种创建方式的结果并没有区别，写法是一样的</p>
+</blockquote>
+
+<h5 id="测试字符串是否符合条件">测试字符串是否符合条件</h5>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">re</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">\d{3}\-\d{3,8}</span><span class="sr">$/</span><span class="p">;</span>
+<span class="nx">re</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s1">'010-12345'</span><span class="p">);</span> <span class="c1">// true</span>
+<span class="nx">re</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s1">'010-1234x'</span><span class="p">);</span> <span class="c1">// false</span>
+<span class="nx">re</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s1">'010 12345'</span><span class="p">);</span> <span class="c1">// false</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>RegExp对象的<code class="highlighter-rouge">test()</code>方法用于测试给定的字符串是否符合条件</p>
+</blockquote>
+
+<h5 id="切分字符串">切分字符串</h5>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s1">'a,b;; c  d'</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="sr">/</span><span class="se">[\s\,\;]</span><span class="sr">+/</span><span class="p">);</span> <span class="c1">// ['a', 'b', 'c', 'd']</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>通过正则表达式还可以比固定字符串更灵活的分割字符串</p>
+
+  <p>规则中包含空格、<code class="highlighter-rouge">,</code>和<code class="highlighter-rouge">;</code>的任意一个通过匹配开启一次分割，在<code class="highlighter-rouge">+</code>的贪婪匹配下还可以过滤掉重复的分割符号(#^.^#)</p>
+</blockquote>
+
+<h5 id="分组">分组</h5>
+
+<p>用<code class="highlighter-rouge">（）</code>包含的正则表达式，在使用<code class="highlighter-rouge">exec()ss</code>匹配的时候会返回一个数组：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">re</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">(\d{3})</span><span class="sr">-</span><span class="se">(\d{3,8})</span><span class="sr">$/</span><span class="p">;</span>
+<span class="nx">re</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="s1">'010-12345'</span><span class="p">);</span> <span class="c1">// ['010-12345', '010', '12345']</span>
+<span class="nx">re</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="s1">'010 12345'</span><span class="p">);</span> <span class="c1">// null</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><code class="highlighter-rouge">exec()</code>在匹配成功时，返回的<code class="highlighter-rouge">Array</code>中，第一个元素是匹配到的整个字符串，后面的元素依次为分组中匹配的字符串</p>
+
+  <p><code class="highlighter-rouge">exec()</code>在匹配失败时，会返回<code class="highlighter-rouge">null</code></p>
+</blockquote>
+
+<h5 id="替换字符串">替换字符串</h5>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'0123.123456100'.replace(/^[0]*([1-9]\d*\.\d{0,4})\d*\.*$/,'$1')
+</code></pre></div></div>
+
+<blockquote>
+  <p><code class="highlighter-rouge">([1-9]\d*\.\d{0,4})</code>匹配的是正整数开头，且有效小数位数为4位的数值，也是我们需要的效果，在通过<code class="highlighter-rouge">/^[0]*</code>和<code class="highlighter-rouge">\d*\.*$/</code>保证整个字符串都会匹配有效，<em>最后替换字符串中的$1表示第一个分组（括号）中的内容</em></p>
+</blockquote>
+
+<h5 id="标志">标志</h5>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">g</code>全局匹配，表示不会在发现第一个匹配项就停止</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">i</code>表示匹配不区分大小写</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">m</code>表示多行模式，多行模式，<code class="highlighter-rouge">/^</code>和<code class="highlighter-rouge">$/</code>匹配变成每行的行首与行尾</p>
+
+    <h5 id="regexp的实例中有3个属性也是分别对应这三种标识">RegExp的实例中有3个属性，也是分别对应这三种标识</h5>
+
+    <ul>
+      <li>
+        <p>global，<code class="highlighter-rouge">bool</code>类型，全局模式</p>
+      </li>
+      <li>
+        <p>ignoreCase，<code class="highlighter-rouge">bool</code>类型，不区分大小写模式</p>
+      </li>
+      <li>
+        <p>multline，<code class="highlighter-rouge">bool</code>类型，多行模式</p>
+
+        <ul>
+          <li>
+            <h5 id="实例化时设置方式">实例化时设置方式</h5>
+          </li>
+        </ul>
+
+        <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">re1</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s1">'ABC</span><span class="err">\\</span><span class="s1">-001'</span><span class="p">,</span><span class="s1">'i'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">re2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s1">'ABC</span><span class="err">\\</span><span class="s1">-001'</span><span class="p">,</span><span class="s1">'ig'</span><span class="p">)</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>另外两个属性：</p>
+
+        <ul>
+          <li>lastIndex，<code class="highlighter-rouge">int</code>类型，表示搜索下一段匹配项字符串的位置，0开始</li>
+          <li>source，正则表达式的字符串表示，<strong><em>按照字面量格式返回，不会有转义字符串</em></strong></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="总结">总结</h3>
+
+<ol>
+  <li><code class="highlighter-rouge">[{(\$|)?*+.}]</code>，元字符必须转义，不然不会被识别</li>
+  <li>惰性限定符对于<code class="highlighter-rouge">*</code>和<code class="highlighter-rouge">?</code>来说就是匹配0次，对于<code class="highlighter-rouge">{n，m}?</code>来说等于<code class="highlighter-rouge">{n}</code></li>
+</ol>
+
+  <!-- 引入share模块 -->
+  
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDU2Ni8xNzA5Mw=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>不可视境界线 ©
+  
+  
+  2018
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+    var wow = new WOW({
+        boxClass: 'wow',
+        animateClass: 'animated',
+        // offset: 600,
+        mobile: true,
+        live: true
+    });
+    wow.init();
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+    window.onbeforeunload = function(){
+        //刷新后页面自动回到顶部
+        document.documentElement.scrollTop = 0;  //ie下
+        document.body.scrollTop = 0;  //非ie
+    }
+</script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

@@ -1,4 +1,324 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-10-29T00:06:51+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">不可视境界线</title><subtitle>用于个人学习整理的博客</subtitle><author><name>true</name></author><entry><title type="html">python基础笔记</title><link href="http://localhost:4000/2018/10/28/python-1.0.html" rel="alternate" type="text/html" title="python基础笔记" /><published>2018-10-28T00:00:00+08:00</published><updated>2018-10-28T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/28/python-1.0</id><content type="html" xml:base="http://localhost:4000/2018/10/28/python-1.0.html">&lt;h1 id=&quot;python基础笔记&quot;&gt;python基础笔记&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-10-29T22:39:01+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">不可视境界线</title><subtitle>用于个人学习整理的博客</subtitle><author><name>true</name></author><entry><title type="html">JS中的正则表达式</title><link href="http://localhost:4000/2018/10/29/js-regexp-1.0.html" rel="alternate" type="text/html" title="JS中的正则表达式" /><published>2018-10-29T00:00:00+08:00</published><updated>2018-10-29T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/29/js-regexp-1.0</id><content type="html" xml:base="http://localhost:4000/2018/10/29/js-regexp-1.0.html">&lt;h1 id=&quot;js中的正则表达式&quot;&gt;JS中的正则表达式&lt;/h1&gt;
+
+&lt;h3 id=&quot;前言&quot;&gt;前言&lt;/h3&gt;
+
+&lt;p&gt;在涉及对一个字符串进行格式验证，比如验证它是否是有效的邮箱格式，虽然可以分离提取字符串&lt;code class=&quot;highlighter-rouge&quot;&gt;@&lt;/code&gt;前后的字符来判断，但是那样显然很麻烦，所以我们可以使用正则表达式来对字符串进行匹配，在js中通过&lt;strong&gt;RegExp&lt;/strong&gt;类型来支持正则表达式&lt;/p&gt;
+
+&lt;p&gt;常见的应用如下：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;验证字符串&lt;/li&gt;
+  &lt;li&gt;查找字符串&lt;/li&gt;
+  &lt;li&gt;替换字符串&lt;/li&gt;
+  &lt;li&gt;提取字符串&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;格式&quot;&gt;格式&lt;/h3&gt;
+
+&lt;p&gt;正则表达式的格式很简单，如下：&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;abc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;这段正则表达式可以匹配包含&lt;code class=&quot;highlighter-rouge&quot;&gt;'abc'&lt;/code&gt;或者&lt;code class=&quot;highlighter-rouge&quot;&gt;ABC&lt;/code&gt;的字符串等，&lt;em&gt;被&lt;code class=&quot;highlighter-rouge&quot;&gt;/.../&lt;/code&gt;包裹的内容是正则表达式，&lt;code class=&quot;highlighter-rouge&quot;&gt;/.../&lt;/code&gt;后面的是标志，每一个正则表达式都可以带有1个或者多个标志，&lt;strong&gt;标志&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;模式下不区分大小写&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;元字符&quot;&gt;元字符&lt;/h4&gt;
+
+&lt;p&gt;正则表达式中的元字符可以匹配位置或字符串中的某个字符，通过搭配可以更高效的写出正则表达式&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;h5 id=&quot;匹配位置的元字符&quot;&gt;匹配位置的元字符：&lt;/h5&gt;
+
+    &lt;p&gt;匹配位置的元字符只有三个&lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;\b&lt;/code&gt;：&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;元字符&lt;/th&gt;
+          &lt;th&gt;作用&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;用于匹配行的开始位置&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;用于匹配行的末尾位置&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\b&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;用于匹配单词的开始或者结尾 ，&lt;em&gt;字符串中每一个空格分隔就算一个单词，如&lt;code class=&quot;highlighter-rouge&quot;&gt;abc efg&lt;/code&gt;就算两个单词&lt;/em&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\B&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;用于匹配不处于单词的开头或者结尾&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//匹配abc开头的字符串&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^abc/&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//匹配abc结尾的字符串&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/abc$/&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//匹配只有'abc'这3个字符组成的字符串&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^abc$/&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//匹配字符串中单词开头为'abc'的字符串&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\b&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;abc/&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//匹配字符串中单词结尾为'abc'的字符串&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/abc&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\b&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//匹配字符串中单词开头不为‘abc’的字符串&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str6&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\B&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;abc/&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//匹配字符串中单词结尾不为‘abc’的字符串&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str7&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/abc&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\B&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;strong&gt;&lt;em&gt;\b会对空格隔开字符串进行匹配，但是匹配到有效后就会停止，使用标志&lt;code class=&quot;highlighter-rouge&quot;&gt;g&lt;/code&gt;可以不停止匹配对全局进行匹配直到匹配完毕&lt;/em&gt;&lt;/strong&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;\b&lt;/code&gt;匹配到字符后可以配合&lt;code class=&quot;highlighter-rouge&quot;&gt;replace()&lt;/code&gt;将单词替换&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;h5 id=&quot;匹配字符的元字符&quot;&gt;匹配字符的元字符&lt;/h5&gt;
+
+    &lt;p&gt;匹配字符的元字符：&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;元字符&lt;/th&gt;
+          &lt;th&gt;作用&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;包含，如：&lt;code class=&quot;highlighter-rouge&quot;&gt;[abc]&lt;/code&gt;匹配其中任何一个字符（&lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt;）即满足条件&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[^]&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;反包含，如：&lt;code class=&quot;highlighter-rouge&quot;&gt;[^abc]&lt;/code&gt;，不匹配其中任何一个字符（&lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt;）即满足条件&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\w&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;匹配单个字符（数字、字母、下划线），等价于&lt;code class=&quot;highlighter-rouge&quot;&gt;[0-9a-zA-Z\_]&lt;/code&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\W&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;匹配单个字符（数字、字母、下划线除外），等价于&lt;code class=&quot;highlighter-rouge&quot;&gt;[^0-9a-zA-Z\_]&lt;/code&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\d&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;匹配单个数字字符，等价于&lt;code class=&quot;highlighter-rouge&quot;&gt;[0-9]&lt;/code&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\D&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;匹配单个非数字字符，等价于&lt;code class=&quot;highlighter-rouge&quot;&gt;[^0-9]&lt;/code&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\s&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;匹配单个空白字符（空格、Tab字符、回车和换行）&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;`\S&lt;/td&gt;
+          &lt;td&gt;匹配单个非空白字符（非空格、Tab字符、回车和换行）&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;匹配单个除回车和换行符之外的所有字符（&lt;strong&gt;&lt;em&gt;可以匹配中文&lt;/em&gt;&lt;/strong&gt;）&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;|&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;匹配左右条件中的一个即满足条件，如：&lt;code class=&quot;highlighter-rouge&quot;&gt;x|y&lt;/code&gt;匹配&lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt;或&lt;code class=&quot;highlighter-rouge&quot;&gt;y&lt;/code&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;h5 id=&quot;限定符&quot;&gt;限定符&lt;/h5&gt;
+
+    &lt;p&gt;限定符可以对匹配的上一项条件重复执行指定的次数&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;贪婪限定符&lt;/th&gt;
+          &lt;th&gt;惰性限定符&lt;/th&gt;
+          &lt;th&gt;作用&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;*?&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;匹配0次或多次&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;+?&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;匹配1次或多次&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;?&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;??&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;匹配0次或1次&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{n}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{n}?&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;匹配n次&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{n,}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{n,}?&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;最少匹配n次&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{n,m}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{n,m}?&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;最少匹配n次，最多匹配m次&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;h5 id=&quot;贪婪限定符会尽量匹配最多的匹配项惰性会尽量匹配最少的匹配项&quot;&gt;贪婪限定符会尽量匹配最多的匹配项，惰性会尽量匹配最少的匹配项&lt;/h5&gt;
+
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/abc*/&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/abc*&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;如果匹配的字符串是&lt;code class=&quot;highlighter-rouge&quot;&gt;'abcccccabccccancccabccabc'&lt;/code&gt;&lt;/p&gt;
+
+      &lt;p&gt;贪婪匹配的结果会是&lt;code class=&quot;highlighter-rouge&quot;&gt;abccccc&lt;/code&gt;，&lt;strong&gt;而惰性匹配的结果会是&lt;code class=&quot;highlighter-rouge&quot;&gt;ab&lt;/code&gt;，因为*最少匹配0次&lt;/strong&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;regexp&quot;&gt;RegExp&lt;/h3&gt;
+
+&lt;h5 id=&quot;创建正则表达式&quot;&gt;创建正则表达式&lt;/h5&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//通过字面量创建正则表达式&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;re1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/ABC&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\-&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;001/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//通过RegExp对象实例化一个正则表达式&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;re2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;RegExp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ABC&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;-001'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;RegExp实例化的表达式参数是字符串，需要转义一下&lt;/p&gt;
+
+  &lt;p&gt;这两种创建方式的结果并没有区别，写法是一样的&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;测试字符串是否符合条件&quot;&gt;测试字符串是否符合条件&lt;/h5&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\d{3}\-\d{3,8}&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'010-12345'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'010-1234x'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'010 12345'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;RegExp对象的&lt;code class=&quot;highlighter-rouge&quot;&gt;test()&lt;/code&gt;方法用于测试给定的字符串是否符合条件&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;切分字符串&quot;&gt;切分字符串&lt;/h5&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s1&quot;&gt;'a,b;; c  d'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;[\s\,\;]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;+/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// ['a', 'b', 'c', 'd']&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;通过正则表达式还可以比固定字符串更灵活的分割字符串&lt;/p&gt;
+
+  &lt;p&gt;规则中包含空格、&lt;code class=&quot;highlighter-rouge&quot;&gt;,&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;;&lt;/code&gt;的任意一个通过匹配开启一次分割，在&lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt;的贪婪匹配下还可以过滤掉重复的分割符号(#^.^#)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;分组&quot;&gt;分组&lt;/h5&gt;
+
+&lt;p&gt;用&lt;code class=&quot;highlighter-rouge&quot;&gt;（）&lt;/code&gt;包含的正则表达式，在使用&lt;code class=&quot;highlighter-rouge&quot;&gt;exec()ss&lt;/code&gt;匹配的时候会返回一个数组：&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;(\d{3})&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;(\d{3,8})&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'010-12345'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// ['010-12345', '010', '12345']&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'010 12345'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// null&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;exec()&lt;/code&gt;在匹配成功时，返回的&lt;code class=&quot;highlighter-rouge&quot;&gt;Array&lt;/code&gt;中，第一个元素是匹配到的整个字符串，后面的元素依次为分组中匹配的字符串&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;exec()&lt;/code&gt;在匹配失败时，会返回&lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;替换字符串&quot;&gt;替换字符串&lt;/h5&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'0123.123456100'.replace(/^[0]*([1-9]\d*\.\d{0,4})\d*\.*$/,'$1')
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;([1-9]\d*\.\d{0,4})&lt;/code&gt;匹配的是正整数开头，且有效小数位数为4位的数值，也是我们需要的效果，在通过&lt;code class=&quot;highlighter-rouge&quot;&gt;/^[0]*&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;\d*\.*$/&lt;/code&gt;保证整个字符串都会匹配有效，&lt;em&gt;最后替换字符串中的$1表示第一个分组（括号）中的内容&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;标志&quot;&gt;标志&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;g&lt;/code&gt;全局匹配，表示不会在发现第一个匹配项就停止&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;表示匹配不区分大小写&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;m&lt;/code&gt;表示多行模式，多行模式，&lt;code class=&quot;highlighter-rouge&quot;&gt;/^&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;$/&lt;/code&gt;匹配变成每行的行首与行尾&lt;/p&gt;
+
+    &lt;h5 id=&quot;regexp的实例中有3个属性也是分别对应这三种标识&quot;&gt;RegExp的实例中有3个属性，也是分别对应这三种标识&lt;/h5&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;global，&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;类型，全局模式&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;ignoreCase，&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;类型，不区分大小写模式&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;multline，&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;类型，多行模式&lt;/p&gt;
+
+        &lt;ul&gt;
+          &lt;li&gt;
+            &lt;h5 id=&quot;实例化时设置方式&quot;&gt;实例化时设置方式&lt;/h5&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;re1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;RegExp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ABC&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;-001'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'i'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;re2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;RegExp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ABC&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;-001'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ig'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;另外两个属性：&lt;/p&gt;
+
+        &lt;ul&gt;
+          &lt;li&gt;lastIndex，&lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt;类型，表示搜索下一段匹配项字符串的位置，0开始&lt;/li&gt;
+          &lt;li&gt;source，正则表达式的字符串表示，&lt;strong&gt;&lt;em&gt;按照字面量格式返回，不会有转义字符串&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;总结&quot;&gt;总结&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[{(\$|)?*+.}]&lt;/code&gt;，元字符必须转义，不然不会被识别&lt;/li&gt;
+  &lt;li&gt;惰性限定符对于&lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;?&lt;/code&gt;来说就是匹配0次，对于&lt;code class=&quot;highlighter-rouge&quot;&gt;{n，m}?&lt;/code&gt;来说等于&lt;code class=&quot;highlighter-rouge&quot;&gt;{n}&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>realmline</name></author><category term="RegExp,正则表达式" /><summary type="html">JS中的正则表达式</summary></entry><entry><title type="html">python基础笔记</title><link href="http://localhost:4000/2018/10/28/python-1.0.html" rel="alternate" type="text/html" title="python基础笔记" /><published>2018-10-28T00:00:00+08:00</published><updated>2018-10-28T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/28/python-1.0</id><content type="html" xml:base="http://localhost:4000/2018/10/28/python-1.0.html">&lt;h1 id=&quot;python基础笔记&quot;&gt;python基础笔记&lt;/h1&gt;
 
 &lt;h3 id=&quot;前言&quot;&gt;前言&lt;/h3&gt;
 
@@ -176,12 +496,12 @@ $ print(str)
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;读写原理&lt;/strong&gt;，修改记事本内容时，会先读取内容并转换为Unicode到内存中，待保存时再把 Unicode转换为UTF-8保存到文件&lt;/p&gt;
 
-    &lt;p&gt;&lt;img src=&quot;../../../assets/posts/2018-10/5.jpg&quot; alt=&quot;记事本读写原理&quot; /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;img src=&quot;../../../assets/posts/2018-10/5.png&quot; alt=&quot;记事本读写原理&quot; /&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;传输原理&lt;/strong&gt;，浏览网站的时候，服务器会把动态生成的Unicode内容转换为UTF-8再&lt;strong&gt;传输&lt;/strong&gt;到浏览器&lt;/p&gt;
 
-    &lt;p&gt;&lt;img src=&quot;../../../assets/posts/2018-10/6.jpg&quot; alt=&quot;浏览器传输原理&quot; /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;img src=&quot;../../../assets/posts/2018-10/6.png&quot; alt=&quot;浏览器传输原理&quot; /&gt;&lt;/p&gt;
 
     &lt;blockquote&gt;
       &lt;p&gt;当看到一些网站的源码有类似&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;meta charset=&quot;UTF-8&quot; /&amp;gt;&lt;/code&gt;，那就表示该网页用的是UTF-8编码&lt;/p&gt;
