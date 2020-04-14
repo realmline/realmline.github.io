@@ -1,11 +1,11 @@
 ---
 layout: post
-title: 'python3基础笔记(一)'
-date: 2018-11-22
+title: '泛型'
+date: 2020-4-14
 author: realmline
 color: rgb(100,149,237)
 cover: '../assets/posts/2018-11/1.png'
-tags: python3
+tags: C#
 ---
 
 # 泛型
