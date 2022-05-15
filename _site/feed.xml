@@ -1,1029 +1,1524 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-10-29T22:39:01+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">不可视境界线</title><subtitle>用于个人学习整理的博客</subtitle><author><name>true</name></author><entry><title type="html">JS中的正则表达式</title><link href="http://localhost:4000/2018/10/29/js-regexp-1.0.html" rel="alternate" type="text/html" title="JS中的正则表达式" /><published>2018-10-29T00:00:00+08:00</published><updated>2018-10-29T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/29/js-regexp-1.0</id><content type="html" xml:base="http://localhost:4000/2018/10/29/js-regexp-1.0.html">&lt;h1 id=&quot;js中的正则表达式&quot;&gt;JS中的正则表达式&lt;/h1&gt;
-
-&lt;h3 id=&quot;前言&quot;&gt;前言&lt;/h3&gt;
-
-&lt;p&gt;在涉及对一个字符串进行格式验证，比如验证它是否是有效的邮箱格式，虽然可以分离提取字符串&lt;code class=&quot;highlighter-rouge&quot;&gt;@&lt;/code&gt;前后的字符来判断，但是那样显然很麻烦，所以我们可以使用正则表达式来对字符串进行匹配，在js中通过&lt;strong&gt;RegExp&lt;/strong&gt;类型来支持正则表达式&lt;/p&gt;
-
-&lt;p&gt;常见的应用如下：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;验证字符串&lt;/li&gt;
-  &lt;li&gt;查找字符串&lt;/li&gt;
-  &lt;li&gt;替换字符串&lt;/li&gt;
-  &lt;li&gt;提取字符串&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;格式&quot;&gt;格式&lt;/h3&gt;
-
-&lt;p&gt;正则表达式的格式很简单，如下：&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;abc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;这段正则表达式可以匹配包含&lt;code class=&quot;highlighter-rouge&quot;&gt;'abc'&lt;/code&gt;或者&lt;code class=&quot;highlighter-rouge&quot;&gt;ABC&lt;/code&gt;的字符串等，&lt;em&gt;被&lt;code class=&quot;highlighter-rouge&quot;&gt;/.../&lt;/code&gt;包裹的内容是正则表达式，&lt;code class=&quot;highlighter-rouge&quot;&gt;/.../&lt;/code&gt;后面的是标志，每一个正则表达式都可以带有1个或者多个标志，&lt;strong&gt;标志&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;模式下不区分大小写&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;/blockquote&gt;
-
-&lt;h4 id=&quot;元字符&quot;&gt;元字符&lt;/h4&gt;
-
-&lt;p&gt;正则表达式中的元字符可以匹配位置或字符串中的某个字符，通过搭配可以更高效的写出正则表达式&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;h5 id=&quot;匹配位置的元字符&quot;&gt;匹配位置的元字符：&lt;/h5&gt;
-
-    &lt;p&gt;匹配位置的元字符只有三个&lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;\b&lt;/code&gt;：&lt;/p&gt;
-
-    &lt;table&gt;
-      &lt;thead&gt;
-        &lt;tr&gt;
-          &lt;th&gt;元字符&lt;/th&gt;
-          &lt;th&gt;作用&lt;/th&gt;
-        &lt;/tr&gt;
-      &lt;/thead&gt;
-      &lt;tbody&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;用于匹配行的开始位置&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;用于匹配行的末尾位置&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\b&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;用于匹配单词的开始或者结尾 ，&lt;em&gt;字符串中每一个空格分隔就算一个单词，如&lt;code class=&quot;highlighter-rouge&quot;&gt;abc efg&lt;/code&gt;就算两个单词&lt;/em&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\B&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;用于匹配不处于单词的开头或者结尾&lt;/td&gt;
-        &lt;/tr&gt;
-      &lt;/tbody&gt;
-    &lt;/table&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//匹配abc开头的字符串&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^abc/&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//匹配abc结尾的字符串&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/abc$/&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//匹配只有'abc'这3个字符组成的字符串&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^abc$/&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//匹配字符串中单词开头为'abc'的字符串&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\b&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;abc/&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//匹配字符串中单词结尾为'abc'的字符串&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/abc&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\b&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//匹配字符串中单词开头不为‘abc’的字符串&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str6&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\B&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;abc/&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//匹配字符串中单词结尾不为‘abc’的字符串&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str7&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/abc&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\B&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;blockquote&gt;
-      &lt;p&gt;&lt;strong&gt;&lt;em&gt;\b会对空格隔开字符串进行匹配，但是匹配到有效后就会停止，使用标志&lt;code class=&quot;highlighter-rouge&quot;&gt;g&lt;/code&gt;可以不停止匹配对全局进行匹配直到匹配完毕&lt;/em&gt;&lt;/strong&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;\b&lt;/code&gt;匹配到字符后可以配合&lt;code class=&quot;highlighter-rouge&quot;&gt;replace()&lt;/code&gt;将单词替换&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h5 id=&quot;匹配字符的元字符&quot;&gt;匹配字符的元字符&lt;/h5&gt;
-
-    &lt;p&gt;匹配字符的元字符：&lt;/p&gt;
-
-    &lt;table&gt;
-      &lt;thead&gt;
-        &lt;tr&gt;
-          &lt;th&gt;元字符&lt;/th&gt;
-          &lt;th&gt;作用&lt;/th&gt;
-        &lt;/tr&gt;
-      &lt;/thead&gt;
-      &lt;tbody&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;包含，如：&lt;code class=&quot;highlighter-rouge&quot;&gt;[abc]&lt;/code&gt;匹配其中任何一个字符（&lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt;）即满足条件&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[^]&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;反包含，如：&lt;code class=&quot;highlighter-rouge&quot;&gt;[^abc]&lt;/code&gt;，不匹配其中任何一个字符（&lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt;）即满足条件&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\w&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;匹配单个字符（数字、字母、下划线），等价于&lt;code class=&quot;highlighter-rouge&quot;&gt;[0-9a-zA-Z\_]&lt;/code&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\W&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;匹配单个字符（数字、字母、下划线除外），等价于&lt;code class=&quot;highlighter-rouge&quot;&gt;[^0-9a-zA-Z\_]&lt;/code&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\d&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;匹配单个数字字符，等价于&lt;code class=&quot;highlighter-rouge&quot;&gt;[0-9]&lt;/code&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\D&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;匹配单个非数字字符，等价于&lt;code class=&quot;highlighter-rouge&quot;&gt;[^0-9]&lt;/code&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\s&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;匹配单个空白字符（空格、Tab字符、回车和换行）&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;`\S&lt;/td&gt;
-          &lt;td&gt;匹配单个非空白字符（非空格、Tab字符、回车和换行）&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;匹配单个除回车和换行符之外的所有字符（&lt;strong&gt;&lt;em&gt;可以匹配中文&lt;/em&gt;&lt;/strong&gt;）&lt;/td&gt;
-        &lt;/tr&gt;
-      &lt;/tbody&gt;
-    &lt;/table&gt;
-
-    &lt;table&gt;
-      &lt;tbody&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;|&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;匹配左右条件中的一个即满足条件，如：&lt;code class=&quot;highlighter-rouge&quot;&gt;x|y&lt;/code&gt;匹配&lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt;或&lt;code class=&quot;highlighter-rouge&quot;&gt;y&lt;/code&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-      &lt;/tbody&gt;
-    &lt;/table&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h5 id=&quot;限定符&quot;&gt;限定符&lt;/h5&gt;
-
-    &lt;p&gt;限定符可以对匹配的上一项条件重复执行指定的次数&lt;/p&gt;
-
-    &lt;table&gt;
-      &lt;thead&gt;
-        &lt;tr&gt;
-          &lt;th&gt;贪婪限定符&lt;/th&gt;
-          &lt;th&gt;惰性限定符&lt;/th&gt;
-          &lt;th&gt;作用&lt;/th&gt;
-        &lt;/tr&gt;
-      &lt;/thead&gt;
-      &lt;tbody&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;*?&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;匹配0次或多次&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;+?&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;匹配1次或多次&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;?&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;??&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;匹配0次或1次&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{n}&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{n}?&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;匹配n次&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{n,}&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{n,}?&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;最少匹配n次&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{n,m}&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{n,m}?&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;最少匹配n次，最多匹配m次&lt;/td&gt;
-        &lt;/tr&gt;
-      &lt;/tbody&gt;
-    &lt;/table&gt;
-
-    &lt;h5 id=&quot;贪婪限定符会尽量匹配最多的匹配项惰性会尽量匹配最少的匹配项&quot;&gt;贪婪限定符会尽量匹配最多的匹配项，惰性会尽量匹配最少的匹配项&lt;/h5&gt;
-
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/abc*/&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/abc*&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;blockquote&gt;
-      &lt;p&gt;如果匹配的字符串是&lt;code class=&quot;highlighter-rouge&quot;&gt;'abcccccabccccancccabccabc'&lt;/code&gt;&lt;/p&gt;
-
-      &lt;p&gt;贪婪匹配的结果会是&lt;code class=&quot;highlighter-rouge&quot;&gt;abccccc&lt;/code&gt;，&lt;strong&gt;而惰性匹配的结果会是&lt;code class=&quot;highlighter-rouge&quot;&gt;ab&lt;/code&gt;，因为*最少匹配0次&lt;/strong&gt;&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;regexp&quot;&gt;RegExp&lt;/h3&gt;
-
-&lt;h5 id=&quot;创建正则表达式&quot;&gt;创建正则表达式&lt;/h5&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//通过字面量创建正则表达式&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;re1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/ABC&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\-&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;001/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//通过RegExp对象实例化一个正则表达式&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;re2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;RegExp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ABC&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;-001'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;RegExp实例化的表达式参数是字符串，需要转义一下&lt;/p&gt;
-
-  &lt;p&gt;这两种创建方式的结果并没有区别，写法是一样的&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h5 id=&quot;测试字符串是否符合条件&quot;&gt;测试字符串是否符合条件&lt;/h5&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\d{3}\-\d{3,8}&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'010-12345'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'010-1234x'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'010 12345'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;RegExp对象的&lt;code class=&quot;highlighter-rouge&quot;&gt;test()&lt;/code&gt;方法用于测试给定的字符串是否符合条件&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h5 id=&quot;切分字符串&quot;&gt;切分字符串&lt;/h5&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s1&quot;&gt;'a,b;; c  d'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;[\s\,\;]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;+/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// ['a', 'b', 'c', 'd']&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;通过正则表达式还可以比固定字符串更灵活的分割字符串&lt;/p&gt;
-
-  &lt;p&gt;规则中包含空格、&lt;code class=&quot;highlighter-rouge&quot;&gt;,&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;;&lt;/code&gt;的任意一个通过匹配开启一次分割，在&lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt;的贪婪匹配下还可以过滤掉重复的分割符号(#^.^#)&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h5 id=&quot;分组&quot;&gt;分组&lt;/h5&gt;
-
-&lt;p&gt;用&lt;code class=&quot;highlighter-rouge&quot;&gt;（）&lt;/code&gt;包含的正则表达式，在使用&lt;code class=&quot;highlighter-rouge&quot;&gt;exec()ss&lt;/code&gt;匹配的时候会返回一个数组：&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;(\d{3})&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;(\d{3,8})&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'010-12345'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// ['010-12345', '010', '12345']&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'010 12345'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// null&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;exec()&lt;/code&gt;在匹配成功时，返回的&lt;code class=&quot;highlighter-rouge&quot;&gt;Array&lt;/code&gt;中，第一个元素是匹配到的整个字符串，后面的元素依次为分组中匹配的字符串&lt;/p&gt;
-
-  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;exec()&lt;/code&gt;在匹配失败时，会返回&lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h5 id=&quot;替换字符串&quot;&gt;替换字符串&lt;/h5&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'0123.123456100'.replace(/^[0]*([1-9]\d*\.\d{0,4})\d*\.*$/,'$1')
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;([1-9]\d*\.\d{0,4})&lt;/code&gt;匹配的是正整数开头，且有效小数位数为4位的数值，也是我们需要的效果，在通过&lt;code class=&quot;highlighter-rouge&quot;&gt;/^[0]*&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;\d*\.*$/&lt;/code&gt;保证整个字符串都会匹配有效，&lt;em&gt;最后替换字符串中的$1表示第一个分组（括号）中的内容&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h5 id=&quot;标志&quot;&gt;标志&lt;/h5&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;g&lt;/code&gt;全局匹配，表示不会在发现第一个匹配项就停止&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;表示匹配不区分大小写&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;m&lt;/code&gt;表示多行模式，多行模式，&lt;code class=&quot;highlighter-rouge&quot;&gt;/^&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;$/&lt;/code&gt;匹配变成每行的行首与行尾&lt;/p&gt;
-
-    &lt;h5 id=&quot;regexp的实例中有3个属性也是分别对应这三种标识&quot;&gt;RegExp的实例中有3个属性，也是分别对应这三种标识&lt;/h5&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;global，&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;类型，全局模式&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;ignoreCase，&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;类型，不区分大小写模式&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;multline，&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;类型，多行模式&lt;/p&gt;
-
-        &lt;ul&gt;
-          &lt;li&gt;
-            &lt;h5 id=&quot;实例化时设置方式&quot;&gt;实例化时设置方式&lt;/h5&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-
-        &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;re1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;RegExp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ABC&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;-001'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'i'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;re2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;RegExp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ABC&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;-001'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ig'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;另外两个属性：&lt;/p&gt;
-
-        &lt;ul&gt;
-          &lt;li&gt;lastIndex，&lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt;类型，表示搜索下一段匹配项字符串的位置，0开始&lt;/li&gt;
-          &lt;li&gt;source，正则表达式的字符串表示，&lt;strong&gt;&lt;em&gt;按照字面量格式返回，不会有转义字符串&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;总结&quot;&gt;总结&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[{(\$|)?*+.}]&lt;/code&gt;，元字符必须转义，不然不会被识别&lt;/li&gt;
-  &lt;li&gt;惰性限定符对于&lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;?&lt;/code&gt;来说就是匹配0次，对于&lt;code class=&quot;highlighter-rouge&quot;&gt;{n，m}?&lt;/code&gt;来说等于&lt;code class=&quot;highlighter-rouge&quot;&gt;{n}&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>realmline</name></author><category term="RegExp,正则表达式" /><summary type="html">JS中的正则表达式</summary></entry><entry><title type="html">python基础笔记</title><link href="http://localhost:4000/2018/10/28/python-1.0.html" rel="alternate" type="text/html" title="python基础笔记" /><published>2018-10-28T00:00:00+08:00</published><updated>2018-10-28T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/28/python-1.0</id><content type="html" xml:base="http://localhost:4000/2018/10/28/python-1.0.html">&lt;h1 id=&quot;python基础笔记&quot;&gt;python基础笔记&lt;/h1&gt;
-
-&lt;h3 id=&quot;前言&quot;&gt;前言&lt;/h3&gt;
-
-&lt;p&gt;这是之前记过的python笔记，又重新整理了一下，发现对之前模糊的理解又清晰了一些！&lt;/p&gt;
-
-&lt;h3 id=&quot;命令行模式与python交互模式&quot;&gt;命令行模式与python交互模式&lt;/h3&gt;
-
-&lt;h5 id=&quot;命令行模式&quot;&gt;命令行模式&lt;/h5&gt;
-
-&lt;p&gt;windows下打开cmd或者powershell进入到命令行模式&lt;/p&gt;
-
-&lt;p&gt;命令行模式下也可以直接执行python文件，但是需要先&lt;code class=&quot;highlighter-rouge&quot;&gt;cd&lt;/code&gt;进入文件所在目录&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;c:\cd&amp;gt; e:\test
-e:\test&amp;gt; test.py 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h5 id=&quot;python交互模式&quot;&gt;python交互模式&lt;/h5&gt;
-
-&lt;p&gt;在命令行模式下输入python命令进入到python交互模式，特征是出现了&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ c:\&amp;gt; python
-......
-&amp;gt;&amp;gt;&amp;gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;同时输入&lt;code class=&quot;highlighter-rouge&quot;&gt;exit()&lt;/code&gt;命令可以退出python交互模式，且回到命令行模式&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;配置python可以直接双击执行只在linux以及mac下才会有效&quot;&gt;配置python可以直接双击执行（&lt;em&gt;只在linux以及mac下才会有效&lt;/em&gt;）&lt;/h3&gt;
-
-&lt;p&gt;在第一行输入以下代码&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/user/bin python3&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;这行代码的用意是让操作系统在执行这个脚本的时候，去调用user/bin下面的python3解释器，但是用户没有按默认安装路径安装就无法找到解释器，通过加上&lt;code class=&quot;highlighter-rouge&quot;&gt;env&lt;/code&gt;会在env设置里面查找python3的安装路径，在调用对应路径下的python3解释器，&lt;strong&gt;&lt;em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/user/bin/env python3&lt;/span&gt;&lt;/code&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;下一步还要通过命令行操作，给对应文件执行权限&lt;code class=&quot;highlighter-rouge&quot;&gt;$ chmod a+x hello.py &lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;设置编码格式&quot;&gt;设置编码格式&lt;/h3&gt;
-
-&lt;p&gt;在第一行输入以下代码&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# _*_ coding: utf-8 _*_
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;用于告诉python解析器，按照utf-8编码读取源码，&lt;strong&gt;&lt;em&gt;同时也要保证代码编译器也是按照utf-8编码的&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;io&quot;&gt;I/O&lt;/h3&gt;
-
-&lt;p&gt;输出&lt;code class=&quot;highlighter-rouge&quot;&gt;print('')&lt;/code&gt;，参数为输出字符&lt;/p&gt;
-
-&lt;p&gt;输入&lt;code class=&quot;highlighter-rouge&quot;&gt;input(‘’)&lt;/code&gt;，参数为提示字符&lt;/p&gt;
-
-&lt;h3 id=&quot;数据类型&quot;&gt;数据类型&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;python是动态语言，所以设置变量只需要名称，类型由值控制&lt;/em&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;整数，如&lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;，也可以是其他进制的值：十六进制:&lt;code class=&quot;highlighter-rouge&quot;&gt;0xff00&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;浮点数，如&lt;code class=&quot;highlighter-rouge&quot;&gt;1.23&lt;/code&gt;，也可以用科学计数法表示：1.23*10&lt;sup&gt;9&lt;/sup&gt;=&lt;code class=&quot;highlighter-rouge&quot;&gt;1.23e9&lt;/code&gt;，0.0012=&lt;code class=&quot;highlighter-rouge&quot;&gt;1.2e-3&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;字符串，&lt;code class=&quot;highlighter-rouge&quot;&gt;hello python&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;布尔值，&lt;code class=&quot;highlighter-rouge&quot;&gt;True &lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;False&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;空值，&lt;code class=&quot;highlighter-rouge&quot;&gt;None&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;变量，&lt;code class=&quot;highlighter-rouge&quot;&gt;a=1&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;转义字符&quot;&gt;转义字符&lt;/h3&gt;
-
-&lt;p&gt;用于字符转义，如&lt;code class=&quot;highlighter-rouge&quot;&gt;\n&lt;/code&gt;换行，&lt;code class=&quot;highlighter-rouge&quot;&gt;\t&lt;/code&gt;制表符等&lt;/p&gt;
-
-&lt;h5 id=&quot;需要禁用字符转义时字符串前缀加r&quot;&gt;需要禁用字符转义时，字符串前缀加&lt;code class=&quot;highlighter-rouge&quot;&gt;r&lt;/code&gt;&lt;/h5&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; r‘/nabcd/t’
-/nabcd/t
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;不使用字符转义后，还有另一种换行的输出&lt;code class=&quot;highlighter-rouge&quot;&gt;'''...''' &lt;/code&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;命令行模式下，直接输入&lt;code class=&quot;highlighter-rouge&quot;&gt;print('''abcdedf&lt;/code&gt;然后按回车键，不会立马输出字符，而是出现&lt;code class=&quot;highlighter-rouge&quot;&gt;...&lt;/code&gt;，填完要输出的内容后再输入&lt;code class=&quot;highlighter-rouge&quot;&gt;''')&lt;/code&gt;即可输出换行字符&lt;/p&gt;
-
-  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; print(''' line1
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-15T22:54:05+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">不可视境界线</title><subtitle>用于个人学习整理的博客</subtitle><author><name>true</name></author><entry><title type="html">泛型</title><link href="http://localhost:4000/2020/04/14/c-generic.html" rel="alternate" type="text/html" title="泛型" /><published>2020-04-14T00:00:00+08:00</published><updated>2020-04-14T00:00:00+08:00</updated><id>http://localhost:4000/2020/04/14/c#-generic</id><content type="html" xml:base="http://localhost:4000/2020/04/14/c-generic.html"><![CDATA[<h1 id="泛型">泛型</h1>
+
+<p>泛型出现于<code class="highlighter-rouge">.net framework 2.0</code></p>
+
+<h3 id="设计思想">设计思想</h3>
+
+<ul>
+  <li>推迟一切可以推迟的，具体到编译的时候的才确定类型</li>
+  <li>优点
+    <ul>
+      <li>类型安全</li>
+      <li>可扩展性</li>
+      <li>高性能</li>
+      <li>代码复用</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p><code class="highlighter-rouge">object</code>类型转换时可能会出错</p>
+
+  <p>泛型的扩展只有方法、类、接口、委托</p>
+
+  <p>不需要进行装箱和拆箱操作提高了性能</p>
+
+  <p>因为泛型的缘故，一个方法，可以让不同类型的数据进行调用</p>
+</blockquote>
+
+<h4 id="泛型方法">泛型方法</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">M</span> <span class="n">Show</span><span class="p">&lt;</span><span class="n">N</span><span class="p">,</span><span class="n">M</span><span class="p">&gt;(</span><span class="n">N</span> <span class="n">t</span><span class="p">){</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="泛型类">泛型类</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GeneircClass</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;{</span>
+    <span class="k">public</span> <span class="n">T</span> <span class="n">TField</span><span class="p">;</span>
+    <span class="k">public</span> <span class="n">T</span> <span class="n">TProperty</span><span class="p">{</span><span class="k">get</span><span class="p">;</span><span class="k">set</span><span class="p">;}</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>泛型属性以及泛型字段并不算泛型的扩展，因为它们是出自于泛型类<code class="highlighter-rouge">GeneircClass的泛型类型T</code></p>
+</blockquote>
+
+<h4 id="泛型接口">泛型接口</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">interface</span> <span class="nc">IGeneirc</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="泛型委托">泛型委托</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Action</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">GeneircAction</span> <span class="p">=</span> <span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="n">Func</span><span class="p">&lt;</span><span class="n">N</span><span class="p">,</span><span class="n">M</span><span class="p">&gt;</span> <span class="n">GeneircFunc</span> <span class="p">=</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="c1">//初始化一个默认值</span>
+    <span class="n">M</span> <span class="n">m</span> <span class="p">=</span> <span class="k">default</span><span class="p">(</span><span class="n">M</span><span class="p">);</span>
+    <span class="p">...</span>
+    <span class="k">return</span> <span class="n">m</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><code class="highlighter-rouge">default()</code>可以给泛型类型初始化一个默认值，如<code class="highlighter-rouge">int</code>的默认值就是<code class="highlighter-rouge">0</code>，<code class="highlighter-rouge">string</code>的默认值就是<code class="highlighter-rouge">""</code></p>
+</blockquote>
+
+<h3 id="自动推断">自动推断</h3>
+
+<p>泛型有自动推断的特点，如果参数中包含了泛型类型，那么则可以简写</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">void</span> <span class="n">Show</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">T</span> <span class="n">t</span><span class="p">){</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">show</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;(</span><span class="n">ivalue</span><span class="p">)</span> <span class="p">==</span> <span class="nf">show</span><span class="p">(</span><span class="n">ivalue</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>因为泛型类型<code class="highlighter-rouge">T</code>已经在参数中出现了，所以可以自动推算出类型</p>
+
+  <p>如果<code class="highlighter-rouge">T</code>是返回类型，且不在参数中出现，那么就无法简写</p>
+</blockquote>
+
+<h3 id="延迟声明">延迟声明</h3>
+
+<p>声明的时候并没有指定类型，具体是在调用的时候指定类型</p>
+
+<blockquote>
+  <p>性能和普通方法差不多，<strong>但是可以避免装箱和拆箱操作从而提升性能</strong></p>
+</blockquote>
+
+<h3 id="泛型约束">泛型约束</h3>
+
+<p>泛型约束通过<code class="highlighter-rouge">where</code>关键字来实现</p>
+
+<h4 id="接口约束">接口约束</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GeneircClass</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="k">where</span> <span class="n">T</span><span class="p">:</span><span class="n">IGeneirc</span> <span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="引用类型约束">引用类型约束</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GeneircClass</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="k">where</span> <span class="n">T</span><span class="p">:</span><span class="n">BaseClass</span><span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="值类型约束">值类型约束</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GeneircClass</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="k">where</span> <span class="n">T</span><span class="p">:</span><span class="n">BaseStruct</span><span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="无参构造函数约束">无参构造函数约束</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GeneircClass</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="k">where</span> <span class="n">T</span><span class="p">:</span><span class="k">new</span><span class="p">(){</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>无参构造函数约束，没法约束带参数的构造函数</p>
+</blockquote>
+
+<h4 id="混合约束">混合约束</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GeneircClass</span><span class="p">&lt;</span><span class="n">N</span><span class="p">,</span><span class="n">M</span><span class="p">&gt;</span> 
+<span class="k">where</span> <span class="n">N</span><span class="p">:</span><span class="n">IGeneirc</span><span class="p">,</span><span class="k">new</span><span class="p">()</span>
+<span class="k">where</span> <span class="n">M</span><span class="p">:</span><span class="n">BaseClass</span><span class="p">,</span><span class="k">new</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+<span class="c1">//无参构造函数约束可以在泛型类型里面进行new的操作，而且传进来的对象没有无参构造函数也会产生报错</span>
+<span class="n">N</span> <span class="n">n</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">N</span><span class="p">();</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>约束之后可以使用基类中的属性和方法</p>
+
+  <p>类型也必须满足约束，可以是基类和子类</p>
+
+  <p>约束可以叠加，但不能重复约束，如果进行了<code class="highlighter-rouge">peopel</code>类的约束，就不能重复添加<code class="highlighter-rouge">class</code>约束</p>
+
+  <p>值类型和引用类型的约束也不能同时出现</p>
+</blockquote>
+
+<h3 id="子类继承泛型的两种情况">子类继承泛型的两种情况</h3>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GenericClass</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;{</span>
+    <span class="k">public</span> <span class="n">T</span> <span class="n">Property</span>
+<span class="p">}</span>
+
+<span class="c1">//将子类的泛型类型同时用作到父类上</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">chlidClassGeneric</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;:</span><span class="n">GenricClass</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1">//指定父类的泛型类型</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">chlidClass</span><span class="p">:</span><span class="n">GenricClass</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span>   
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>当泛型被指定类型后，可以认定为不再是泛型</p>
+</blockquote>
+
+<h3 id="协变和逆变">协变和逆变</h3>
+
+<p><strong><em>只能在接口或委托上面实现</em></strong></p>
+
+<blockquote>
+  <p>协变和逆变实际上只是用于通过编译器的检查</p>
+</blockquote>
+
+<h4 id="协变covariant">协变(covariant)</h4>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">out</code>，<code class="highlighter-rouge">&lt;out T&gt;</code>这个泛型类型只能用作返回值类型</p>
+
+    <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//父类是可以用子类来实现的</span>
+<span class="n">parent</span> <span class="p">=</span> <span class="k">new</span> <span class="n">child</span><span class="p">;</span>
+<span class="c1">//但是使用子类集合来实现父类集合时，因为两者都是list，所以无法识别从而报错</span>
+<span class="n">IList</span><span class="p">&lt;</span><span class="n">parent</span><span class="p">&gt;</span> <span class="n">list</span> <span class="p">!=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">child</span><span class="p">&gt;();</span>
+<span class="c1">//IEnumerable&lt;out T&gt;是.net内置的协变接口</span>
+<span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">parent</span><span class="p">&gt;</span> <span class="n">enumerable</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">child</span><span class="p">&gt;();</span> 
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>因为<code class="highlighter-rouge">out</code>修饰的返回值的，所以可以通过编译器检查</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h4 id="逆变contravariant">逆变(contravariant)</h4>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">in</code>，<code class="highlighter-rouge">&lt;in T&gt;</code>这个泛型类型只能用作参数类型</p>
+
+    <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//没有内置的逆变接口，此处用IEnumerable假设</span>
+<span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">child</span><span class="p">&gt;</span> <span class="n">list</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">parent</span><span class="p">&gt;();</span> 
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p><code class="highlighter-rouge">child</code>并不是实际返回值，只是传入的参数，所以就算是父类可以通过检查</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="泛型类缓存">泛型类缓存</h3>
+
+<ul>
+  <li>
+    <p>泛型在<code class="highlighter-rouge">jit</code>编译的时候，不同的参数的泛型，会产生对应类型的全新的类，也就是通过副本产生真正的具体类型</p>
+  </li>
+  <li>
+    <p><strong><em>静态字段和静态构造函数只会初始化一次，而且会常驻在内容中</em></strong>，当泛型和这个组合的时候就可以灵活的产生泛型缓存，不同的类型都会执行一次各自的静态字段和静态构造函数</p>
+  </li>
+</ul>
+
+<h4 id="计时器">计时器</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//初始化一个计时器对象</span>
+<span class="n">Stopwatch</span> <span class="n">watch</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Stopwatch</span><span class="p">();</span>
+<span class="c1">//启动计时器</span>
+<span class="n">watch</span><span class="p">.</span><span class="n">start</span><span class="p">;</span>
+<span class="p">...</span> <span class="c1">//进行编译操作</span>
+<span class="c1">//停止计时器</span>
+<span class="n">watch</span><span class="p">.</span><span class="n">stop</span><span class="p">;</span>
+<span class="c1">//获取期间消耗的时间（毫秒为单位）</span>
+<span class="n">watch</span><span class="p">.</span><span class="n">ElapsedMilliseconds</span>
+</code></pre></div></div>
+
+<h2 id="要点">要点</h2>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//在编译、反射获取泛型类的时候泛型的类型显示为genricClass`1，它表示genricClass这个泛型类有一个泛型参数，`2则表示有两个泛型参数</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>当泛型方法返回泛型的返回值时，可以使用<code class="highlighter-rouge">return default(T)</code>语法糖，这个语法糖会根据泛型的类型产生默认值</p>
+</blockquote>]]></content><author><name>realmline</name></author><category term="C#" /><summary type="html"><![CDATA[泛型]]></summary></entry><entry><title type="html">python3基础笔记(一)</title><link href="http://localhost:4000/2018/11/22/python3-1.0.html" rel="alternate" type="text/html" title="python3基础笔记(一)" /><published>2018-11-22T00:00:00+08:00</published><updated>2018-11-22T00:00:00+08:00</updated><id>http://localhost:4000/2018/11/22/python3-1.0</id><content type="html" xml:base="http://localhost:4000/2018/11/22/python3-1.0.html"><![CDATA[<h3 id="命令行模式与python交互模式">命令行模式与python交互模式</h3>
+
+<h5 id="命令行模式">命令行模式</h5>
+
+<p>windows下打开cmd或者powershell进入到命令行模式</p>
+
+<p>命令行模式下也可以直接执行python文件，但是需要先<code class="highlighter-rouge">cd</code>进入文件所在目录</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span><span class="p">:</span>\<span class="n">cd</span><span class="o">&gt;</span> <span class="n">e</span><span class="p">:</span>\<span class="n">test</span>
+<span class="n">e</span><span class="p">:</span>\<span class="n">test</span><span class="o">&gt;</span> <span class="n">test</span><span class="p">.</span><span class="n">py</span> 
+</code></pre></div></div>
+
+<h5 id="python交互模式">python交互模式</h5>
+
+<p>在命令行模式下输入python命令进入到python交互模式，特征是出现了<code class="highlighter-rouge">&gt;&gt;&gt;</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span> <span class="n">c</span><span class="p">:</span>\<span class="o">&gt;</span> <span class="n">python</span>
+<span class="p">......</span>
+<span class="o">&gt;&gt;&gt;</span> 
+</code></pre></div></div>
+
+<blockquote>
+  <p>同时输入<code class="highlighter-rouge">exit()</code>命令可以退出python交互模式，且回到命令行模式</p>
+</blockquote>
+
+<h3 id="python3解释器">python3解释器</h3>
+
+<p>在第一行输入以下代码</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/user/bin python3
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>这行代码的用意是让操作系统在执行这个脚本的时候，去调用user/bin下面的python3解释器，但是用户没有按默认安装路径安装就无法找到解释器，通过加上<code class="highlighter-rouge">env</code>会在env设置里面查找python3的安装路径，在调用对应路径下的python3解释器，<strong><em><code class="highlighter-rouge"><span class="c1">#!/user/bin/env python3</span></code></em></strong></p>
+</blockquote>
+
+<h3 id="设置编码格式">设置编码格式</h3>
+
+<p><strong><em>默认情况下，python3源码文件以UFT-8编码，所有的字符串都是unicode编码,也可以为源码文件指定不同的编码</em></strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># _*_ coding: cp-1252 _*_
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>用于告诉python解析器，按照cp-1252编码读取源码，<strong><em>同时也要保证代码编译器也是按照cp-1252编码的</em></strong></p>
+</blockquote>
+
+<h3 id="标识符">标识符</h3>
+
+<ul>
+  <li>第一个字符必须是字母或者下划线<code class="highlighter-rouge">_</code></li>
+  <li>其他部分可以由数字、字母以及下划线组成<code class="highlighter-rouge">_</code></li>
+  <li>对大小写敏感</li>
+</ul>
+
+<h3 id="保留字关键字">保留字（关键字）</h3>
+
+<p>保留字不能用作任何标识符，通过<code class="highlighter-rouge">keyword</code>模块的<code class="highlighter-rouge">kwlist</code>可以获取关键字列表</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">keyword</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">keyword</span><span class="p">.</span><span class="n">kwlist</span>
+<span class="p">[</span><span class="s">'Flase'</span><span class="p">,</span><span class="s">'None'</span><span class="p">,</span><span class="s">'True'</span><span class="p">...]</span>
+</code></pre></div></div>
+
+<p>判断是否为关键字使用<code class="highlighter-rouge">keyword.iskeyword()</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">keyword</span><span class="p">.</span><span class="n">iskeyword</span><span class="p">(</span><span class="s">'break'</span><span class="p">)</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">keyword</span><span class="p">.</span><span class="n">iskeyword</span><span class="p">(</span><span class="s">'aaaaa'</span><span class="p">)</span>
+<span class="bp">False</span>
+</code></pre></div></div>
+
+<h3 id="注释">注释</h3>
+
+<p>单行注释：<code class="highlighter-rouge">#</code></p>
+
+<p>多行注释：<code class="highlighter-rouge">'''……'''</code>或<code class="highlighter-rouge">"""……"""</code></p>
+
+<h3 id="io">I/O</h3>
+
+<p>输出<code class="highlighter-rouge">print('')</code>，参数为输出字符，如果不需要换行可以加入<code class="highlighter-rouge">end</code>参数，<code class="highlighter-rouge">print('abc',end='')</code>end的值为结尾间隔符，默认为换行’\n’</p>
+
+<blockquote>
+  <p><code class="highlighter-rouge">print()</code>中用<code class="highlighter-rouge">,</code>分隔字符串时，显示默认为空格，所以需要保证<code class="highlighter-rouge">,end = ''</code>必须在最后面，且不能再接<code class="highlighter-rouge">,</code></p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="s">'abc'</span><span class="p">,</span><span class="s">'efg'</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>       <span class="c1">#正确
+</span><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="s">'abc'</span><span class="p">,</span><span class="s">'efg'</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">,</span><span class="s">'hij'</span><span class="p">)</span> <span class="c1">#错误
+</span><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="s">'abc'</span><span class="p">,</span><span class="s">'efg'</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">,)</span>      <span class="c1">#错误
+</span></code></pre></div></div>
+
+<p>输入<code class="highlighter-rouge">input(‘’)</code>，参数为提示字符</p>
+
+<h3 id="数据类型">数据类型</h3>
+
+<p><em>python的变量不需要声明，但是在使用前必须赋值，赋值后才会被创建</em>，<strong>python3中有6个标准数据类型</strong>：</p>
+
+<ol>
+  <li>Numbers（数字）</li>
+  <li>String（字符串）</li>
+  <li>List（列表）</li>
+  <li>Tuple（元组）</li>
+  <li>Sets（集合）</li>
+  <li>Dictionaries（字典）</li>
+</ol>
+
+<h3 id="numbers数字">Numbers（数字）</h3>
+
+<p>python3支持int、float、bool、complex（复数）</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">4</span>  <span class="c1"># 加法
+</span><span class="mi">9</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mf">4.3</span> <span class="o">-</span> <span class="mi">2</span> <span class="c1"># 减法
+</span><span class="mf">2.3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">7</span>  <span class="c1"># 乘法
+</span><span class="mi">21</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">4</span>  <span class="c1"># 除法，得到一个浮点数
+</span><span class="mf">0.5</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">2</span> <span class="o">//</span> <span class="mi">4</span> <span class="c1"># 除法，得到一个整数
+</span><span class="mi">0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">17</span> <span class="o">%</span> <span class="mi">3</span> <span class="c1"># 取余 
+</span><span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">5</span> <span class="c1"># 乘方
+</span><span class="mi">32</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>数值的除法<code class="highlighter-rouge">/</code>总是返回一个浮点数，使用<code class="highlighter-rouge">//</code>返回整数</p>
+
+  <p>混合计算的时候，python会把整型转换成浮点型</p>
+</blockquote>
+
+<h3 id="转义字符">转义字符</h3>
+
+<p>用于字符转义，如<code class="highlighter-rouge">\n</code>换行，<code class="highlighter-rouge">\t</code>制表符等</p>
+
+<h5 id="需要禁用字符转义时字符串前缀加r或r">需要禁用字符转义时，字符串前缀加<code class="highlighter-rouge">r</code>或<code class="highlighter-rouge">R</code></h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">r</span><span class="err">‘</span><span class="o">/</span><span class="n">nabcd</span><span class="o">/</span><span class="n">t</span><span class="err">’</span>
+<span class="o">/</span><span class="n">nabcd</span><span class="o">/</span><span class="n">t</span>
+</code></pre></div></div>
+
+<p>不使用字符转义后，还有另一种换行的输出<code class="highlighter-rouge">'''...''' </code></p>
+
+<blockquote>
+  <p>命令行模式下，直接输入<code class="highlighter-rouge">print('''abcdedf</code>然后按回车键，不会立马输出字符，而是出现<code class="highlighter-rouge">...</code>，填完要输出的内容后再输入<code class="highlighter-rouge">''')</code>即可输出换行字符</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="s">''' line1
 ...line2
-...line3''')
-line1
-line2
-line3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
-&lt;/blockquote&gt;
+...line3'''</span><span class="p">)</span>
+<span class="n">line1</span>
+<span class="n">line2</span>
+<span class="n">line3</span>
+</code></pre></div>  </div>
+</blockquote>
 
-&lt;h3 id=&quot;逻辑关键字&quot;&gt;逻辑关键字&lt;/h3&gt;
+<h3 id="逻辑关键字">逻辑关键字</h3>
 
-&lt;p&gt;与&lt;code class=&quot;highlighter-rouge&quot;&gt;and&lt;/code&gt;，或&lt;code class=&quot;highlighter-rouge&quot;&gt;or&lt;/code&gt;，非&lt;code class=&quot;highlighter-rouge&quot;&gt;not&lt;/code&gt;&lt;/p&gt;
+<p>与<code class="highlighter-rouge">and</code>，或<code class="highlighter-rouge">or</code>，非<code class="highlighter-rouge">not</code></p>
 
-&lt;h3 id=&quot;占位符&quot;&gt;占位符&lt;/h3&gt;
+<h3 id="占位符">占位符</h3>
 
-&lt;p&gt;有两种方式：&lt;/p&gt;
+<p>有两种方式：</p>
 
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;%&lt;/code&gt;，通过加不同的参数，可以替换为不同数据类型的内容&lt;/p&gt;
+<ol>
+  <li>
+    <p><code class="highlighter-rouge">%</code>，通过加不同的参数，可以替换为不同数据类型的内容</p>
 
-    &lt;table&gt;
-      &lt;thead&gt;
-        &lt;tr&gt;
-          &lt;th&gt;占位符&lt;/th&gt;
-          &lt;th&gt;替换内容&lt;/th&gt;
-        &lt;/tr&gt;
-      &lt;/thead&gt;
-      &lt;tbody&gt;
-        &lt;tr&gt;
-          &lt;td&gt;%d&lt;/td&gt;
-          &lt;td&gt;整数（十进制）&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;%f&lt;/td&gt;
-          &lt;td&gt;浮点数，&lt;strong&gt;%0.nf表示显示n个有效小数位数&lt;/strong&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;%S&lt;/td&gt;
-          &lt;td&gt;字符串&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td&gt;%x&lt;/td&gt;
-          &lt;td&gt;十六进制&lt;/td&gt;
-        &lt;/tr&gt;
-      &lt;/tbody&gt;
-    &lt;/table&gt;
+    <table>
+      <thead>
+        <tr>
+          <th>占位符</th>
+          <th>替换内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>%d</td>
+          <td>整数（十进制）</td>
+        </tr>
+        <tr>
+          <td>%f</td>
+          <td>浮点数，<strong>%0.nf表示显示n个有效小数位数</strong></td>
+        </tr>
+        <tr>
+          <td>%S</td>
+          <td>字符串</td>
+        </tr>
+        <tr>
+          <td>%x</td>
+          <td>十六进制</td>
+        </tr>
+      </tbody>
+    </table>
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ str = &quot;hello $s by $s&quot;%(&quot;python&quot;,&quot;2018-10-28&quot;)
-$ print(str)
-&amp;gt;&amp;gt;&amp;gt; &quot;hello python by 2018-10-28&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span> <span class="nb">str</span> <span class="o">=</span> <span class="s">"hello $s by $s"</span><span class="o">%</span><span class="p">(</span><span class="s">"python"</span><span class="p">,</span><span class="s">"2018-10-28"</span><span class="p">)</span>
+<span class="err">$</span> <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">"hello python by 2018-10-28"</span>
+</code></pre></div>    </div>
 
-    &lt;blockquote&gt;
-      &lt;p&gt;目前这几种数据类型就够用了，如果还需要替换其他类型的内容，再搜索python 占位符即可，如果要显示’%’字符可以用&lt;code class=&quot;highlighter-rouge&quot;&gt;%%&lt;/code&gt;转义&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;字符串类型的内置方法&lt;code class=&quot;highlighter-rouge&quot;&gt;format()&lt;/code&gt;&lt;/p&gt;
+    <blockquote>
+      <p>目前这几种数据类型就够用了，如果还需要替换其他类型的内容，再搜索python 占位符即可，如果要显示’%’字符可以用<code class="highlighter-rouge">%%</code>转义</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>字符串类型的内置方法<code class="highlighter-rouge">format()</code></p>
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ str = &quot;hello {0} by {1}&quot;.format(&quot;python&quot;,&quot;2018-10-28&quot;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span> <span class="nb">str</span> <span class="o">=</span> <span class="s">"hello {0} by {1}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="s">"python"</span><span class="p">,</span><span class="s">"2018-10-28"</span><span class="p">)</span>
+</code></pre></div>    </div>
 
-    &lt;blockquote&gt;
-      &lt;p&gt;浮点类型控制有效小数位数的占位格式：&lt;code class=&quot;highlighter-rouge&quot;&gt;{0:n}&lt;/code&gt;&lt;strong&gt;&lt;em&gt;n代表有效的小数位数&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+    <blockquote>
+      <p>浮点类型控制有效小数位数的占位格式：<code class="highlighter-rouge">{0:n}</code><strong><em>n代表有效的小数位数</em></strong></p>
+    </blockquote>
+  </li>
+</ol>
 
-&lt;h3 id=&quot;字符编码&quot;&gt;字符编码&lt;/h3&gt;
+<h3 id="字符编码">字符编码</h3>
 
-&lt;p&gt;刚开始只有127个字符（ASCII码）被编入电脑，后来出现了所有语言都统一的编码（Unicode码），但是Unicode用来存储英文会浪费一倍的存储空间，所以就出现了可变长度的编码（UTF-8）&lt;/p&gt;
+<p>刚开始只有127个字符（ASCII码）被编入电脑，后来出现了所有语言都统一的编码（Unicode码），但是Unicode用来存储英文会浪费一倍的存储空间，所以就出现了可变长度的编码（UTF-8）</p>
 
-&lt;blockquote&gt;
-  &lt;p&gt;ASCII码中，一个字节对应一个字符&lt;/p&gt;
+<blockquote>
+  <p>ASCII码中，一个字节对应一个字符</p>
 
-  &lt;p&gt;Unicode码中，两个字节对应一个字符&lt;/p&gt;
+  <p>Unicode码中，两个字节对应一个字符</p>
 
-  &lt;p&gt;UTF-8中，一个字母对应一个字节，一个汉字对应3个字节（&lt;strong&gt;&lt;em&gt;生僻字单个会占4-6个字符&lt;/em&gt;&lt;/strong&gt;）&lt;/p&gt;
-&lt;/blockquote&gt;
+  <p>UTF-8中，一个字母对应一个字节，一个汉字对应3个字节（<strong><em>生僻字单个会占4-6个字符</em></strong>）</p>
+</blockquote>
 
-&lt;h5 id=&quot;计算机系统通用的字符编码方式&quot;&gt;计算机系统通用的字符编码方式:&lt;/h5&gt;
+<h5 id="计算机系统通用的字符编码方式">计算机系统通用的字符编码方式:</h5>
 
-&lt;p&gt;&lt;strong&gt;计算机内存中，统一使用Unicode编码，当保存到硬盘或者传输的时候就会转换为UTF-8&lt;/strong&gt;&lt;/p&gt;
+<p><strong>计算机内存中，统一使用Unicode编码，当保存到硬盘或者传输的时候就会转换为UTF-8</strong></p>
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;读写原理&lt;/strong&gt;，修改记事本内容时，会先读取内容并转换为Unicode到内存中，待保存时再把 Unicode转换为UTF-8保存到文件&lt;/p&gt;
+<ul>
+  <li>
+    <p><strong>读写原理</strong>，修改记事本内容时，会先读取内容并转换为Unicode到内存中，待保存时再把 Unicode转换为UTF-8保存到文件</p>
 
-    &lt;p&gt;&lt;img src=&quot;../../../assets/posts/2018-10/5.png&quot; alt=&quot;记事本读写原理&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;传输原理&lt;/strong&gt;，浏览网站的时候，服务器会把动态生成的Unicode内容转换为UTF-8再&lt;strong&gt;传输&lt;/strong&gt;到浏览器&lt;/p&gt;
+    <p><img src="C:/assets/posts/2018-11/5.png" alt="记事本读写原理" /></p>
+  </li>
+  <li>
+    <p><strong>传输原理</strong>，浏览网站的时候，服务器会把动态生成的Unicode内容转换为UTF-8再<strong>传输</strong>到浏览器</p>
 
-    &lt;p&gt;&lt;img src=&quot;../../../assets/posts/2018-10/6.png&quot; alt=&quot;浏览器传输原理&quot; /&gt;&lt;/p&gt;
+    <p><img src="C:/assets/posts/2018-10/6.png" alt="浏览器传输原理" /></p>
 
-    &lt;blockquote&gt;
-      &lt;p&gt;当看到一些网站的源码有类似&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;meta charset=&quot;UTF-8&quot; /&amp;gt;&lt;/code&gt;，那就表示该网页用的是UTF-8编码&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+    <blockquote>
+      <p>当看到一些网站的源码有类似<code class="highlighter-rouge">&lt;meta charset="UTF-8" /&gt;</code>，那就表示该网页用的是UTF-8编码</p>
+    </blockquote>
+  </li>
+</ul>
 
-&lt;h5 id=&quot;在python3中字符串是以unicode编码的&quot;&gt;在python3中，字符串是以Unicode编码的&lt;/h5&gt;
+<h5 id="在python3中字符串是以unicode编码的">在python3中，字符串是以Unicode编码的</h5>
 
-&lt;p&gt;读取内容的时候也会先转换为Unicode，所以如果知道字符串的整数编码，就可以直接用16进制这么写&lt;/p&gt;
+<p>读取内容的时候也会先转换为Unicode，所以如果知道字符串的整数编码，就可以直接用16进制这么写</p>
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; '\u4e2d\u6587'
-'中文'
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="s">'</span><span class="se">\u4e2d\u6587</span><span class="s">'</span>
+<span class="s">'中文'</span>
+</code></pre></div></div>
 
-&lt;p&gt;&lt;strong&gt;对于单个字符&lt;/strong&gt;：&lt;/p&gt;
+<p><strong>对于单个字符</strong>：</p>
 
-&lt;p&gt;python提供了&lt;code class=&quot;highlighter-rouge&quot;&gt;ord()&lt;/code&gt;，获取字符的整数表示，以及&lt;code class=&quot;highlighter-rouge&quot;&gt;chr&lt;/code&gt;，把编码转换为对应字符&lt;/p&gt;
+<p>python提供了<code class="highlighter-rouge">ord()</code>，获取字符的整数表示，以及<code class="highlighter-rouge">chr</code>，把编码转换为对应字符</p>
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; ord('A')
-65
-&amp;gt;&amp;gt;&amp;gt; ord('中')
-20013
-&amp;gt;&amp;gt;&amp;gt; chr(66)
-'B'
-&amp;gt;&amp;gt;&amp;gt; chr(25991)
-'文'
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">ord</span><span class="p">(</span><span class="s">'A'</span><span class="p">)</span>
+<span class="mi">65</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">ord</span><span class="p">(</span><span class="s">'中'</span><span class="p">)</span>
+<span class="mi">20013</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">66</span><span class="p">)</span>
+<span class="s">'B'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">25991</span><span class="p">)</span>
+<span class="s">'文'</span>
+</code></pre></div></div>
 
-&lt;h5 id=&quot;网络传输&quot;&gt;网络传输&lt;/h5&gt;
+<h5 id="网络传输">网络传输</h5>
 
-&lt;p&gt;字符串在内存中以Unicode表示，当进行网络传输时，需把字符串转换为字节为单位的&lt;code class=&quot;highlighter-rouge&quot;&gt;bytes&lt;/code&gt;（字节流），本地接受时，需要再把&lt;code class=&quot;highlighter-rouge&quot;&gt;bytes&lt;/code&gt;转换成字符串&lt;/p&gt;
+<p>字符串在内存中以Unicode表示，当进行网络传输时，需把字符串转换为字节为单位的<code class="highlighter-rouge">bytes</code>（字节流），本地接受时，需要再把<code class="highlighter-rouge">bytes</code>转换成字符串</p>
 
-&lt;p&gt;Python对&lt;code class=&quot;highlighter-rouge&quot;&gt;bytes&lt;/code&gt;的数据用&lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt;前缀表示：如&lt;code class=&quot;highlighter-rouge&quot;&gt;x = b'abc'&lt;/code&gt;或者&lt;code class=&quot;highlighter-rouge&quot;&gt;x = b&quot;abc&quot;&lt;/code&gt;&lt;/p&gt;
+<p>Python对<code class="highlighter-rouge">bytes</code>的数据用<code class="highlighter-rouge">b</code>前缀表示：如<code class="highlighter-rouge">x = b'abc'</code>或者<code class="highlighter-rouge">x = b"abc"</code></p>
 
-&lt;h5 id=&quot;把字符串转换成bytes编码&quot;&gt;把字符串转换成&lt;code class=&quot;highlighter-rouge&quot;&gt;bytes&lt;/code&gt;编码&lt;/h5&gt;
+<h5 id="把字符串转换成bytes编码">把字符串转换成<code class="highlighter-rouge">bytes</code>编码</h5>
 
-&lt;p&gt;字符串通过&lt;code class=&quot;highlighter-rouge&quot;&gt;encode（）&lt;/code&gt;方法可以编码为指定的&lt;code class=&quot;highlighter-rouge&quot;&gt;bytes&lt;/code&gt;&lt;/p&gt;
+<p>字符串通过<code class="highlighter-rouge">encode（）</code>方法可以编码为指定的<code class="highlighter-rouge">bytes</code></p>
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; 'ABC'.encode('ascii')
-b'ABC'
-&amp;gt;&amp;gt;&amp;gt; '中文'.encode('utf-8')
-b'\xe4\xb8\xad\xe6\x96\x87'
-&amp;gt;&amp;gt;&amp;gt; '中文'.encode('ascii')
-Traceback (most recent call last):
-  File &quot;&amp;lt;stdin&amp;gt;&quot;, line 1, in &amp;lt;module&amp;gt;
-UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-1: ordinal not in range(128)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="s">'ABC'</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'ascii'</span><span class="p">)</span>
+<span class="sa">b</span><span class="s">'ABC'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">'中文'</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+<span class="sa">b</span><span class="s">'</span><span class="se">\xe4\xb8\xad\xe6\x96\x87</span><span class="s">'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">'中文'</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'ascii'</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s">"&lt;stdin&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="nb">UnicodeEncodeError</span><span class="p">:</span> <span class="s">'ascii'</span> <span class="n">codec</span> <span class="n">can</span><span class="s">'t encode characters in position 0-1: ordinal not in range(128)
+</span></code></pre></div></div>
 
-&lt;blockquote&gt;
-  &lt;p&gt;纯英文可以用&lt;code class=&quot;highlighter-rouge&quot;&gt;ASCII&lt;/code&gt;编码为&lt;code class=&quot;highlighter-rouge&quot;&gt;bytes&lt;/code&gt;，含有中文可以用&lt;code class=&quot;highlighter-rouge&quot;&gt;UTF-8&lt;/code&gt;编码为&lt;code class=&quot;highlighter-rouge&quot;&gt;bytes&lt;/code&gt;&lt;/p&gt;
+<blockquote>
+  <p>纯英文可以用<code class="highlighter-rouge">ASCII</code>编码为<code class="highlighter-rouge">bytes</code>，含有中文可以用<code class="highlighter-rouge">UTF-8</code>编码为<code class="highlighter-rouge">bytes</code></p>
 
-  &lt;p&gt;&lt;strong&gt;&lt;em&gt;含有中文不能用&lt;code class=&quot;highlighter-rouge&quot;&gt;ASCII&lt;/code&gt;编码为&lt;code class=&quot;highlighter-rouge&quot;&gt;bytes&lt;/code&gt;，因为&lt;code class=&quot;highlighter-rouge&quot;&gt;ASCII&lt;/code&gt;编码范围只有英文和一些特殊符号&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+  <p><strong><em>含有中文不能用<code class="highlighter-rouge">ASCII</code>编码为<code class="highlighter-rouge">bytes</code>，因为<code class="highlighter-rouge">ASCII</code>编码范围只有英文和一些特殊符号</em></strong></p>
+</blockquote>
 
-&lt;h5 id=&quot;把编码转换为字符串&quot;&gt;把编码转换为字符串&lt;/h5&gt;
+<h5 id="把编码转换为字符串">把编码转换为字符串</h5>
 
-&lt;p&gt;通过&lt;code class=&quot;highlighter-rouge&quot;&gt;decode()&lt;/code&gt;方法可以将字节流转换为字符串，&lt;strong&gt;&lt;em&gt;但是如果包含不能解码的字节会报错，加入errors=’ignore’参数，可以忽略错误字节&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+<p>通过<code class="highlighter-rouge">decode()</code>方法可以将字节流转换为字符串，<strong><em>但是如果包含不能解码的字节会报错，加入errors=’ignore’参数，可以忽略错误字节</em></strong></p>
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; b'\xe4\xb8\xad\xff'.decode('utf-8')
-Traceback (most recent call last):
-  ...
-UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 3: invalid start byte
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="sa">b</span><span class="s">'</span><span class="se">\xe4\xb8\xad\xff</span><span class="s">'</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="p">...</span>
+<span class="nb">UnicodeDecodeError</span><span class="p">:</span> <span class="s">'utf-8'</span> <span class="n">codec</span> <span class="n">can</span><span class="s">'t decode byte 0xff in position 3: invalid start byte
 
-&amp;gt;&amp;gt;&amp;gt; b'\xe4\xb8\xad\xff'.decode('utf-8', errors='ignore')
-'中'
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&gt;&gt;&gt; b'</span>\<span class="n">xe4</span>\<span class="n">xb8</span>\<span class="n">xad</span>\<span class="n">xff</span><span class="s">'.decode('</span><span class="n">utf</span><span class="o">-</span><span class="mi">8</span><span class="s">', errors='</span><span class="n">ignore</span><span class="s">')
+'</span><span class="n">中</span><span class="s">'
+</span></code></pre></div></div>
 
-&lt;blockquote&gt;
-  &lt;p&gt;加入了&lt;code class=&quot;highlighter-rouge&quot;&gt;errors=‘ignore’&lt;/code&gt;后，代码忽略了错误字节返回了&lt;code class=&quot;highlighter-rouge&quot;&gt;'中'&lt;/code&gt;字符串&lt;/p&gt;
+<blockquote>
+  <p>加入了<code class="highlighter-rouge">errors=‘ignore’</code>后，代码忽略了错误字节返回了<code class="highlighter-rouge">'中'</code>字符串</p>
 
-  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;decode()&lt;/code&gt;不指定参数时，默认转换为unicode编码的字符串&lt;/p&gt;
-&lt;/blockquote&gt;
+  <p><code class="highlighter-rouge">decode()</code>不指定参数时，默认转换为unicode编码的字符串</p>
+</blockquote>
 
-&lt;h3 id=&quot;总结&quot;&gt;总结&lt;/h3&gt;
+<h3 id="有序列表列表元组">有序列表（列表&amp;元组）</h3>
 
-&lt;ol&gt;
-  &lt;li&gt;数值除法有两种格式，&lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt;返回浮点值，&lt;code class=&quot;highlighter-rouge&quot;&gt;//&lt;/code&gt;返回整数值&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;None&lt;/code&gt;不能理解为0，0是有意义的，而&lt;code class=&quot;highlighter-rouge&quot;&gt;Node&lt;/code&gt;是特殊的空值&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;byte&lt;/code&gt;中，无法显示为&lt;code class=&quot;highlighter-rouge&quot;&gt;ASCII&lt;/code&gt;的字节用&lt;code class=&quot;highlighter-rouge&quot;&gt;\x##&lt;/code&gt;显示，如‘中’，包含3个字节,显示为&lt;code class=&quot;highlighter-rouge&quot;&gt;\xe4\xb8\xad&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>realmline</name></author><category term="python" /><summary type="html">python基础笔记</summary></entry><entry><title type="html">github远程库</title><link href="http://localhost:4000/2018/10/27/git-1.2.html" rel="alternate" type="text/html" title="github远程库" /><published>2018-10-27T00:00:00+08:00</published><updated>2018-10-27T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/27/git-1.2</id><content type="html" xml:base="http://localhost:4000/2018/10/27/git-1.2.html">&lt;h1 id=&quot;关联github远程库&quot;&gt;关联github远程库&lt;/h1&gt;
+<h5 id="list列表">list（列表）</h5>
 
-&lt;h3 id=&quot;前言&quot;&gt;前言&lt;/h3&gt;
+<p>使用<code class="highlighter-rouge">[]</code>初始化，元素可不是同一类型</p>
 
-&lt;p&gt;github是一个开源协作平台，也可以作为免费的远程仓库，这一篇主要记录关联github远程库的各种操作，&lt;strong&gt;由于我是在windows系统下进行操作的，所以以下操作均已windows为基准&lt;/strong&gt;&lt;/p&gt;
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="s">'xiaoming'</span><span class="p">,</span><span class="mi">1</span><span class="p">,[</span><span class="mi">2000</span><span class="p">,</span><span class="mi">01</span><span class="p">,</span><span class="mi">01</span><span class="p">]]</span>
+</code></pre></div></div>
 
-&lt;h3 id=&quot;创建ssh-key&quot;&gt;创建SSH KEY&lt;/h3&gt;
+<ul>
+  <li>
+    <p>通过索引获取元素</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">range(10)</code>或<code class="highlighter-rouge">range(1,10)</code>可以创建一个整数序列，通过<code class="highlighter-rouge">list()</code>能转换为一个list列表</p>
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;右击桌面菜单，选择打开Git Bash，执行命令：&lt;/p&gt;
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>数据操作：</p>
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ssh-keygen -t- rsa -C 'youemail@example.com'
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    <ul>
+      <li>
+        <p>新增：</p>
 
-    &lt;blockquote&gt;
-      &lt;p&gt;要将&lt;code class=&quot;highlighter-rouge&quot;&gt;youemail@example.com&lt;/code&gt;改成自己的github邮箱&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-  &lt;li&gt;执行成功后，在&lt;code class=&quot;highlighter-rouge&quot;&gt;C:\User\administrator\&lt;/code&gt;目录下找到.ssh文件夹，里面会有两个文件，&lt;code class=&quot;highlighter-rouge&quot;&gt;id_rsa&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;id_rsa.pub&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;将公匙（id_rsa.pub）中的内容复制出来添加到github的sshkey中&lt;/li&gt;
-&lt;/ul&gt;
+        <ul>
+          <li><code class="highlighter-rouge">list.append(str)</code>，追加一个元素到list列表末尾</li>
+          <li><code class="highlighter-rouge">list.insert(n,str)</code>，追加一个元素到list列表的索引n处</li>
+          <li><code class="highlighter-rouge">list.extend(L)</code>,将L列表中的所有元素，扩充到list列表的末尾</li>
+        </ul>
+      </li>
+      <li>
+        <p>修改：直接给指定索引赋值，<code class="highlighter-rouge">list[0] = 1</code></p>
+      </li>
+      <li>
+        <p>删除：<code class="highlighter-rouge">list.pop(n)</code>，删除一个位于索引n的元素，<em>不填写参数时，默认删除最后一个元素</em></p>
+      </li>
+      <li>
+        <p>判断元素在列表中出现的次数:<code class="highlighter-rouge">list.index(value)</code>,<code class="highlighter-rouge">value</code>为要判断的元素的值</p>
+      </li>
+      <li>
+        <p>倒排:<code class="highlighter-rouge">list.reverse()</code>,倒排列表中的元素</p>
+      </li>
+      <li>
+        <p>判断元素是否存在</p>
 
-&lt;h3 id=&quot;推送仓库&quot;&gt;推送仓库&lt;/h3&gt;
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="mi">3</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>   <span class="c1">#存在时返回True反之False
+</span><span class="bp">True</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>可以使用操作符+号进行拼接</p>
 
-&lt;p&gt;有两种方式可以操作：&lt;/p&gt;
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;推送现有仓库&lt;/p&gt;
+<h5 id="tuple元组">tuple（元组）</h5>
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git remote add origin https://github.com/githubname/gitDemo.git
+<p>使用<code class="highlighter-rouge">()</code>初始化，除了初始化后不能修改，其他均与list差不多</p>
+
+<blockquote>
+  <p>初始化的时候，固定了引用类型的指向，但是可以通过修改指向的值使元组的值改变</p>
+
+  <p>当只有一个元素，需要加上<code class="highlighter-rouge">,</code>，防止被识别成数值<code class="highlighter-rouge">a=(1,)</code></p>
+</blockquote>
+
+<h3 id="键值对类型">键值对类型</h3>
+
+<h5 id="dictionary字典">dictionary（字典）</h5>
+
+<p>初始化</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">"xiaoming"</span><span class="p">:</span><span class="mi">59</span><span class="p">,</span><span class="s">"xiaowang"</span><span class="p">:</span><span class="mi">99</span><span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>数据操作：
+    <ul>
+      <li>新增&amp;修改：<code class="highlighter-rouge">d['key'] = 'aaa'</code>，当<code class="highlighter-rouge">key</code>这个键在<code class="highlighter-rouge">d</code>中已经存在时为修改，反之为新增</li>
+      <li>删除：
+        <ul>
+          <li><code class="highlighter-rouge">d.pop('key')</code>，删除键为<code class="highlighter-rouge">key</code>的元素，并返回删除的项</li>
+        </ul>
+      </li>
+      <li>判断<code class="highlighter-rouge">key</code>是否存在：
+        <ul>
+          <li><code class="highlighter-rouge">key in d</code>，若<code class="highlighter-rouge">key</code>存在返回<code class="highlighter-rouge">True</code>，不存在返回<code class="highlighter-rouge">False</code></li>
+          <li><code class="highlighter-rouge">d.get(key,-1)</code>，存在时返回该<code class="highlighter-rouge">key</code>的值，不存在时返回<code class="highlighter-rouge">None</code>，若已经指定了第二个参数，不存在则会返回第二个参数的值</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="set">set</h5>
+
+<p>和<code class="highlighter-rouge">dictionary</code>类似，但是只有<code class="highlighter-rouge">key</code>没有<code class="highlighter-rouge">value</code>，初始化需要用到一个list</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>数据操作</p>
+
+    <ul>
+      <li>
+        <p>添加键：<code class="highlighter-rouge">set.add(key)</code></p>
+      </li>
+      <li>
+        <p>删除键：<code class="highlighter-rouge">set.remove(key)</code></p>
+      </li>
+      <li>
+        <p>交集（取所有过滤重复），并集（取相同）</p>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">s1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s1</span> <span class="o">|</span> <span class="n">s2</span> <span class="c1">#交集
+</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s1</span> <span class="o">&amp;</span> <span class="n">s2</span> <span class="c1">#并集
+</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="总结">总结</h3>
+
+<ol>
+  <li>
+    <p>python可以同时为多个变量赋值，<code class="highlighter-rouge">a,b=1,2</code></p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">type()</code>可以判断变量的数据类型，<code class="highlighter-rouge">isinstance(1,int)</code>可以判断变量是否是指定的类型，第二个参数也可以是一个数据类型的元组</p>
+  </li>
+  <li>
+    <p>字符串有四个内置方法可以转换大小写</p>
+
+    <ol>
+      <li><code class="highlighter-rouge">str.upper()</code>，将所有字母转换为大写，判断使用<code class="highlighter-rouge">str.isupper()</code></li>
+      <li><code class="highlighter-rouge">str.lower()</code>，将所有字母转换为小写，判断使用<code class="highlighter-rouge">str.islower()</code></li>
+      <li><code class="highlighter-rouge">str.capitalize()</code>，将所有字母转换为首字母大写，其余小写，无判断方法</li>
+      <li><code class="highlighter-rouge">str.title()</code>将所有单词转换为首字母大写，其余小写，判断使用<code class="highlighter-rouge">str.istitle()</code></li>
+    </ol>
+  </li>
+  <li>
+    <p>python有两种索引方式</p>
+
+    <ol>
+      <li>大于等于<code class="highlighter-rouge">[0]</code>的索引，表示从第一位元素开始获取，依次递增</li>
+      <li>小于等于<code class="highlighter-rouge">[-1]</code>的索引，表示从最后一位元素开始获取，依次递减</li>
+    </ol>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">None</code>不能理解为0，0是有意义的，而<code class="highlighter-rouge">Node</code>是特殊的空值</p>
+  </li>
+  <li>
+    <p>字符串和列表使用<code class="highlighter-rouge">+</code>操作符可以拼接，使用*操作符可以重复</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">byte</code>中，无法显示为<code class="highlighter-rouge">ASCII</code>的字节用<code class="highlighter-rouge">\x##</code>显示，如‘中’，包含3个字节,显示为<code class="highlighter-rouge">\xe4\xb8\xad</code></p>
+  </li>
+  <li>
+    <p>python运行处理unicode字符串，加前缀u或U，<code class="highlighter-rouge">u'this is a unicode string'</code></p>
+  </li>
+  <li>
+    <p>python中<code class="highlighter-rouge">del</code>可以删除元素和变</p>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">del</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">del</span> <span class="n">a</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span>
+<span class="nb">NameError</span><span class="p">:</span><span class="n">name</span> <span class="s">'a'</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+</code></pre></div>    </div>
+  </li>
+</ol>]]></content><author><name>realmline</name></author><category term="python3" /><summary type="html"><![CDATA[命令行模式与python交互模式]]></summary></entry><entry><title type="html">JS中的正则表达式</title><link href="http://localhost:4000/2018/10/29/js-regexp-1.0.html" rel="alternate" type="text/html" title="JS中的正则表达式" /><published>2018-10-29T00:00:00+08:00</published><updated>2018-10-29T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/29/js-regexp-1.0</id><content type="html" xml:base="http://localhost:4000/2018/10/29/js-regexp-1.0.html"><![CDATA[<h1 id="js中的正则表达式">JS中的正则表达式</h1>
+
+<h3 id="前言">前言</h3>
+
+<p>在涉及对一个字符串进行格式验证，比如验证它是否是有效的邮箱格式，虽然可以分离提取字符串<code class="highlighter-rouge">@</code>前后的字符来判断，但是那样显然很麻烦，所以我们可以使用正则表达式来对字符串进行匹配，在js中通过<strong>RegExp</strong>类型来支持正则表达式</p>
+
+<p>常见的应用如下：</p>
+
+<ol>
+  <li>验证字符串</li>
+  <li>查找字符串</li>
+  <li>替换字符串</li>
+  <li>提取字符串</li>
+</ol>
+
+<h3 id="格式">格式</h3>
+
+<p>正则表达式的格式很简单，如下：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">/</span><span class="nx">abc</span><span class="o">/</span><span class="nx">i</span><span class="p">;</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>这段正则表达式可以匹配包含<code class="highlighter-rouge">'abc'</code>或者<code class="highlighter-rouge">ABC</code>的字符串等，<em>被<code class="highlighter-rouge">/.../</code>包裹的内容是正则表达式，<code class="highlighter-rouge">/.../</code>后面的是标志，每一个正则表达式都可以带有1个或者多个标志，<strong>标志<code class="highlighter-rouge">i</code>模式下不区分大小写</strong></em></p>
+
+</blockquote>
+
+<h4 id="元字符">元字符</h4>
+
+<p>正则表达式中的元字符可以匹配位置或字符串中的某个字符，通过搭配可以更高效的写出正则表达式</p>
+
+<ul>
+  <li>
+    <h5 id="匹配位置的元字符">匹配位置的元字符：</h5>
+
+    <p>匹配位置的元字符只有三个<code class="highlighter-rouge">^</code>、<code class="highlighter-rouge">$</code>和<code class="highlighter-rouge">\b</code>：</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>元字符</th>
+          <th>作用</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="highlighter-rouge">^</code></td>
+          <td>用于匹配行的开始位置</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">$</code></td>
+          <td>用于匹配行的末尾位置</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">\b</code></td>
+          <td>用于匹配单词的开始或者结尾 ，<em>字符串中每一个空格分隔就算一个单词，如<code class="highlighter-rouge">abc efg</code>就算两个单词</em></td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">\B</code></td>
+          <td>用于匹配不处于单词的开头或者结尾</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//匹配abc开头的字符串</span>
+<span class="kd">var</span> <span class="nx">str1</span> <span class="o">=</span> <span class="sr">/^abc/</span>
+<span class="c1">//匹配abc结尾的字符串</span>
+<span class="kd">var</span> <span class="nx">str2</span> <span class="o">=</span> <span class="sr">/abc$/</span>
+<span class="c1">//匹配只有'abc'这3个字符组成的字符串</span>
+<span class="kd">var</span> <span class="nx">str3</span> <span class="o">=</span> <span class="sr">/^abc$/</span>
+<span class="c1">//匹配字符串中单词开头为'abc'的字符串</span>
+<span class="kd">var</span> <span class="nx">str4</span> <span class="o">=</span> <span class="sr">/</span><span class="se">\b</span><span class="sr">abc/</span>
+<span class="c1">//匹配字符串中单词结尾为'abc'的字符串</span>
+<span class="kd">var</span> <span class="nx">str5</span> <span class="o">=</span> <span class="sr">/abc</span><span class="se">\b</span><span class="sr">/</span>
+<span class="c1">//匹配字符串中单词开头不为‘abc’的字符串</span>
+<span class="kd">var</span> <span class="nx">str6</span> <span class="o">=</span> <span class="sr">/</span><span class="se">\B</span><span class="sr">abc/</span>
+<span class="c1">//匹配字符串中单词结尾不为‘abc’的字符串</span>
+<span class="kd">var</span> <span class="nx">str7</span> <span class="o">=</span> <span class="sr">/abc</span><span class="se">\B</span><span class="sr">/</span>
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p><strong><em>\b会对空格隔开字符串进行匹配，但是匹配到有效后就会停止，使用标志<code class="highlighter-rouge">g</code>可以不停止匹配对全局进行匹配直到匹配完毕</em></strong>，<code class="highlighter-rouge">\b</code>匹配到字符后可以配合<code class="highlighter-rouge">replace()</code>将单词替换</p>
+    </blockquote>
+  </li>
+  <li>
+    <h5 id="匹配字符的元字符">匹配字符的元字符</h5>
+
+    <p>匹配字符的元字符：</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>元字符</th>
+          <th>作用</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="highlighter-rouge">[]</code></td>
+          <td>包含，如：<code class="highlighter-rouge">[abc]</code>匹配其中任何一个字符（<code class="highlighter-rouge">a</code>、<code class="highlighter-rouge">b</code>、<code class="highlighter-rouge">c</code>）即满足条件</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">[^]</code></td>
+          <td>反包含，如：<code class="highlighter-rouge">[^abc]</code>，不匹配其中任何一个字符（<code class="highlighter-rouge">a</code>、<code class="highlighter-rouge">b</code>、<code class="highlighter-rouge">c</code>）即满足条件</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">\w</code></td>
+          <td>匹配单个字符（数字、字母、下划线），等价于<code class="highlighter-rouge">[0-9a-zA-Z\_]</code></td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">\W</code></td>
+          <td>匹配单个字符（数字、字母、下划线除外），等价于<code class="highlighter-rouge">[^0-9a-zA-Z\_]</code></td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">\d</code></td>
+          <td>匹配单个数字字符，等价于<code class="highlighter-rouge">[0-9]</code></td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">\D</code></td>
+          <td>匹配单个非数字字符，等价于<code class="highlighter-rouge">[^0-9]</code></td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">\s</code></td>
+          <td>匹配单个空白字符（空格、Tab字符、回车和换行）</td>
+        </tr>
+        <tr>
+          <td>`\S</td>
+          <td>匹配单个非空白字符（非空格、Tab字符、回车和换行）</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">.</code></td>
+          <td>匹配单个除回车和换行符之外的所有字符（<strong><em>可以匹配中文</em></strong>）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <tbody>
+        <tr>
+          <td><code class="highlighter-rouge">|</code></td>
+          <td>匹配左右条件中的一个即满足条件，如：<code class="highlighter-rouge">x|y</code>匹配<code class="highlighter-rouge">x</code>或<code class="highlighter-rouge">y</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <h5 id="限定符">限定符</h5>
+
+    <p>限定符可以对匹配的上一项条件重复执行指定的次数</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>贪婪限定符</th>
+          <th>惰性限定符</th>
+          <th>作用</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="highlighter-rouge">*</code></td>
+          <td><code class="highlighter-rouge">*?</code></td>
+          <td>匹配0次或多次</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">+</code></td>
+          <td><code class="highlighter-rouge">+?</code></td>
+          <td>匹配1次或多次</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">?</code></td>
+          <td><code class="highlighter-rouge">??</code></td>
+          <td>匹配0次或1次</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">{n}</code></td>
+          <td><code class="highlighter-rouge">{n}?</code></td>
+          <td>匹配n次</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">{n,}</code></td>
+          <td><code class="highlighter-rouge">{n,}?</code></td>
+          <td>最少匹配n次</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">{n,m}</code></td>
+          <td><code class="highlighter-rouge">{n,m}?</code></td>
+          <td>最少匹配n次，最多匹配m次</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h5 id="贪婪限定符会尽量匹配最多的匹配项惰性会尽量匹配最少的匹配项">贪婪限定符会尽量匹配最多的匹配项，惰性会尽量匹配最少的匹配项</h5>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="sr">/abc*/</span>
+<span class="kd">var</span> <span class="nx">str1</span> <span class="o">=</span> <span class="sr">/abc*</span><span class="se">?</span><span class="sr">/</span>
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>如果匹配的字符串是<code class="highlighter-rouge">'abcccccabccccancccabccabc'</code></p>
+
+      <p>贪婪匹配的结果会是<code class="highlighter-rouge">abccccc</code>，<strong>而惰性匹配的结果会是<code class="highlighter-rouge">ab</code>，因为*最少匹配0次</strong></p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="regexp">RegExp</h3>
+
+<h5 id="创建正则表达式">创建正则表达式</h5>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//通过字面量创建正则表达式</span>
+<span class="kd">var</span> <span class="nx">re1</span> <span class="o">=</span> <span class="sr">/ABC</span><span class="se">\-</span><span class="sr">001/</span><span class="p">;</span>
+<span class="c1">//通过RegExp对象实例化一个正则表达式</span>
+<span class="kd">var</span> <span class="nx">re2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="dl">'</span><span class="s1">ABC</span><span class="se">\\</span><span class="s1">-001</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>RegExp实例化的表达式参数是字符串，需要转义一下</p>
+
+  <p>这两种创建方式的结果并没有区别，写法是一样的</p>
+</blockquote>
+
+<h5 id="测试字符串是否符合条件">测试字符串是否符合条件</h5>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">re</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">\d{3}\-\d{3,8}</span><span class="sr">$/</span><span class="p">;</span>
+<span class="nx">re</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="dl">'</span><span class="s1">010-12345</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// true</span>
+<span class="nx">re</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="dl">'</span><span class="s1">010-1234x</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// false</span>
+<span class="nx">re</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="dl">'</span><span class="s1">010 12345</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// false</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>RegExp对象的<code class="highlighter-rouge">test()</code>方法用于测试给定的字符串是否符合条件</p>
+</blockquote>
+
+<h5 id="切分字符串">切分字符串</h5>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">'</span><span class="s1">a,b;; c  d</span><span class="dl">'</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="sr">/</span><span class="se">[\s\,\;]</span><span class="sr">+/</span><span class="p">);</span> <span class="c1">// ['a', 'b', 'c', 'd']</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>通过正则表达式还可以比固定字符串更灵活的分割字符串</p>
+
+  <p>规则中包含空格、<code class="highlighter-rouge">,</code>和<code class="highlighter-rouge">;</code>的任意一个通过匹配开启一次分割，在<code class="highlighter-rouge">+</code>的贪婪匹配下还可以过滤掉重复的分割符号(#^.^#)</p>
+</blockquote>
+
+<h5 id="分组">分组</h5>
+
+<p>用<code class="highlighter-rouge">（）</code>包含的正则表达式，在使用<code class="highlighter-rouge">exec()ss</code>匹配的时候会返回一个数组：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">re</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">(\d{3})</span><span class="sr">-</span><span class="se">(\d{3,8})</span><span class="sr">$/</span><span class="p">;</span>
+<span class="nx">re</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="dl">'</span><span class="s1">010-12345</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// ['010-12345', '010', '12345']</span>
+<span class="nx">re</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="dl">'</span><span class="s1">010 12345</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// null</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><code class="highlighter-rouge">exec()</code>在匹配成功时，返回的<code class="highlighter-rouge">Array</code>中，第一个元素是匹配到的整个字符串，后面的元素依次为分组中匹配的字符串</p>
+
+  <p><code class="highlighter-rouge">exec()</code>在匹配失败时，会返回<code class="highlighter-rouge">null</code></p>
+</blockquote>
+
+<h5 id="替换字符串">替换字符串</h5>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'0123.123456100'.replace(/^[0]*([1-9]\d*\.\d{0,4})\d*\.*$/,'$1')
+</code></pre></div></div>
+
+<blockquote>
+  <p><code class="highlighter-rouge">([1-9]\d*\.\d{0,4})</code>匹配的是正整数开头，且有效小数位数为4位的数值，也是我们需要的效果，在通过<code class="highlighter-rouge">/^[0]*</code>和<code class="highlighter-rouge">\d*\.*$/</code>保证整个字符串都会匹配有效，<em>最后替换字符串中的$1表示第一个分组（括号）中的内容</em></p>
+</blockquote>
+
+<h5 id="标志">标志</h5>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">g</code>全局匹配，表示不会在发现第一个匹配项就停止</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">i</code>表示匹配不区分大小写</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">m</code>表示多行模式，多行模式，<code class="highlighter-rouge">/^</code>和<code class="highlighter-rouge">$/</code>匹配变成每行的行首与行尾</p>
+
+    <h5 id="regexp的实例中有3个属性也是分别对应这三种标识">RegExp的实例中有3个属性，也是分别对应这三种标识</h5>
+
+    <ul>
+      <li>
+        <p>global，<code class="highlighter-rouge">bool</code>类型，全局模式</p>
+      </li>
+      <li>
+        <p>ignoreCase，<code class="highlighter-rouge">bool</code>类型，不区分大小写模式</p>
+      </li>
+      <li>
+        <p>multline，<code class="highlighter-rouge">bool</code>类型，多行模式</p>
+
+        <ul>
+          <li>
+            <h5 id="实例化时设置方式">实例化时设置方式</h5>
+          </li>
+        </ul>
+
+        <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">re1</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="dl">'</span><span class="s1">ABC</span><span class="se">\\</span><span class="s1">-001</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">i</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">re2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="dl">'</span><span class="s1">ABC</span><span class="se">\\</span><span class="s1">-001</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">ig</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>另外两个属性：</p>
+
+        <ul>
+          <li>lastIndex，<code class="highlighter-rouge">int</code>类型，表示搜索下一段匹配项字符串的位置，0开始</li>
+          <li>source，正则表达式的字符串表示，<strong><em>按照字面量格式返回，不会有转义字符串</em></strong></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="总结">总结</h3>
+
+<ol>
+  <li><code class="highlighter-rouge">[{(\$|)?*+.}]</code>，元字符必须转义，不然不会被识别</li>
+  <li>惰性限定符对于<code class="highlighter-rouge">*</code>和<code class="highlighter-rouge">?</code>来说就是匹配0次，对于<code class="highlighter-rouge">{n，m}?</code>来说等于<code class="highlighter-rouge">{n}</code></li>
+</ol>]]></content><author><name>realmline</name></author><category term="RegExp,正则表达式" /><summary type="html"><![CDATA[JS中的正则表达式]]></summary></entry><entry><title type="html">git分支学习笔记</title><link href="http://localhost:4000/2018/10/27/git-1.1.html" rel="alternate" type="text/html" title="git分支学习笔记" /><published>2018-10-27T00:00:00+08:00</published><updated>2018-10-27T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/27/git-1.1</id><content type="html" xml:base="http://localhost:4000/2018/10/27/git-1.1.html"><![CDATA[<h1 id="git分支学习笔记">git分支学习笔记</h1>
+
+<h3 id="前言">前言</h3>
+
+<p>仓库刚创建的时候是只有一个<code class="highlighter-rouge">master</code>主分支的，在实际应用中，多人开发时，为了避免代码未完成，提交时对当前版本造成影响，我们可以根据当前版本创建一个分支来完成自己的模块和功能，并在完成之后合并到主分支即可，<strong>由于我是在windows系统下进行操作的，所以以下操作均已windows为基准</strong></p>
+
+<p><strong><em>文中出现的dev为本次记录使用的分支名称</em></strong></p>
+
+<h3 id="创建分支">创建分支</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git branch dev
+$ git checkout dev
+</code></pre></div></div>
+
+<ul>
+  <li>第一条命令创建了一个名为dev的分支</li>
+  <li>第二条命令切换当前分支到dev，<strong><em>同时HEAD也会指向dev分支</em></strong></li>
+  <li>这两条命令也可以缩减为一条：<code class="highlighter-rouge">git checkout -b dev</code></li>
+</ul>
+
+<h3 id="查看当前分支">查看当前分支</h3>
+
+<p><code class="highlighter-rouge">git branch</code>命令可以查看所有分支信息，其中有*标注的为当前分支</p>
+
+<h3 id="合并分支">合并分支</h3>
+
+<p><code class="highlighter-rouge">git merge dev</code>可以将dev的分支合并到当前分支，如果合并出现冲突时，需要解决冲突，然后再<code class="highlighter-rouge">git commit</code>才行</p>
+
+<blockquote>
+  <p>默认情况下，合并的时候是处于快进模式<code class="highlighter-rouge">fast-forward</code>（<strong>直接将当前分支指向被合并的分支</strong>），这个模式下删除被合并的分支时，会丢失分支信息，因为合并的时候没有创建<code class="highlighter-rouge">commit</code></p>
+
+  <p>解决方案：<code class="highlighter-rouge">git merge --no-ff -m'xxxxx' dev</code></p>
+
+  <ul>
+    <li>意为本次提交禁用fast-forward模式，且合并时会生成一个<code class="highlighter-rouge">commit</code>，所以需要加上<code class="highlighter-rouge">-m'xxxxxx'</code></li>
+  </ul>
+
+  <p>使用<code class="highlighter-rouge">git log --graph --pretty=oneline --abbrev-commit</code>可以查看当前分支的合并情况，<strong>快进模式下合并不会存在记录</strong></p>
+</blockquote>
+
+<h3 id="删除分支">删除分支</h3>
+
+<p><code class="highlighter-rouge">git branch -d dev</code>可以删除掉dev这个分支</p>
+
+<blockquote>
+  <p>当分支没有合并过，且有新增的文件在版本库时，执行<code class="highlighter-rouge">git branch -d dev</code>是无法删除分支， 当然也可以强制删除，将<code class="highlighter-rouge">-d</code>改为<code class="highlighter-rouge">-D</code></p>
+</blockquote>
+
+<h3 id="储藏当前工作区">储藏当前工作区</h3>
+
+<blockquote>
+  <p>当文件修改未完成，又需要紧急修改另一个文件时，提交当前未完成的代码肯定会有影响，这个时候可以先储藏当前工作区</p>
+</blockquote>
+
+<p><code class="highlighter-rouge">git stash</code>可以储藏当前工作区，需要注意的是：</p>
+
+<ul>
+  <li>如果目录下有没被git管理的文件，那么<code class="highlighter-rouge">git status</code>还是会提示将那些文件<code class="highlighter-rouge">add</code>到暂存区</li>
+</ul>
+
+<p><em>如果没有上述的情况，那就可以执行<code class="highlighter-rouge">git stash</code>，然后创建分支修改另一个文件：</em></p>
+
+<ul>
+  <li>
+    <p>修复完成后，提交并合并到最新分支，然后回到储藏的那个分支，还原工作区</p>
+
+    <ul>
+      <li><strong>修复的版本合并到最新分支后，也需要和储藏区的分支合并一下，不然提交的时候可能会产生冲突</strong></li>
+    </ul>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash apply
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>通过上面的命令可以恢复内容，但是在<code class="highlighter-rouge">stash</code>里面的内容不会删除，需要<code class="highlighter-rouge">git stash drop</code>来删除</p>
+
+      <p>解决方案：<code class="highlighter-rouge">git stash pop</code>可以在恢复的同时删除掉储藏的内容</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="查看储藏区的内容">查看储藏区的内容</h3>
+
+<p><code class="highlighter-rouge">git stash list</code>可以查看储藏区的内容</p>
+
+<ul>
+  <li>恢复指定储藏区内容<code class="highlighter-rouge">git stash apply stash@{0}</code></li>
+  <li>删除指定储藏区内容<code class="highlighter-rouge">git stash drop stash@{0} </code></li>
+  <li>删除所有储藏区的内容<code class="highlighter-rouge">git stash clear</code></li>
+</ul>]]></content><author><name>realmline</name></author><category term="git" /><summary type="html"><![CDATA[git分支学习笔记]]></summary></entry><entry><title type="html">github远程库</title><link href="http://localhost:4000/2018/10/27/git-1.2.html" rel="alternate" type="text/html" title="github远程库" /><published>2018-10-27T00:00:00+08:00</published><updated>2018-10-27T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/27/git-1.2</id><content type="html" xml:base="http://localhost:4000/2018/10/27/git-1.2.html"><![CDATA[<h1 id="关联github远程库">关联github远程库</h1>
+
+<h3 id="前言">前言</h3>
+
+<p>github是一个开源协作平台，也可以作为免费的远程仓库，这一篇主要记录关联github远程库的各种操作，<strong>由于我是在windows系统下进行操作的，所以以下操作均已windows为基准</strong></p>
+
+<h3 id="创建ssh-key">创建SSH KEY</h3>
+
+<ul>
+  <li>
+    <p>右击桌面菜单，选择打开Git Bash，执行命令：</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ssh-keygen -t rsa -C 'youemail@example.com'
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>要将<code class="highlighter-rouge">youemail@example.com</code>改成自己的github邮箱</p>
+    </blockquote>
+  </li>
+  <li>执行成功后，在<code class="highlighter-rouge">C:\User\administrator\</code>目录下找到.ssh文件夹，里面会有两个文件，<code class="highlighter-rouge">id_rsa</code>和<code class="highlighter-rouge">id_rsa.pub</code></li>
+  <li>将公匙（id_rsa.pub）中的内容复制出来添加到github的sshkey中</li>
+</ul>
+
+<h3 id="推送仓库">推送仓库</h3>
+
+<p>有两种方式可以操作：</p>
+
+<ul>
+  <li>
+    <p>推送现有仓库</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git remote add origin https://github.com/githubname/gitDemo.git
 $ git remote add origin git@github.com:yougithubname/project.git
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+</code></pre></div>    </div>
 
-    &lt;blockquote&gt;
-      &lt;p&gt;先关联远程库，origin为关联远程库的名称&lt;/p&gt;
+    <blockquote>
+      <p>先关联远程库，origin为关联远程库的名称</p>
 
-      &lt;p&gt;第一条命令是http关联，缺点是每次提交都需要输入一回账号和密码&lt;/p&gt;
+      <p>第一条命令是http关联，缺点是每次提交都需要输入一回账号和密码</p>
 
-      &lt;p&gt;第二条命令是ssh关联，需要把sshkey公钥绑定到github的ssh上面&lt;/p&gt;
-    &lt;/blockquote&gt;
+      <p>第二条命令是ssh关联，需要把sshkey公钥绑定到github的ssh上面</p>
+    </blockquote>
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git push -u origin master
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git push -u origin master
+</code></pre></div>    </div>
 
-    &lt;blockquote&gt;
-      &lt;p&gt;推送现有仓库到远程库，由于远程库是空的，加了&lt;code class=&quot;highlighter-rouge&quot;&gt;-u&lt;/code&gt;参数可以把本地的master和远程的master分支关联起来&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;克隆远程库至本地&lt;/p&gt;
+    <blockquote>
+      <p>推送现有仓库到远程库，由于远程库是空的，加了<code class="highlighter-rouge">-u</code>参数可以把本地的master和远程的master分支关联起来</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>克隆远程库至本地</p>
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git clone git@github.com:yougithubname/project.git
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone git@github.com:yougithubname/project.git
 $ git clone https://github.com/yougithubname.gitDemo.git
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+</code></pre></div>    </div>
 
-    &lt;blockquote&gt;
-      &lt;p&gt;同样的第一条是http的方式，第二条是ssh方式，克隆下来后，默认的远程库关联名为origin&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+    <blockquote>
+      <p>同样的第一条是http的方式，第二条是ssh方式，克隆下来后，默认的远程库关联名为origin</p>
+    </blockquote>
+  </li>
+</ul>
 
-&lt;h3 id=&quot;查看远程分支&quot;&gt;查看远程分支&lt;/h3&gt;
+<h3 id="查看远程分支">查看远程分支</h3>
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git remote&lt;/code&gt;	显示远程仓库分支，&lt;em&gt;如上面的推送仓库的master主分支会显示origin关联名&lt;/em&gt;&lt;/p&gt;
+<p><code class="highlighter-rouge">git remote</code>	显示远程仓库分支，<em>如上面的推送仓库的master主分支会显示origin关联名</em></p>
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git remote -v&lt;/code&gt;可以显示更详细的远程库分支&lt;/p&gt;
+<p><code class="highlighter-rouge">git remote -v</code>可以显示更详细的远程库分支</p>
 
-&lt;h3 id=&quot;删除远程关联&quot;&gt;删除远程关联&lt;/h3&gt;
+<h3 id="删除远程关联">删除远程关联</h3>
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git remote rm origin&lt;/code&gt;删除名为origin的远程库关联&lt;/p&gt;
+<p><code class="highlighter-rouge">git remote rm origin</code>删除名为origin的远程库关联</p>
 
-&lt;h3 id=&quot;提交本地内容至远程库&quot;&gt;提交本地内容至远程库&lt;/h3&gt;
+<h3 id="提交本地内容至远程库">提交本地内容至远程库</h3>
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin master&lt;/code&gt;将本地master的分支提交到远程库上&lt;/p&gt;
+<p><code class="highlighter-rouge">git push origin master</code>将本地master的分支提交到远程库上</p>
 
-&lt;h3 id=&quot;远程库分支&quot;&gt;远程库分支&lt;/h3&gt;
+<h3 id="远程库分支">远程库分支</h3>
 
-&lt;h5 id=&quot;克隆远程分支&quot;&gt;克隆远程分支&lt;/h5&gt;
+<h5 id="克隆远程分支">克隆远程分支</h5>
 
-&lt;p&gt;远程库默认clone下来的只有master主分支，clone其他分支命令如下：&lt;/p&gt;
+<p>远程库默认clone下来的只有master主分支，clone其他分支命令如下：</p>
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git checkout -b dev origin/dev
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout -b dev origin/dev
+</code></pre></div></div>
 
-&lt;blockquote&gt;
-  &lt;p&gt;clone远程的dev分支，并新建到本地dev分支库中&lt;/p&gt;
-&lt;/blockquote&gt;
+<blockquote>
+  <p>clone远程的dev分支，并新建到本地dev分支库中</p>
+</blockquote>
 
-&lt;h5 id=&quot;提交分支到远程库&quot;&gt;提交分支到远程库&lt;/h5&gt;
+<h5 id="提交分支到远程库">提交分支到远程库</h5>
 
-&lt;p&gt;如果和远程库分支版本不同，就需要先拉取，而拉取远程分支到本地需要指定链接&lt;/p&gt;
+<p>如果和远程库分支版本不同，就需要先拉取，而拉取远程分支到本地需要指定链接</p>
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git branch --set-upstream-to=origin/dev dev
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch --set-upstream-to=origin/dev dev
+</code></pre></div></div>
 
-&lt;blockquote&gt;
-  &lt;p&gt;将本地分支dev与远程dev分支链接，然后&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull&lt;/code&gt;拉取更新下来&lt;/p&gt;
-&lt;/blockquote&gt;
+<blockquote>
+  <p>将本地分支dev与远程dev分支链接，然后<code class="highlighter-rouge">git pull</code>拉取更新下来</p>
+</blockquote>
 
-&lt;p&gt;如果本地当前分支名在远程库不存在时，&lt;code class=&quot;highlighter-rouge&quot;&gt;push&lt;/code&gt;会在远程生成一个新的分支，避免这个情况可以指定分支：&lt;/p&gt;
+<p>如果本地当前分支名在远程库不存在时，<code class="highlighter-rouge">push</code>会在远程生成一个新的分支，避免这个情况可以指定分支：</p>
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git push origin HEAD:dev
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin HEAD:dev
+</code></pre></div></div>
 
-&lt;blockquote&gt;
-  &lt;p&gt;将当前分支提交到远程库的dev分支中，HEAD指向当前分支&lt;/p&gt;
-&lt;/blockquote&gt;
+<blockquote>
+  <p>将当前分支提交到远程库的dev分支中，HEAD指向当前分支</p>
+</blockquote>
 
-&lt;h5 id=&quot;查看本地分支和远程分支链接情况&quot;&gt;查看本地分支和远程分支链接情况&lt;/h5&gt;
+<h5 id="查看本地分支和远程分支链接情况">查看本地分支和远程分支链接情况</h5>
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git branch -vv
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git branch -vv
 master 3caa59 [origin/master] 'xxxxxx'
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</code></pre></div></div>
 
-&lt;blockquote&gt;
-  &lt;p&gt;返回的内容为当前本地分支的列表信息，内容分别为：&lt;/p&gt;
+<blockquote>
+  <p>返回的内容为当前本地分支的列表信息，内容分别为：</p>
 
-  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;master&lt;/code&gt;分支名、&lt;code class=&quot;highlighter-rouge&quot;&gt;3cass59&lt;/code&gt;分支的id、&lt;code class=&quot;highlighter-rouge&quot;&gt;[origin/master]&lt;/code&gt;链接的远程库分支、&lt;code class=&quot;highlighter-rouge&quot;&gt;'xxxxxx'&lt;/code&gt;上一次&lt;code class=&quot;highlighter-rouge&quot;&gt;commit&lt;/code&gt;的描述&lt;/p&gt;
-&lt;/blockquote&gt;
+  <p><code class="highlighter-rouge">master</code>分支名、<code class="highlighter-rouge">3cass59</code>分支的id、<code class="highlighter-rouge">[origin/master]</code>链接的远程库分支、<code class="highlighter-rouge">'xxxxxx'</code>上一次<code class="highlighter-rouge">commit</code>的描述</p>
+</blockquote>
 
-&lt;h3 id=&quot;rebase&quot;&gt;rebase&lt;/h3&gt;
+<h3 id="rebase">rebase</h3>
 
-&lt;p&gt;将版本分支修改成一条直线，当远程的仓库有更新时，本地无法直接提交，需要先拉取下来，之后查看&lt;code class=&quot;highlighter-rouge&quot;&gt;log&lt;/code&gt;会发现基于上一个版本之后，提交历史分叉了，因为远程拉取下来的分支是基于上一个版本的，本地修改的内容也是基于上一个版本&lt;/p&gt;
+<p>将版本分支修改成一条直线，当远程的仓库有更新时，本地无法直接提交，需要先拉取下来，之后查看<code class="highlighter-rouge">log</code>会发现基于上一个版本之后，提交历史分叉了，因为远程拉取下来的分支是基于上一个版本的，本地修改的内容也是基于上一个版本</p>
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* 本地版本
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* 本地版本
 |\
 | -拉取版本
 |/
 *上一版本
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</code></pre></div></div>
 
-&lt;p&gt;通过&lt;code class=&quot;highlighter-rouge&quot;&gt;git rebase&lt;/code&gt;可以将本地版本的修改改为不在基于上一版本，而且基于刚刚拉取下来的版本&lt;/p&gt;
+<p>通过<code class="highlighter-rouge">git rebase</code>可以将本地版本的修改改为不在基于上一版本，而且基于刚刚拉取下来的版本</p>
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;*本地版本
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*本地版本
 *拉取版本
 *上一版本
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</code></pre></div></div>
 
-&lt;h3 id=&quot;标签&quot;&gt;标签&lt;/h3&gt;
+<h3 id="标签">标签</h3>
 
-&lt;p&gt;当需要寻找指定版本时，&lt;code class=&quot;highlighter-rouge&quot;&gt;commit id&lt;/code&gt;十分难记，可以通过给版本添加标签便于寻找&lt;/p&gt;
+<p>当需要寻找指定版本时，<code class="highlighter-rouge">commit id</code>十分难记，可以通过给版本添加标签便于寻找</p>
 
-&lt;h4 id=&quot;查看标签&quot;&gt;查看标签&lt;/h4&gt;
+<h4 id="查看标签">查看标签</h4>
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git tag &lt;/code&gt;命令可以查看所有的标签，&lt;strong&gt;&lt;em&gt;返回列表不是按时间顺序，而且按字母顺序的&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+<p><code class="highlighter-rouge">git tag </code>命令可以查看所有的标签，<strong><em>返回列表不是按时间顺序，而且按字母顺序的</em></strong></p>
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git show tagname&lt;/code&gt;命令可以查看指定标签名的标签信息&lt;/p&gt;
+<p><code class="highlighter-rouge">git show tagname</code>命令可以查看指定标签名的标签信息</p>
 
-&lt;h4 id=&quot;创建标签&quot;&gt;创建标签&lt;/h4&gt;
+<h4 id="创建标签">创建标签</h4>
 
-&lt;p&gt;先进入需要打标签的分支&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout dev&lt;/code&gt;，此处切换到dev分支&lt;/p&gt;
+<p>先进入需要打标签的分支<code class="highlighter-rouge">git checkout dev</code>，此处切换到dev分支</p>
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git tag v1.0
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git tag v1.0
 git tag -a v1.0 -m 'version 0.1'
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</code></pre></div></div>
 
-&lt;blockquote&gt;
-  &lt;p&gt;第一条添加的时一个v1.0的版本&lt;/p&gt;
+<blockquote>
+  <p>第一条添加的时一个v1.0的版本</p>
 
-  &lt;p&gt;第二条添加一个带有描述的标签，&lt;code class=&quot;highlighter-rouge&quot;&gt;-a 'xxxx'&lt;/code&gt;为标签名称，&lt;code class=&quot;highlighter-rouge&quot;&gt;-m 'xxxxx'&lt;/code&gt;为描述信息&lt;/p&gt;
-&lt;/blockquote&gt;
+  <p>第二条添加一个带有描述的标签，<code class="highlighter-rouge">-a 'xxxx'</code>为标签名称，<code class="highlighter-rouge">-m 'xxxxx'</code>为描述信息</p>
+</blockquote>
 
-&lt;p&gt;给以前的&lt;code class=&quot;highlighter-rouge&quot;&gt;commit&lt;/code&gt;添加标签&lt;/p&gt;
+<p>给以前的<code class="highlighter-rouge">commit</code>添加标签</p>
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;先通过&lt;code class=&quot;highlighter-rouge&quot;&gt;git reflog&lt;/code&gt;找到&lt;code class=&quot;highlighter-rouge&quot;&gt;commit id&lt;/code&gt;&lt;/p&gt;
+<ul>
+  <li>
+    <p>先通过<code class="highlighter-rouge">git reflog</code>找到<code class="highlighter-rouge">commit id</code></p>
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git tag v1.0 10ab2j
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git tag v1.0 10ab2j
 git tag -a v1.0 -m 'version 0.1' 10ab2j
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+</code></pre></div>    </div>
 
-    &lt;blockquote&gt;
-      &lt;p&gt;10ab2j为指定的&lt;code class=&quot;highlighter-rouge&quot;&gt;commit id&lt;/code&gt;，通过此命令可以给指定版本添加标签&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+    <blockquote>
+      <p>10ab2j为指定的<code class="highlighter-rouge">commit id</code>，通过此命令可以给指定版本添加标签</p>
+    </blockquote>
+  </li>
+</ul>
 
-&lt;h4 id=&quot;删除标签&quot;&gt;删除标签&lt;/h4&gt;
+<h4 id="删除标签">删除标签</h4>
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git tag -d v1.0&lt;/code&gt;删除标签为v1.0的标签&lt;/p&gt;
+<p><code class="highlighter-rouge">git tag -d v1.0</code>删除标签为v1.0的标签</p>
 
-&lt;p&gt;&lt;strong&gt;删除远程库的标签，必须要先在删除本地的那个标签&lt;/strong&gt;&lt;/p&gt;
+<p><strong>删除远程库的标签，必须要先在删除本地的那个标签</strong></p>
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git tag -d v1.0
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git tag -d v1.0
 git push origin :refs/tags/v1.0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</code></pre></div></div>
 
-&lt;h4 id=&quot;推送标签&quot;&gt;推送标签&lt;/h4&gt;
+<h4 id="推送标签">推送标签</h4>
 
-&lt;p&gt;默认情况下，标签存在本地，不会被推送到远程库，如果要推送到远程：&lt;/p&gt;
+<p>默认情况下，标签存在本地，不会被推送到远程库，如果要推送到远程：</p>
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git push origin v1.0
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin v1.0
 git push origin --tags
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</code></pre></div></div>
 
-&lt;blockquote&gt;
-  &lt;p&gt;第一条推送v1.0的标签到远程&lt;/p&gt;
+<blockquote>
+  <p>第一条推送v1.0的标签到远程</p>
 
-  &lt;p&gt;第二条推送所有未被推送过的本地标签到远程&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>realmline</name></author><category term="git" /><summary type="html">关联github远程库</summary></entry><entry><title type="html">git分支学习笔记</title><link href="http://localhost:4000/2018/10/27/git-1.1.html" rel="alternate" type="text/html" title="git分支学习笔记" /><published>2018-10-27T00:00:00+08:00</published><updated>2018-10-27T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/27/git-1.1</id><content type="html" xml:base="http://localhost:4000/2018/10/27/git-1.1.html">&lt;h1 id=&quot;git分支学习笔记&quot;&gt;git分支学习笔记&lt;/h1&gt;
+  <p>第二条推送所有未被推送过的本地标签到远程</p>
+</blockquote>]]></content><author><name>realmline</name></author><category term="git" /><summary type="html"><![CDATA[关联github远程库]]></summary></entry><entry><title type="html">git基础操作学习笔记</title><link href="http://localhost:4000/2018/10/26/git-1.0.html" rel="alternate" type="text/html" title="git基础操作学习笔记" /><published>2018-10-26T00:00:00+08:00</published><updated>2018-10-26T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/26/git-1.0</id><content type="html" xml:base="http://localhost:4000/2018/10/26/git-1.0.html"><![CDATA[<h1 id="git基础操作学习笔记">git基础操作学习笔记</h1>
 
-&lt;h3 id=&quot;前言&quot;&gt;前言&lt;/h3&gt;
+<h3 id="前言">前言</h3>
 
-&lt;p&gt;仓库刚创建的时候是只有一个&lt;code class=&quot;highlighter-rouge&quot;&gt;master&lt;/code&gt;主分支的，在实际应用中，多人开发时，为了避免代码未完成，提交时对当前版本造成影响，我们可以根据当前版本创建一个分支来完成自己的模块和功能，并在完成之后合并到主分支即可，&lt;strong&gt;由于我是在windows系统下进行操作的，所以以下操作均已windows为基准&lt;/strong&gt;&lt;/p&gt;
+<p>git是当下最先进的分布式版本控制系统，原来在公司一直用的svn，不过由于想要尝试制作个人博客，就通过廖雪峰老师的git教程开始了学习，<strong>由于我是在windows系统下进行操作的，所以以下操作均已windows为基准</strong></p>
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;文中出现的dev为本次记录使用的分支名称&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+<h3 id="配置用户名和邮箱">配置用户名和邮箱</h3>
 
-&lt;h3 id=&quot;创建分支&quot;&gt;创建分支&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git branch dev
-$ git checkout dev
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;第一条命令创建了一个名为dev的分支&lt;/li&gt;
-  &lt;li&gt;第二条命令切换当前分支到dev，&lt;strong&gt;&lt;em&gt;同时HEAD也会指向dev分支&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;这两条命令也可以缩减为一条：&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout -b dev&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;查看当前分支&quot;&gt;查看当前分支&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git branch&lt;/code&gt;命令可以查看所有分支信息，其中有*标注的为当前分支&lt;/p&gt;
-
-&lt;h3 id=&quot;合并分支&quot;&gt;合并分支&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge dev&lt;/code&gt;可以将dev的分支合并到当前分支，如果合并出现冲突时，需要解决冲突，然后再&lt;code class=&quot;highlighter-rouge&quot;&gt;git commit&lt;/code&gt;才行&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;默认情况下，合并的时候是处于快进模式&lt;code class=&quot;highlighter-rouge&quot;&gt;fast-forward&lt;/code&gt;（&lt;strong&gt;直接将当前分支指向被合并的分支&lt;/strong&gt;），这个模式下删除被合并的分支时，会丢失分支信息，因为合并的时候没有创建&lt;code class=&quot;highlighter-rouge&quot;&gt;commit&lt;/code&gt;&lt;/p&gt;
-
-  &lt;p&gt;解决方案：&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge --no-ff -m'xxxxx' dev&lt;/code&gt;&lt;/p&gt;
-
-  &lt;ul&gt;
-    &lt;li&gt;意为本次提交禁用fast-forward模式，且合并时会生成一个&lt;code class=&quot;highlighter-rouge&quot;&gt;commit&lt;/code&gt;，所以需要加上&lt;code class=&quot;highlighter-rouge&quot;&gt;-m'xxxxxx'&lt;/code&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-
-  &lt;p&gt;使用&lt;code class=&quot;highlighter-rouge&quot;&gt;git log --graph --pretty=oneline --abbrev-commit&lt;/code&gt;可以查看当前分支的合并情况，&lt;strong&gt;快进模式下合并不会存在记录&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;删除分支&quot;&gt;删除分支&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git branch -d dev&lt;/code&gt;可以删除掉dev这个分支&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;当分支没有合并过，且有新增的文件在版本库时，执行&lt;code class=&quot;highlighter-rouge&quot;&gt;git branch -d dev&lt;/code&gt;是无法删除分支， 当然也可以强制删除，将&lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt;改为&lt;code class=&quot;highlighter-rouge&quot;&gt;-D&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;储藏当前工作区&quot;&gt;储藏当前工作区&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;当文件修改未完成，又需要紧急修改另一个文件时，提交当前未完成的代码肯定会有影响，这个时候可以先储藏当前工作区&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git stash&lt;/code&gt;可以储藏当前工作区，需要注意的是：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如果目录下有没被git管理的文件，那么&lt;code class=&quot;highlighter-rouge&quot;&gt;git status&lt;/code&gt;还是会提示将那些文件&lt;code class=&quot;highlighter-rouge&quot;&gt;add&lt;/code&gt;到暂存区&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;em&gt;如果没有上述的情况，那就可以执行&lt;code class=&quot;highlighter-rouge&quot;&gt;git stash&lt;/code&gt;，然后创建分支修改另一个文件：&lt;/em&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;修复完成后，提交并合并到最新分支，然后回到储藏的那个分支，还原工作区&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;修复的版本合并到最新分支后，也需要和储藏区的分支合并一下，不然提交的时候可能会产生冲突&lt;/strong&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git stash apply
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;blockquote&gt;
-      &lt;p&gt;通过上面的命令可以恢复内容，但是在&lt;code class=&quot;highlighter-rouge&quot;&gt;stash&lt;/code&gt;里面的内容不会删除，需要&lt;code class=&quot;highlighter-rouge&quot;&gt;git stash drop&lt;/code&gt;来删除&lt;/p&gt;
-
-      &lt;p&gt;解决方案：&lt;code class=&quot;highlighter-rouge&quot;&gt;git stash pop&lt;/code&gt;可以在恢复的同时删除掉储藏的内容&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;查看储藏区的内容&quot;&gt;查看储藏区的内容&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git stash list&lt;/code&gt;可以查看储藏区的内容&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;恢复指定储藏区内容&lt;code class=&quot;highlighter-rouge&quot;&gt;git stash apply stash@{0}&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;删除指定储藏区内容&lt;code class=&quot;highlighter-rouge&quot;&gt;git stash drop stash@{0} &lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;删除所有储藏区的内容&lt;code class=&quot;highlighter-rouge&quot;&gt;git stash clear&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>realmline</name></author><category term="git" /><summary type="html">git分支学习笔记</summary></entry><entry><title type="html">git基础操作学习笔记</title><link href="http://localhost:4000/2018/10/26/git-1.0.html" rel="alternate" type="text/html" title="git基础操作学习笔记" /><published>2018-10-26T00:00:00+08:00</published><updated>2018-10-26T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/26/git-1.0</id><content type="html" xml:base="http://localhost:4000/2018/10/26/git-1.0.html">&lt;h1 id=&quot;git基础操作学习笔记&quot;&gt;git基础操作学习笔记&lt;/h1&gt;
-
-&lt;h3 id=&quot;前言&quot;&gt;前言&lt;/h3&gt;
-
-&lt;p&gt;git是当下最先进的分布式版本控制系统，原来在公司一直用的svn，不过由于想要尝试制作个人博客，就通过廖雪峰老师的git教程开始了学习，&lt;strong&gt;由于我是在windows系统下进行操作的，所以以下操作均已windows为基准&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;配置用户名和邮箱&quot;&gt;配置用户名和邮箱&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git config --global user.name 'youname'
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git config --global user.name 'youname'
 $ git config --global user.email 'youemail'
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</code></pre></div></div>
 
-&lt;p&gt;通过输入上述命令绑定用户名和邮箱，加了–global表示这台电脑会统一使用这个配置&lt;/p&gt;
+<p>通过输入上述命令绑定用户名和邮箱，加了–global表示这台电脑会统一使用这个配置</p>
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;给单独仓库设置用户名和邮箱，&lt;strong&gt;要先进入对应仓库目录&lt;/strong&gt;，然后执行命令：&lt;/p&gt;
+<ul>
+  <li>
+    <p>给单独仓库设置用户名和邮箱，<strong>要先进入对应仓库目录</strong>，然后执行命令：</p>
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git config user.name 'youname'
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git config user.name 'youname'
 $ git config user.email 'youemail'
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+</code></pre></div>    </div>
 
-    &lt;blockquote&gt;
-      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git --list&lt;/code&gt;可以查看当前配置，&lt;strong&gt;在当前仓库下使用会优先显示当前仓库的配置，没有配置的内容会显示全局配置&lt;/strong&gt;&lt;/p&gt;
+    <blockquote>
+      <p><code class="highlighter-rouge">git --list</code>可以查看当前配置，<strong>在当前仓库下使用会优先显示当前仓库的配置，没有配置的内容会显示全局配置</strong></p>
 
-      &lt;p&gt;修改的时候也是执行相同的命令，改变youname和email即可&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+      <p>修改的时候也是执行相同的命令，改变youname和email即可</p>
+    </blockquote>
+  </li>
+</ul>
 
-&lt;h3 id=&quot;创建一个仓库&quot;&gt;创建一个仓库&lt;/h3&gt;
+<h3 id="创建一个仓库">创建一个仓库</h3>
 
-&lt;p&gt;打开&lt;code class=&quot;highlighter-rouge&quot;&gt;cmd&lt;/code&gt;或者&lt;code class=&quot;highlighter-rouge&quot;&gt;power shell&lt;/code&gt;，然后通过&lt;code class=&quot;highlighter-rouge&quot;&gt;cd e:\path&lt;/code&gt;进入要创建仓库的文件夹，并执行&lt;code class=&quot;highlighter-rouge&quot;&gt;git init&lt;/code&gt;命令&lt;/p&gt;
+<p>打开<code class="highlighter-rouge">cmd</code>或者<code class="highlighter-rouge">power shell</code>，然后通过<code class="highlighter-rouge">cd e:\path</code>进入要创建仓库的文件夹，并执行<code class="highlighter-rouge">git init</code>命令</p>
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git init
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git init
+</code></pre></div></div>
 
-&lt;p&gt;提示创建好了一个空仓库，当前目录下多一个&lt;code class=&quot;highlighter-rouge&quot;&gt;.get&lt;/code&gt;的目录，这个目录默认是隐藏的，用于跟踪管理git版本库，为了避免仓库出现问题，最好不要修改这个目录的文件&lt;/p&gt;
+<p>提示创建好了一个空仓库，当前目录下多一个<code class="highlighter-rouge">.get</code>的目录，这个目录默认是隐藏的，用于跟踪管理git版本库，为了避免仓库出现问题，最好不要修改这个目录的文件</p>
 
-&lt;h3 id=&quot;把文件添加到版本库&quot;&gt;把文件添加到版本库&lt;/h3&gt;
+<h3 id="把文件添加到版本库">把文件添加到版本库</h3>
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;git是无法操作仓库目录外的文件的 ，只能操作当前仓库目录下的文件&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+<p><strong><em>git是无法操作仓库目录外的文件的 ，只能操作当前仓库目录下的文件</em></strong></p>
 
-&lt;p&gt;将文件添加到仓库分两步&lt;/p&gt;
+<p>将文件添加到仓库分两步</p>
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git add xxx.txt
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git add xxx.txt
 $ git commit -m'xxxxxxxxxxxxx'
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</code></pre></div></div>
 
-&lt;ul&gt;
-  &lt;li&gt;将文件添加到暂存区&lt;code class=&quot;highlighter-rouge&quot;&gt;git add xxx.txt&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;将文件添加到仓库&lt;code class=&quot;highlighter-rouge&quot;&gt;git commit -m'xxxxxxxxx'&lt;/code&gt;,
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git add&lt;/code&gt;是将某个文件添加到暂存区，后面的&lt;code class=&quot;highlighter-rouge&quot;&gt;xxx.txt&lt;/code&gt;可以是文件也可以是当前目录下的一个目录&lt;code class=&quot;highlighter-rouge&quot;&gt;git add /&lt;/code&gt;
-        &lt;ul&gt;
-          &lt;li&gt;&lt;strong&gt;如果需要撤销add操作，&lt;a href=&quot;#1&quot;&gt;看这里&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git commit&lt;/code&gt;是将暂存区的内容提交到仓库，&lt;code class=&quot;highlighter-rouge&quot;&gt;-m'xxxx'&lt;/code&gt;是本次提交的描述，&lt;strong&gt;必填&lt;/strong&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>将文件添加到暂存区<code class="highlighter-rouge">git add xxx.txt</code></li>
+  <li>将文件添加到仓库<code class="highlighter-rouge">git commit -m'xxxxxxxxx'</code>,
+    <ul>
+      <li><code class="highlighter-rouge">git add</code>是将某个文件添加到暂存区，后面的<code class="highlighter-rouge">xxx.txt</code>可以是文件也可以是当前目录下的一个目录<code class="highlighter-rouge">git add /</code>
+        <ul>
+          <li><strong>如果需要撤销add操作，<a href="#1">看这里</a></strong></li>
+        </ul>
+      </li>
+      <li><code class="highlighter-rouge">git commit</code>是将暂存区的内容提交到仓库，<code class="highlighter-rouge">-m'xxxx'</code>是本次提交的描述，<strong>必填</strong></li>
+    </ul>
+  </li>
+</ul>
 
-&lt;h3 id=&quot;工作区暂存区版本库&quot;&gt;工作区&amp;amp;暂存区&amp;amp;版本库&lt;/h3&gt;
+<h3 id="工作区暂存区版本库">工作区&amp;暂存区&amp;版本库</h3>
 
-&lt;p&gt;&lt;img src=&quot;../../../assets/posts/2018-10/2.jpg&quot; alt=&quot;工作区&amp;amp;暂存区&amp;amp;版本库&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;在本地仓库目录下&lt;/strong&gt;，除了隐藏目录.git之外的都是工作区&lt;/li&gt;
-  &lt;li&gt;版本库目录(.git)中，有一个名为暂存区&lt;code class=&quot;highlighter-rouge&quot;&gt;stage&lt;/code&gt;的区域，用来存放&lt;code class=&quot;highlighter-rouge&quot;&gt;git add&lt;/code&gt;命令添加的文件&lt;/li&gt;
-  &lt;li&gt;版本库在创建的时候默认会生成一个主分支master&lt;/li&gt;
-  &lt;li&gt;HEAD指向当前所在的分支，凡是命令中出现这个都是指对当前的分支的操作&lt;/li&gt;
-&lt;/ul&gt;
+<p><img src="../../../assets/posts/2018-10/2.jpg" alt="工作区&amp;暂存区&amp;版本库" /></p>
+<ul>
+  <li><strong>在本地仓库目录下</strong>，除了隐藏目录.git之外的都是工作区</li>
+  <li>版本库目录(.git)中，有一个名为暂存区<code class="highlighter-rouge">stage</code>的区域，用来存放<code class="highlighter-rouge">git add</code>命令添加的文件</li>
+  <li>版本库在创建的时候默认会生成一个主分支master</li>
+  <li>HEAD指向当前所在的分支，凡是命令中出现这个都是指对当前的分支的操作</li>
+</ul>
 
-&lt;h3 id=&quot;查看仓库的当前状态&quot;&gt;查看仓库的当前状态&lt;/h3&gt;
+<h3 id="查看仓库的当前状态">查看仓库的当前状态</h3>
 
-&lt;p&gt;通过&lt;code class=&quot;highlighter-rouge&quot;&gt;git status&lt;/code&gt;可以查看仓库当前状态，目前记录下有这几种状态&lt;/p&gt;
+<p>通过<code class="highlighter-rouge">git status</code>可以查看仓库当前状态，目前记录下有这几种状态</p>
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Untracked files&lt;/strong&gt;：当前目录下有未被git管理的文件&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Changes to be committed&lt;/strong&gt;：有文件在暂存区中，但是还没有&lt;code class=&quot;highlighter-rouge&quot;&gt;commit&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Changes not staged for commit&lt;/strong&gt;：有文件修改，但是还没有&lt;code class=&quot;highlighter-rouge&quot;&gt;add&lt;/code&gt;到暂存区&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li><strong>Untracked files</strong>：当前目录下有未被git管理的文件</li>
+  <li><strong>Changes to be committed</strong>：有文件在暂存区中，但是还没有<code class="highlighter-rouge">commit</code></li>
+  <li><strong>Changes not staged for commit</strong>：有文件修改，但是还没有<code class="highlighter-rouge">add</code>到暂存区</li>
+</ul>
 
-&lt;h3 id=&quot;查看文件差异&quot;&gt;查看文件差异&lt;/h3&gt;
+<h3 id="查看文件差异">查看文件差异</h3>
 
-&lt;p&gt;当仓库管理下的文件在工作区被修改时，可以通过&lt;code class=&quot;highlighter-rouge&quot;&gt;git diff filename&lt;/code&gt;或者&lt;code class=&quot;highlighter-rouge&quot;&gt;git diff HEAD --filename&lt;/code&gt;来查看差异&lt;/p&gt;
+<p>当仓库管理下的文件在工作区被修改时，可以通过<code class="highlighter-rouge">git diff filename</code>或者<code class="highlighter-rouge">git diff HEAD --filename</code>来查看差异</p>
 
-&lt;h5 id=&quot;git-diff-filename和git-diff-head---filename的差异&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git diff filename&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;git diff HEAD --filename&lt;/code&gt;的差异&lt;/h5&gt;
+<h5 id="git-diff-filename和git-diff-head---filename的差异"><code class="highlighter-rouge">git diff filename</code>和<code class="highlighter-rouge">git diff HEAD --filename</code>的差异</h5>
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git diff filename&lt;/code&gt;
-    &lt;ul&gt;
-      &lt;li&gt;当暂存区没有文件时，比较的是&lt;code class=&quot;highlighter-rouge&quot;&gt;工作区&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;上次提交版本&lt;/code&gt;的文件&lt;/li&gt;
-      &lt;li&gt;当暂存区有文件时，比较的是&lt;code class=&quot;highlighter-rouge&quot;&gt;当前工作区&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;暂存区&lt;/code&gt;的文件&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git diff HEAD --filename&lt;/code&gt;
-    &lt;ul&gt;
-      &lt;li&gt;比较的是工作区和版本库中的文件的差别&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li><code class="highlighter-rouge">git diff filename</code>
+    <ul>
+      <li>当暂存区没有文件时，比较的是<code class="highlighter-rouge">工作区</code>和<code class="highlighter-rouge">上次提交版本</code>的文件</li>
+      <li>当暂存区有文件时，比较的是<code class="highlighter-rouge">当前工作区</code>和<code class="highlighter-rouge">暂存区</code>的文件</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">git diff HEAD filename</code>
+    <ul>
+      <li>比较的是工作区和版本库中的文件的差别</li>
+    </ul>
+  </li>
+</ul>
 
-&lt;p&gt;&lt;em&gt;需要注意的是&lt;code class=&quot;highlighter-rouge&quot;&gt;git diff&lt;/code&gt;&lt;/em&gt;只会显示工作区的差异，当文件被add到暂存区时，在执行这个命令就什么也不会返回，&lt;strong&gt;加上&lt;code class=&quot;highlighter-rouge&quot;&gt;git diff --cached&lt;/code&gt;参数则可以查看暂存区和版本库的差异&lt;/strong&gt;&lt;/p&gt;
+<p><em>需要注意的是<code class="highlighter-rouge">git diff</code></em>只会显示工作区的差异，当文件被add到暂存区时，在执行这个命令就什么也不会返回，<strong>加上<code class="highlighter-rouge">--cached</code>参数后，即<code class="highlighter-rouge">git diff --cached filename</code>则可以查看暂存区和版本库的差异</strong></p>
 
-&lt;h3 id=&quot;查看版本日志&quot;&gt;查看版本日志&lt;/h3&gt;
+<h3 id="查看版本日志">查看版本日志</h3>
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git log&lt;/code&gt;命令会列出所有历史记录，最近的排在上方，记录过多时，通过&lt;code class=&quot;highlighter-rouge&quot;&gt;↑&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;↓&lt;/code&gt;来控制显示，且通过&lt;code class=&quot;highlighter-rouge&quot;&gt;q&lt;/code&gt;退出，如果要看详细的版本分支结构可以通过加上参数实现，&lt;a href=&quot;https://git-scm.com/docs/git-log&quot; target=&quot;_blank&quot;&gt;详细参数&lt;/a&gt;&lt;/p&gt;
+<p><code class="highlighter-rouge">git log</code>命令会列出所有历史记录，最近的排在上方，记录过多时，通过<code class="highlighter-rouge">↑</code>、<code class="highlighter-rouge">↓</code>来控制显示，且通过<code class="highlighter-rouge">q</code>退出，如果要看详细的版本分支结构可以通过加上参数实现，<a href="https://git-scm.com/docs/git-log" target="_blank">详细参数</a></p>
 
-&lt;h3 id=&quot;查看每一个命令的版本日志&quot;&gt;查看每一个命令的版本日志&lt;/h3&gt;
+<h3 id="查看每一个命令的版本日志">查看每一个命令的版本日志</h3>
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git reflog&lt;/code&gt;可以查找所有历史的记录，可以找到指定&lt;code class=&quot;highlighter-rouge&quot;&gt;commit id&lt;/code&gt;，对指定版本进行相应操作&lt;/p&gt;
+<p><code class="highlighter-rouge">git reflog</code>可以查找所有历史的记录，可以找到指定<code class="highlighter-rouge">commit id</code>，对指定版本进行相应操作</p>
 
-&lt;h3 id=&quot;回退版本&quot;&gt;&lt;span id=&quot;1&quot;&gt;回退版本&lt;/span&gt;&lt;/h3&gt;
+<h3 id="回退版本"><span id="1">回退版本</span></h3>
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git reset --hrad HEAD^
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git reset --hard HEAD^
 $ git reset --hard HEAD^^
+$ git reset --hard 'commitID'
 $ git reset HEAD 'filename'
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</code></pre></div></div>
 
-&lt;ol&gt;
-  &lt;li&gt;第一条命令可以回退到上个版本&lt;/li&gt;
-  &lt;li&gt;第二条命令可以回退到上上个版本，通过改变&lt;code class=&quot;highlighter-rouge&quot;&gt;HEAD^n&lt;/code&gt;可以回退到n个版本&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;第三条命令可以将filename的从暂存区删除&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
+<ol>
+  <li>第一条命令可以回退到上个版本</li>
+  <li>第二条命令可以回退到上上个版本，通过改变<code class="highlighter-rouge">HEAD^n</code>可以回退到n个版本</li>
+  <li>第三条命令可以回退到指定commitID的版本，配合<code class="highlighter-rouge">git reflog</code>查找要退回的commitID</li>
+  <li><strong>第四条命令可以将filename的从暂存区删除</strong></li>
+</ol>
 
-&lt;h3 id=&quot;删除文件&quot;&gt;删除文件&lt;/h3&gt;
+<h3 id="删除文件">删除文件</h3>
 
-&lt;p&gt;执行&lt;code class=&quot;highlighter-rouge&quot;&gt;git rm filename&lt;/code&gt;命令，即可删除仓库文件，&lt;strong&gt;注意：还需要&lt;code class=&quot;highlighter-rouge&quot;&gt;commit&lt;/code&gt;，不然仓库的文件会还存在&lt;/strong&gt;&lt;/p&gt;
+<p>执行<code class="highlighter-rouge">git rm filename</code>命令，即可删除仓库文件，<strong>注意：还需要<code class="highlighter-rouge">commit</code>，不然仓库的文件会还存在</strong></p>
 
-&lt;h3 id=&quot;总结&quot;&gt;总结&lt;/h3&gt;
+<h3 id="总结">总结</h3>
 
-&lt;ul&gt;
-  &lt;li&gt;git中的&lt;code class=&quot;highlighter-rouge&quot;&gt;add&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;commit&lt;/code&gt;操作并不是1对1的关系，&lt;code class=&quot;highlighter-rouge&quot;&gt;commit&lt;/code&gt;只是提交暂存区的文件，所以一次&lt;code class=&quot;highlighter-rouge&quot;&gt;commit&lt;/code&gt;可以对应多次&lt;code class=&quot;highlighter-rouge&quot;&gt;add&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;git是针对修改，而不是文件
-    &lt;ul&gt;
-      &lt;li&gt;修改文件并&lt;code class=&quot;highlighter-rouge&quot;&gt;add&lt;/code&gt;后，再次修改文件且不&lt;code class=&quot;highlighter-rouge&quot;&gt;add&lt;/code&gt;，然后直接&lt;code class=&quot;highlighter-rouge&quot;&gt;commit&lt;/code&gt;，会发现只有第一次的修改被提交了&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;如果被托管的文件不是通过&lt;code class=&quot;highlighter-rouge&quot;&gt;git rm&lt;/code&gt;而是直接在本地删除时，需要使用&lt;code class=&quot;highlighter-rouge&quot;&gt;commit -am'xxxxx'&lt;/code&gt;，这样才会将删除同步到仓库，而&lt;code class=&quot;highlighter-rouge&quot;&gt;git rm&lt;/code&gt;删除的话，只需要&lt;code class=&quot;highlighter-rouge&quot;&gt;commit -m&lt;/code&gt;即可&lt;/li&gt;
-  &lt;li&gt;HEAD指向的是最新&lt;code class=&quot;highlighter-rouge&quot;&gt;commit id&lt;/code&gt;的版本&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>realmline</name></author><category term="git" /><summary type="html">git基础操作学习笔记</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/myblog,cd%20mtblog,jekyll%20serve/jekyll/update/2018/10/25/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2018-10-25T21:20:04+08:00</published><updated>2018-10-25T21:20:04+08:00</updated><id>http://localhost:4000/myblog,cd%20mtblog,jekyll%20serve/jekyll/update/2018/10/25/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/myblog,cd%20mtblog,jekyll%20serve/jekyll/update/2018/10/25/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+<ul>
+  <li>git中的<code class="highlighter-rouge">add</code>和<code class="highlighter-rouge">commit</code>操作并不是1对1的关系，<code class="highlighter-rouge">commit</code>只是提交暂存区的文件，所以一次<code class="highlighter-rouge">commit</code>可以对应多次<code class="highlighter-rouge">add</code></li>
+  <li>git是针对修改，而不是文件
+    <ul>
+      <li>修改文件并<code class="highlighter-rouge">add</code>后，再次修改文件且不<code class="highlighter-rouge">add</code>，然后直接<code class="highlighter-rouge">commit</code>，会发现只有第一次的修改被提交了</li>
+    </ul>
+  </li>
+  <li>如果被托管的文件不是通过<code class="highlighter-rouge">git rm</code>而是直接在本地删除时，需要使用<code class="highlighter-rouge">commit -am'xxxxx'</code>，这样才会将删除同步到仓库，而<code class="highlighter-rouge">git rm</code>删除的话，只需要<code class="highlighter-rouge">commit -m</code>即可</li>
+  <li>HEAD指向的是最新<code class="highlighter-rouge">commit id</code>的版本</li>
+</ul>]]></content><author><name>realmline</name></author><category term="git" /><summary type="html"><![CDATA[git基础操作学习笔记]]></summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/myblog,cd%20mtblog,jekyll%20serve/jekyll/update/2018/10/25/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2018-10-25T21:20:04+08:00</published><updated>2018-10-25T21:20:04+08:00</updated><id>http://localhost:4000/myblog,cd%20mtblog,jekyll%20serve/jekyll/update/2018/10/25/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/myblog,cd%20mtblog,jekyll%20serve/jekyll/update/2018/10/25/welcome-to-jekyll.html"><![CDATA[<p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
 
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+<p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
 
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+<p>Jekyll also offers powerful support for code snippets:</p>
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
+<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
 
-&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name>true</name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry></feed>
+<p>Check out the <a href="https://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>]]></content><author><name>true</name></author><category term="myBlog,cd mtBlog,jekyll serve" /><category term="jekyll" /><category term="update" /><summary type="html"><![CDATA[You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.]]></summary></entry></feed>

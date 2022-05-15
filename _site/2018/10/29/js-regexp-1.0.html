@@ -112,8 +112,8 @@ var _hmt = _hmt || [];
   <!-- 页面宽度大于800px -->
   <div class="left-area">
     
-      <a href="javascript:;" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(238,180,34)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
-      <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(238,180,34);"><sapn class="main">没有上一页咯</sapn></span></div>
+      <a href="/2018/11/22/python3-1.0.html" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(238,180,34)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+      <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(238,180,34);"><sapn class="main">python3基础笔记(一)</sapn></span></div>
     
   </div>
   <div class="post-titlearea">
@@ -124,18 +124,18 @@ var _hmt = _hmt || [];
   </div>
   <div class="right-area">
     
-      <a href="/2018/10/28/python-1.0.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(238,180,34)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
-      <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(238,180,34);"><sapn class="main">python基础笔记</sapn></span></div>
+      <a href="/2018/10/27/git-1.2.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(238,180,34)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+      <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(238,180,34);"><sapn class="main">github远程库</sapn></span></div>
     
   </div>
 
   <!-- 页面宽度小于800px -->
   <div class="post-changearea">
     
-      <a href="javascript:;" class="leftchange" style="border-right: 1px solid rgb(238,180,34);border-bottom: 2px solid rgb(238,180,34);"><span><br>没有上一篇咯</span></a>
+      <a href="/2018/11/22/python3-1.0.html" class="leftchange" style="border-right: 1px solid rgb(238,180,34);border-bottom: 2px solid rgb(238,180,34);"><span>上一篇<br><br>python3基础笔记(一)</span></a>
     
     
-      <a href="/2018/10/28/python-1.0.html" class="rightchange" style="border-left: 1px solid rgb(238,180,34);border-bottom: 2px solid rgb(238,180,34);"><span>下一篇<br><br>python基础笔记</span></a>
+      <a href="/2018/10/27/git-1.2.html" class="rightchange" style="border-left: 1px solid rgb(238,180,34);border-bottom: 2px solid rgb(238,180,34);"><span>下一篇<br><br>github远程库</span></a>
     
   </div>
 </div>
@@ -359,7 +359,7 @@ var _hmt = _hmt || [];
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//通过字面量创建正则表达式</span>
 <span class="kd">var</span> <span class="nx">re1</span> <span class="o">=</span> <span class="sr">/ABC</span><span class="se">\-</span><span class="sr">001/</span><span class="p">;</span>
 <span class="c1">//通过RegExp对象实例化一个正则表达式</span>
-<span class="kd">var</span> <span class="nx">re2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s1">'ABC</span><span class="err">\\</span><span class="s1">-001'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">re2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="dl">'</span><span class="s1">ABC</span><span class="se">\\</span><span class="s1">-001</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <blockquote>
@@ -371,9 +371,9 @@ var _hmt = _hmt || [];
 <h5 id="测试字符串是否符合条件">测试字符串是否符合条件</h5>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">re</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">\d{3}\-\d{3,8}</span><span class="sr">$/</span><span class="p">;</span>
-<span class="nx">re</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s1">'010-12345'</span><span class="p">);</span> <span class="c1">// true</span>
-<span class="nx">re</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s1">'010-1234x'</span><span class="p">);</span> <span class="c1">// false</span>
-<span class="nx">re</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s1">'010 12345'</span><span class="p">);</span> <span class="c1">// false</span>
+<span class="nx">re</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="dl">'</span><span class="s1">010-12345</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// true</span>
+<span class="nx">re</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="dl">'</span><span class="s1">010-1234x</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// false</span>
+<span class="nx">re</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="dl">'</span><span class="s1">010 12345</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// false</span>
 </code></pre></div></div>
 
 <blockquote>
@@ -382,7 +382,7 @@ var _hmt = _hmt || [];
 
 <h5 id="切分字符串">切分字符串</h5>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s1">'a,b;; c  d'</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="sr">/</span><span class="se">[\s\,\;]</span><span class="sr">+/</span><span class="p">);</span> <span class="c1">// ['a', 'b', 'c', 'd']</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">'</span><span class="s1">a,b;; c  d</span><span class="dl">'</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="sr">/</span><span class="se">[\s\,\;]</span><span class="sr">+/</span><span class="p">);</span> <span class="c1">// ['a', 'b', 'c', 'd']</span>
 </code></pre></div></div>
 
 <blockquote>
@@ -396,8 +396,8 @@ var _hmt = _hmt || [];
 <p>用<code class="highlighter-rouge">（）</code>包含的正则表达式，在使用<code class="highlighter-rouge">exec()ss</code>匹配的时候会返回一个数组：</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">re</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">(\d{3})</span><span class="sr">-</span><span class="se">(\d{3,8})</span><span class="sr">$/</span><span class="p">;</span>
-<span class="nx">re</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="s1">'010-12345'</span><span class="p">);</span> <span class="c1">// ['010-12345', '010', '12345']</span>
-<span class="nx">re</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="s1">'010 12345'</span><span class="p">);</span> <span class="c1">// null</span>
+<span class="nx">re</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="dl">'</span><span class="s1">010-12345</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// ['010-12345', '010', '12345']</span>
+<span class="nx">re</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="dl">'</span><span class="s1">010 12345</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// null</span>
 </code></pre></div></div>
 
 <blockquote>
@@ -445,8 +445,8 @@ var _hmt = _hmt || [];
           </li>
         </ul>
 
-        <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">re1</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s1">'ABC</span><span class="err">\\</span><span class="s1">-001'</span><span class="p">,</span><span class="s1">'i'</span><span class="p">)</span>
-<span class="kd">var</span> <span class="nx">re2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s1">'ABC</span><span class="err">\\</span><span class="s1">-001'</span><span class="p">,</span><span class="s1">'ig'</span><span class="p">)</span>
+        <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">re1</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="dl">'</span><span class="s1">ABC</span><span class="se">\\</span><span class="s1">-001</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">i</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">re2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="dl">'</span><span class="s1">ABC</span><span class="se">\\</span><span class="s1">-001</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">ig</span><span class="dl">'</span><span class="p">)</span>
 </code></pre></div>        </div>
       </li>
       <li>
@@ -519,6 +519,9 @@ var _hmt = _hmt || [];
     </section>
 
     <!-- 来必力City版安装代码 -->
+    <style>
+      #taboola-livere { display: none;}
+    </style>
     <script type="text/javascript">
        (function(d, s) {
            var j, e = d.getElementsByTagName(s)[0];
@@ -559,7 +562,10 @@ var _hmt = _hmt || [];
   <span>不可视境界线 ©
   
   
-  2018
+    2018
+    -
+  
+  2022
   <br>
   Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
 </footer>

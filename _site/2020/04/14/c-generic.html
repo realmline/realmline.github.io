@@ -1,0 +1,532 @@
+<!-- 博文的布局-Layout -->
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 引入head标签 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="用于个人学习整理的博客" />
+<meta name="keywords" content="境界线,realmline" />
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_autumn.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+<!-- SNS-icon -->
+<script src="/assets/fonts/sns/iconfont.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="/assets/profile.jpeg" rel="shortcut icon" />
+<link href="/assets/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>泛型</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?https://hm.baidu.com/hm.js?35f27cd3f76195dca98823d061bc968b";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+
+<!-- Android Lolipop Theme Color -->
+<meta name="theme-color" content=" rgb(100,149,237) ">
+</head>
+<body>
+
+<!-- 顶部锚点 -->
+<a id="htmlup" name="htmlup"></a>
+<!-- 引入博文顶部选项 -->
+
+<header id="post-header" style="background-color:rgb(100,149,237);">
+  <div class="top-center">
+      <div class="logo">
+          <a href="/" title="my awesome webtitle" style="color: white;">不可视境界线</a>
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/" style="color: white;">首页</a></li>
+              
+                <li><a href="/tags.html" style="color: white;">标签</a></li>
+              
+                <li><a href="/timeline.html" style="color: white;">时间线</a></li>
+              
+                <li><a href="/about.html" style="color: white;">关于博主</a></li>
+              
+                <li><a href="/friendLink.html" style="color: white;">友情链接</a></li>
+              
+          </ul>
+      </nav>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/boot_white.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/boot_white.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+
+<!-- 引入移动下拉选项 -->
+<div id="boot-area">
+    <ul>
+        
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>时间线</li></a>
+        
+          <a href="/about.html"><li>关于博主</li></a>
+        
+          <a href="/friendLink.html"><li>友情链接</li></a>
+        
+    </ul>
+</div>
+
+<!-- 引入博文顶部样式 -->
+<!-- 版本一 垃圾 -->
+<!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
+    <span class="wow fadeInUp" data-wow-delay="0.2s">泛型</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;realmline</span>
+</div> -->
+
+<!-- 版本二 可切换页面 -->
+
+<div class="post-top" style="background-color:rgb(100,149,237);">
+  <!-- 页面宽度大于800px -->
+  <div class="left-area">
+    
+      <a href="javascript:;" class="btn bounceInLeft animated" onmouseover="showLeft();this.style.color='rgb(100,149,237)';" onmouseout="goneLeft();this.style.color='rgba(0,0,0,.2)';"><</a>
+      <div id="left-tab" style="display:none;"><span class="left-san"></span><span class="left-main" style="color:rgb(100,149,237);"><sapn class="main">没有上一页咯</sapn></span></div>
+    
+  </div>
+  <div class="post-titlearea">
+    <span class="wow fadeInUp" data-wow-delay="0.2s">泛型</span>
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;realmline</span> -->
+  </div>
+  <div class="right-area">
+    
+      <a href="/2018/11/22/python3-1.0.html" class="btn bounceInRight self-animated" onmouseover="showRight();this.style.color='rgb(100,149,237)';" onmouseout="goneRight();this.style.color='rgba(0,0,0,.2)';">></a>
+      <div id="right-tab" style="display:none;"><span class="right-san"></span><span class="right-main" style="color:rgb(100,149,237);"><sapn class="main">python3基础笔记(一)</sapn></span></div>
+    
+  </div>
+
+  <!-- 页面宽度小于800px -->
+  <div class="post-changearea">
+    
+      <a href="javascript:;" class="leftchange" style="border-right: 1px solid rgb(100,149,237);border-bottom: 2px solid rgb(100,149,237);"><span><br>没有上一篇咯</span></a>
+    
+    
+      <a href="/2018/11/22/python3-1.0.html" class="rightchange" style="border-left: 1px solid rgb(100,149,237);border-bottom: 2px solid rgb(100,149,237);"><span>下一篇<br><br>python3基础笔记(一)</span></a>
+    
+  </div>
+</div>
+
+
+<div class="markdown-body fadeInUp animated">
+
+  
+
+  <!-- 文章内容 -->
+  <h1 id="泛型">泛型</h1>
+
+<p>泛型出现于<code class="highlighter-rouge">.net framework 2.0</code></p>
+
+<h3 id="设计思想">设计思想</h3>
+
+<ul>
+  <li>推迟一切可以推迟的，具体到编译的时候的才确定类型</li>
+  <li>优点
+    <ul>
+      <li>类型安全</li>
+      <li>可扩展性</li>
+      <li>高性能</li>
+      <li>代码复用</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p><code class="highlighter-rouge">object</code>类型转换时可能会出错</p>
+
+  <p>泛型的扩展只有方法、类、接口、委托</p>
+
+  <p>不需要进行装箱和拆箱操作提高了性能</p>
+
+  <p>因为泛型的缘故，一个方法，可以让不同类型的数据进行调用</p>
+</blockquote>
+
+<h4 id="泛型方法">泛型方法</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">M</span> <span class="n">Show</span><span class="p">&lt;</span><span class="n">N</span><span class="p">,</span><span class="n">M</span><span class="p">&gt;(</span><span class="n">N</span> <span class="n">t</span><span class="p">){</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="泛型类">泛型类</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GeneircClass</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;{</span>
+    <span class="k">public</span> <span class="n">T</span> <span class="n">TField</span><span class="p">;</span>
+    <span class="k">public</span> <span class="n">T</span> <span class="n">TProperty</span><span class="p">{</span><span class="k">get</span><span class="p">;</span><span class="k">set</span><span class="p">;}</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>泛型属性以及泛型字段并不算泛型的扩展，因为它们是出自于泛型类<code class="highlighter-rouge">GeneircClass的泛型类型T</code></p>
+</blockquote>
+
+<h4 id="泛型接口">泛型接口</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">interface</span> <span class="nc">IGeneirc</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="泛型委托">泛型委托</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Action</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">GeneircAction</span> <span class="p">=</span> <span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="n">Func</span><span class="p">&lt;</span><span class="n">N</span><span class="p">,</span><span class="n">M</span><span class="p">&gt;</span> <span class="n">GeneircFunc</span> <span class="p">=</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="c1">//初始化一个默认值</span>
+    <span class="n">M</span> <span class="n">m</span> <span class="p">=</span> <span class="k">default</span><span class="p">(</span><span class="n">M</span><span class="p">);</span>
+    <span class="p">...</span>
+    <span class="k">return</span> <span class="n">m</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><code class="highlighter-rouge">default()</code>可以给泛型类型初始化一个默认值，如<code class="highlighter-rouge">int</code>的默认值就是<code class="highlighter-rouge">0</code>，<code class="highlighter-rouge">string</code>的默认值就是<code class="highlighter-rouge">""</code></p>
+</blockquote>
+
+<h3 id="自动推断">自动推断</h3>
+
+<p>泛型有自动推断的特点，如果参数中包含了泛型类型，那么则可以简写</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">void</span> <span class="n">Show</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">T</span> <span class="n">t</span><span class="p">){</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">show</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;(</span><span class="n">ivalue</span><span class="p">)</span> <span class="p">==</span> <span class="nf">show</span><span class="p">(</span><span class="n">ivalue</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>因为泛型类型<code class="highlighter-rouge">T</code>已经在参数中出现了，所以可以自动推算出类型</p>
+
+  <p>如果<code class="highlighter-rouge">T</code>是返回类型，且不在参数中出现，那么就无法简写</p>
+</blockquote>
+
+<h3 id="延迟声明">延迟声明</h3>
+
+<p>声明的时候并没有指定类型，具体是在调用的时候指定类型</p>
+
+<blockquote>
+  <p>性能和普通方法差不多，<strong>但是可以避免装箱和拆箱操作从而提升性能</strong></p>
+</blockquote>
+
+<h3 id="泛型约束">泛型约束</h3>
+
+<p>泛型约束通过<code class="highlighter-rouge">where</code>关键字来实现</p>
+
+<h4 id="接口约束">接口约束</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GeneircClass</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="k">where</span> <span class="n">T</span><span class="p">:</span><span class="n">IGeneirc</span> <span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="引用类型约束">引用类型约束</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GeneircClass</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="k">where</span> <span class="n">T</span><span class="p">:</span><span class="n">BaseClass</span><span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="值类型约束">值类型约束</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GeneircClass</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="k">where</span> <span class="n">T</span><span class="p">:</span><span class="n">BaseStruct</span><span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="无参构造函数约束">无参构造函数约束</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GeneircClass</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="k">where</span> <span class="n">T</span><span class="p">:</span><span class="k">new</span><span class="p">(){</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>无参构造函数约束，没法约束带参数的构造函数</p>
+</blockquote>
+
+<h4 id="混合约束">混合约束</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GeneircClass</span><span class="p">&lt;</span><span class="n">N</span><span class="p">,</span><span class="n">M</span><span class="p">&gt;</span> 
+<span class="k">where</span> <span class="n">N</span><span class="p">:</span><span class="n">IGeneirc</span><span class="p">,</span><span class="k">new</span><span class="p">()</span>
+<span class="k">where</span> <span class="n">M</span><span class="p">:</span><span class="n">BaseClass</span><span class="p">,</span><span class="k">new</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+<span class="c1">//无参构造函数约束可以在泛型类型里面进行new的操作，而且传进来的对象没有无参构造函数也会产生报错</span>
+<span class="n">N</span> <span class="n">n</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">N</span><span class="p">();</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>约束之后可以使用基类中的属性和方法</p>
+
+  <p>类型也必须满足约束，可以是基类和子类</p>
+
+  <p>约束可以叠加，但不能重复约束，如果进行了<code class="highlighter-rouge">peopel</code>类的约束，就不能重复添加<code class="highlighter-rouge">class</code>约束</p>
+
+  <p>值类型和引用类型的约束也不能同时出现</p>
+</blockquote>
+
+<h3 id="子类继承泛型的两种情况">子类继承泛型的两种情况</h3>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">GenericClass</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;{</span>
+    <span class="k">public</span> <span class="n">T</span> <span class="n">Property</span>
+<span class="p">}</span>
+
+<span class="c1">//将子类的泛型类型同时用作到父类上</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">chlidClassGeneric</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;:</span><span class="n">GenricClass</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1">//指定父类的泛型类型</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">chlidClass</span><span class="p">:</span><span class="n">GenricClass</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span>   
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>当泛型被指定类型后，可以认定为不再是泛型</p>
+</blockquote>
+
+<h3 id="协变和逆变">协变和逆变</h3>
+
+<p><strong><em>只能在接口或委托上面实现</em></strong></p>
+
+<blockquote>
+  <p>协变和逆变实际上只是用于通过编译器的检查</p>
+</blockquote>
+
+<h4 id="协变covariant">协变(covariant)</h4>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">out</code>，<code class="highlighter-rouge">&lt;out T&gt;</code>这个泛型类型只能用作返回值类型</p>
+
+    <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//父类是可以用子类来实现的</span>
+<span class="n">parent</span> <span class="p">=</span> <span class="k">new</span> <span class="n">child</span><span class="p">;</span>
+<span class="c1">//但是使用子类集合来实现父类集合时，因为两者都是list，所以无法识别从而报错</span>
+<span class="n">IList</span><span class="p">&lt;</span><span class="n">parent</span><span class="p">&gt;</span> <span class="n">list</span> <span class="p">!=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">child</span><span class="p">&gt;();</span>
+<span class="c1">//IEnumerable&lt;out T&gt;是.net内置的协变接口</span>
+<span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">parent</span><span class="p">&gt;</span> <span class="n">enumerable</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">child</span><span class="p">&gt;();</span> 
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>因为<code class="highlighter-rouge">out</code>修饰的返回值的，所以可以通过编译器检查</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h4 id="逆变contravariant">逆变(contravariant)</h4>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">in</code>，<code class="highlighter-rouge">&lt;in T&gt;</code>这个泛型类型只能用作参数类型</p>
+
+    <div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//没有内置的逆变接口，此处用IEnumerable假设</span>
+<span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">child</span><span class="p">&gt;</span> <span class="n">list</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">parent</span><span class="p">&gt;();</span> 
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p><code class="highlighter-rouge">child</code>并不是实际返回值，只是传入的参数，所以就算是父类可以通过检查</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="泛型类缓存">泛型类缓存</h3>
+
+<ul>
+  <li>
+    <p>泛型在<code class="highlighter-rouge">jit</code>编译的时候，不同的参数的泛型，会产生对应类型的全新的类，也就是通过副本产生真正的具体类型</p>
+  </li>
+  <li>
+    <p><strong><em>静态字段和静态构造函数只会初始化一次，而且会常驻在内容中</em></strong>，当泛型和这个组合的时候就可以灵活的产生泛型缓存，不同的类型都会执行一次各自的静态字段和静态构造函数</p>
+  </li>
+</ul>
+
+<h4 id="计时器">计时器</h4>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//初始化一个计时器对象</span>
+<span class="n">Stopwatch</span> <span class="n">watch</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Stopwatch</span><span class="p">();</span>
+<span class="c1">//启动计时器</span>
+<span class="n">watch</span><span class="p">.</span><span class="n">start</span><span class="p">;</span>
+<span class="p">...</span> <span class="c1">//进行编译操作</span>
+<span class="c1">//停止计时器</span>
+<span class="n">watch</span><span class="p">.</span><span class="n">stop</span><span class="p">;</span>
+<span class="c1">//获取期间消耗的时间（毫秒为单位）</span>
+<span class="n">watch</span><span class="p">.</span><span class="n">ElapsedMilliseconds</span>
+</code></pre></div></div>
+
+<h2 id="要点">要点</h2>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//在编译、反射获取泛型类的时候泛型的类型显示为genricClass`1，它表示genricClass这个泛型类有一个泛型参数，`2则表示有两个泛型参数</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>当泛型方法返回泛型的返回值时，可以使用<code class="highlighter-rouge">return default(T)</code>语法糖，这个语法糖会根据泛型的类型产生默认值</p>
+</blockquote>
+
+
+  <!-- 引入share模块 -->
+  
+  <div class="social-share-wrapper">
+    <div class="social-share"></div>
+  </div>
+
+
+<!-- share.js -->
+<script src="/assets/js/social-share.min.js"></script>
+<script>
+  socialShare('.social-share', {
+    sites: [
+      
+        'qq'
+        ,
+        
+      
+        'wechat'
+        ,
+        
+      
+        'weibo'
+        ,
+        
+      
+        'twitter'
+        ,
+        
+      
+        'facebook'
+        
+      
+    ],
+    wechatQrcodeTitle: "分享到微信朋友圈",
+    wechatQrcodeHelper: '期待在朋友圈见到这篇文章'
+  });
+</script>
+
+</div>
+
+<!-- 底部锚点 -->
+<a id="htmldown" name="htmldown"></a>
+<!-- 引入评论模块 -->
+
+
+
+    <section class="post-footer-item comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDU2Ni8xNzA5Mw=="></div>
+    </section>
+
+    <!-- 来必力City版安装代码 -->
+    <style>
+      #taboola-livere { display: none;}
+    </style>
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+
+           if (typeof LivereTower === 'function') { return; }
+
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- City版安装代码已完成 -->
+
+
+
+
+
+<!-- 引入goto模块 -->
+<div class="bounceInRight animated go">
+  <a title="顶部切换页面" class="gototop" href="#htmlup" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Top
+    </div>
+  </a>
+  <a title="底部有livere评论哦" class="gotobottom" href="#htmldown" target="_self">
+    <div class="box" style="font-family:'ffad_matroregular';">
+        Foot
+    </div>
+  </a>
+</div>
+
+<!-- 引入页面底部模块 -->
+<footer id="bottom">
+  <br>
+  <span>不可视境界线 ©
+  
+  
+    2018
+    -
+  
+  2022
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
+</footer>
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+    var wow = new WOW({
+        boxClass: 'wow',
+        animateClass: 'animated',
+        // offset: 600,
+        mobile: true,
+        live: true
+    });
+    wow.init();
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+    window.onbeforeunload = function(){
+        //刷新后页面自动回到顶部
+        document.documentElement.scrollTop = 0;  //ie下
+        document.body.scrollTop = 0;  //非ie
+    }
+</script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

@@ -242,14 +242,14 @@ $ git commit -m'xxxxxxxxxxxxx'
       <li>当暂存区有文件时，比较的是<code class="highlighter-rouge">当前工作区</code>和<code class="highlighter-rouge">暂存区</code>的文件</li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">git diff HEAD --filename</code>
+  <li><code class="highlighter-rouge">git diff HEAD filename</code>
     <ul>
       <li>比较的是工作区和版本库中的文件的差别</li>
     </ul>
   </li>
 </ul>
 
-<p><em>需要注意的是<code class="highlighter-rouge">git diff</code></em>只会显示工作区的差异，当文件被add到暂存区时，在执行这个命令就什么也不会返回，<strong>加上<code class="highlighter-rouge">git diff --cached</code>参数则可以查看暂存区和版本库的差异</strong></p>
+<p><em>需要注意的是<code class="highlighter-rouge">git diff</code></em>只会显示工作区的差异，当文件被add到暂存区时，在执行这个命令就什么也不会返回，<strong>加上<code class="highlighter-rouge">--cached</code>参数后，即<code class="highlighter-rouge">git diff --cached filename</code>则可以查看暂存区和版本库的差异</strong></p>
 
 <h3 id="查看版本日志">查看版本日志</h3>
 
@@ -261,15 +261,17 @@ $ git commit -m'xxxxxxxxxxxxx'
 
 <h3 id="回退版本"><span id="1">回退版本</span></h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git reset --hrad HEAD^
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git reset --hard HEAD^
 $ git reset --hard HEAD^^
+$ git reset --hard 'commitID'
 $ git reset HEAD 'filename'
 </code></pre></div></div>
 
 <ol>
   <li>第一条命令可以回退到上个版本</li>
   <li>第二条命令可以回退到上上个版本，通过改变<code class="highlighter-rouge">HEAD^n</code>可以回退到n个版本</li>
-  <li><strong>第三条命令可以将filename的从暂存区删除</strong></li>
+  <li>第三条命令可以回退到指定commitID的版本，配合<code class="highlighter-rouge">git reflog</code>查找要退回的commitID</li>
+  <li><strong>第四条命令可以将filename的从暂存区删除</strong></li>
 </ol>
 
 <h3 id="删除文件">删除文件</h3>
@@ -341,6 +343,9 @@ $ git reset HEAD 'filename'
     </section>
 
     <!-- 来必力City版安装代码 -->
+    <style>
+      #taboola-livere { display: none;}
+    </style>
     <script type="text/javascript">
        (function(d, s) {
            var j, e = d.getElementsByTagName(s)[0];
@@ -381,7 +386,10 @@ $ git reset HEAD 'filename'
   <span>不可视境界线 ©
   
   
-  2018
+    2018
+    -
+  
+  2022
   <br>
   Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
 </footer>
