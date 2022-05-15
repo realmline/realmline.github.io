@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-15T22:54:05+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">不可视境界线</title><subtitle>用于个人学习整理的博客</subtitle><author><name>true</name></author><entry><title type="html">泛型</title><link href="http://localhost:4000/2020/04/14/c-generic.html" rel="alternate" type="text/html" title="泛型" /><published>2020-04-14T00:00:00+08:00</published><updated>2020-04-14T00:00:00+08:00</updated><id>http://localhost:4000/2020/04/14/c#-generic</id><content type="html" xml:base="http://localhost:4000/2020/04/14/c-generic.html"><![CDATA[<h1 id="泛型">泛型</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="www.realmline.net/feed.xml" rel="self" type="application/atom+xml" /><link href="www.realmline.net/" rel="alternate" type="text/html" /><updated>2022-05-15T23:14:35+08:00</updated><id>www.realmline.net/feed.xml</id><title type="html">不可视境界线</title><subtitle>用于个人学习整理的博客</subtitle><author><name>true</name></author><entry><title type="html">泛型</title><link href="www.realmline.net/2020/04/14/c-generic.html" rel="alternate" type="text/html" title="泛型" /><published>2020-04-14T00:00:00+08:00</published><updated>2020-04-14T00:00:00+08:00</updated><id>www.realmline.net/2020/04/14/c#-generic</id><content type="html" xml:base="www.realmline.net/2020/04/14/c-generic.html"><![CDATA[<h1 id="泛型">泛型</h1>
 
 <p>泛型出现于<code class="highlighter-rouge">.net framework 2.0</code></p>
 
@@ -253,7 +253,7 @@
 
 <blockquote>
   <p>当泛型方法返回泛型的返回值时，可以使用<code class="highlighter-rouge">return default(T)</code>语法糖，这个语法糖会根据泛型的类型产生默认值</p>
-</blockquote>]]></content><author><name>realmline</name></author><category term="C#" /><summary type="html"><![CDATA[泛型]]></summary></entry><entry><title type="html">python3基础笔记(一)</title><link href="http://localhost:4000/2018/11/22/python3-1.0.html" rel="alternate" type="text/html" title="python3基础笔记(一)" /><published>2018-11-22T00:00:00+08:00</published><updated>2018-11-22T00:00:00+08:00</updated><id>http://localhost:4000/2018/11/22/python3-1.0</id><content type="html" xml:base="http://localhost:4000/2018/11/22/python3-1.0.html"><![CDATA[<h3 id="命令行模式与python交互模式">命令行模式与python交互模式</h3>
+</blockquote>]]></content><author><name>realmline</name></author><category term="C#" /><summary type="html"><![CDATA[泛型]]></summary></entry><entry><title type="html">python3基础笔记(一)</title><link href="www.realmline.net/2018/11/22/python3-1.0.html" rel="alternate" type="text/html" title="python3基础笔记(一)" /><published>2018-11-22T00:00:00+08:00</published><updated>2018-11-22T00:00:00+08:00</updated><id>www.realmline.net/2018/11/22/python3-1.0</id><content type="html" xml:base="www.realmline.net/2018/11/22/python3-1.0.html"><![CDATA[<h3 id="命令行模式与python交互模式">命令行模式与python交互模式</h3>
 
 <h5 id="命令行模式">命令行模式</h5>
 
@@ -755,7 +755,7 @@
 <span class="nb">NameError</span><span class="p">:</span><span class="n">name</span> <span class="s">'a'</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
 </code></pre></div>    </div>
   </li>
-</ol>]]></content><author><name>realmline</name></author><category term="python3" /><summary type="html"><![CDATA[命令行模式与python交互模式]]></summary></entry><entry><title type="html">JS中的正则表达式</title><link href="http://localhost:4000/2018/10/29/js-regexp-1.0.html" rel="alternate" type="text/html" title="JS中的正则表达式" /><published>2018-10-29T00:00:00+08:00</published><updated>2018-10-29T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/29/js-regexp-1.0</id><content type="html" xml:base="http://localhost:4000/2018/10/29/js-regexp-1.0.html"><![CDATA[<h1 id="js中的正则表达式">JS中的正则表达式</h1>
+</ol>]]></content><author><name>realmline</name></author><category term="python3" /><summary type="html"><![CDATA[命令行模式与python交互模式]]></summary></entry><entry><title type="html">JS中的正则表达式</title><link href="www.realmline.net/2018/10/29/js-regexp-1.0.html" rel="alternate" type="text/html" title="JS中的正则表达式" /><published>2018-10-29T00:00:00+08:00</published><updated>2018-10-29T00:00:00+08:00</updated><id>www.realmline.net/2018/10/29/js-regexp-1.0</id><content type="html" xml:base="www.realmline.net/2018/10/29/js-regexp-1.0.html"><![CDATA[<h1 id="js中的正则表达式">JS中的正则表达式</h1>
 
 <h3 id="前言">前言</h3>
 
@@ -1075,7 +1075,7 @@
 <ol>
   <li><code class="highlighter-rouge">[{(\$|)?*+.}]</code>，元字符必须转义，不然不会被识别</li>
   <li>惰性限定符对于<code class="highlighter-rouge">*</code>和<code class="highlighter-rouge">?</code>来说就是匹配0次，对于<code class="highlighter-rouge">{n，m}?</code>来说等于<code class="highlighter-rouge">{n}</code></li>
-</ol>]]></content><author><name>realmline</name></author><category term="RegExp,正则表达式" /><summary type="html"><![CDATA[JS中的正则表达式]]></summary></entry><entry><title type="html">git分支学习笔记</title><link href="http://localhost:4000/2018/10/27/git-1.1.html" rel="alternate" type="text/html" title="git分支学习笔记" /><published>2018-10-27T00:00:00+08:00</published><updated>2018-10-27T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/27/git-1.1</id><content type="html" xml:base="http://localhost:4000/2018/10/27/git-1.1.html"><![CDATA[<h1 id="git分支学习笔记">git分支学习笔记</h1>
+</ol>]]></content><author><name>realmline</name></author><category term="RegExp,正则表达式" /><summary type="html"><![CDATA[JS中的正则表达式]]></summary></entry><entry><title type="html">git分支学习笔记</title><link href="www.realmline.net/2018/10/27/git-1.1.html" rel="alternate" type="text/html" title="git分支学习笔记" /><published>2018-10-27T00:00:00+08:00</published><updated>2018-10-27T00:00:00+08:00</updated><id>www.realmline.net/2018/10/27/git-1.1</id><content type="html" xml:base="www.realmline.net/2018/10/27/git-1.1.html"><![CDATA[<h1 id="git分支学习笔记">git分支学习笔记</h1>
 
 <h3 id="前言">前言</h3>
 
@@ -1164,7 +1164,7 @@ $ git checkout dev
   <li>恢复指定储藏区内容<code class="highlighter-rouge">git stash apply stash@{0}</code></li>
   <li>删除指定储藏区内容<code class="highlighter-rouge">git stash drop stash@{0} </code></li>
   <li>删除所有储藏区的内容<code class="highlighter-rouge">git stash clear</code></li>
-</ul>]]></content><author><name>realmline</name></author><category term="git" /><summary type="html"><![CDATA[git分支学习笔记]]></summary></entry><entry><title type="html">github远程库</title><link href="http://localhost:4000/2018/10/27/git-1.2.html" rel="alternate" type="text/html" title="github远程库" /><published>2018-10-27T00:00:00+08:00</published><updated>2018-10-27T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/27/git-1.2</id><content type="html" xml:base="http://localhost:4000/2018/10/27/git-1.2.html"><![CDATA[<h1 id="关联github远程库">关联github远程库</h1>
+</ul>]]></content><author><name>realmline</name></author><category term="git" /><summary type="html"><![CDATA[git分支学习笔记]]></summary></entry><entry><title type="html">github远程库</title><link href="www.realmline.net/2018/10/27/git-1.2.html" rel="alternate" type="text/html" title="github远程库" /><published>2018-10-27T00:00:00+08:00</published><updated>2018-10-27T00:00:00+08:00</updated><id>www.realmline.net/2018/10/27/git-1.2</id><content type="html" xml:base="www.realmline.net/2018/10/27/git-1.2.html"><![CDATA[<h1 id="关联github远程库">关联github远程库</h1>
 
 <h3 id="前言">前言</h3>
 
@@ -1366,7 +1366,7 @@ git push origin --tags
   <p>第一条推送v1.0的标签到远程</p>
 
   <p>第二条推送所有未被推送过的本地标签到远程</p>
-</blockquote>]]></content><author><name>realmline</name></author><category term="git" /><summary type="html"><![CDATA[关联github远程库]]></summary></entry><entry><title type="html">git基础操作学习笔记</title><link href="http://localhost:4000/2018/10/26/git-1.0.html" rel="alternate" type="text/html" title="git基础操作学习笔记" /><published>2018-10-26T00:00:00+08:00</published><updated>2018-10-26T00:00:00+08:00</updated><id>http://localhost:4000/2018/10/26/git-1.0</id><content type="html" xml:base="http://localhost:4000/2018/10/26/git-1.0.html"><![CDATA[<h1 id="git基础操作学习笔记">git基础操作学习笔记</h1>
+</blockquote>]]></content><author><name>realmline</name></author><category term="git" /><summary type="html"><![CDATA[关联github远程库]]></summary></entry><entry><title type="html">git基础操作学习笔记</title><link href="www.realmline.net/2018/10/26/git-1.0.html" rel="alternate" type="text/html" title="git基础操作学习笔记" /><published>2018-10-26T00:00:00+08:00</published><updated>2018-10-26T00:00:00+08:00</updated><id>www.realmline.net/2018/10/26/git-1.0</id><content type="html" xml:base="www.realmline.net/2018/10/26/git-1.0.html"><![CDATA[<h1 id="git基础操作学习笔记">git基础操作学习笔记</h1>
 
 <h3 id="前言">前言</h3>
 
@@ -1509,7 +1509,7 @@ $ git reset HEAD 'filename'
   </li>
   <li>如果被托管的文件不是通过<code class="highlighter-rouge">git rm</code>而是直接在本地删除时，需要使用<code class="highlighter-rouge">commit -am'xxxxx'</code>，这样才会将删除同步到仓库，而<code class="highlighter-rouge">git rm</code>删除的话，只需要<code class="highlighter-rouge">commit -m</code>即可</li>
   <li>HEAD指向的是最新<code class="highlighter-rouge">commit id</code>的版本</li>
-</ul>]]></content><author><name>realmline</name></author><category term="git" /><summary type="html"><![CDATA[git基础操作学习笔记]]></summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/myblog,cd%20mtblog,jekyll%20serve/jekyll/update/2018/10/25/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2018-10-25T21:20:04+08:00</published><updated>2018-10-25T21:20:04+08:00</updated><id>http://localhost:4000/myblog,cd%20mtblog,jekyll%20serve/jekyll/update/2018/10/25/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/myblog,cd%20mtblog,jekyll%20serve/jekyll/update/2018/10/25/welcome-to-jekyll.html"><![CDATA[<p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+</ul>]]></content><author><name>realmline</name></author><category term="git" /><summary type="html"><![CDATA[git基础操作学习笔记]]></summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="www.realmline.net/myblog,cd%20mtblog,jekyll%20serve/jekyll/update/2018/10/25/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2018-10-25T21:20:04+08:00</published><updated>2018-10-25T21:20:04+08:00</updated><id>www.realmline.net/myblog,cd%20mtblog,jekyll%20serve/jekyll/update/2018/10/25/welcome-to-jekyll</id><content type="html" xml:base="www.realmline.net/myblog,cd%20mtblog,jekyll%20serve/jekyll/update/2018/10/25/welcome-to-jekyll.html"><![CDATA[<p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
 
 <p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
 
